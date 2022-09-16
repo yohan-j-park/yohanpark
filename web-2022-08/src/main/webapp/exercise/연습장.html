@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name='frm'>
+<input type='button' name='btnOutput' value='눌러주세요'/>
+<input type='button' name='btn' value='dddd'/>
+
+</form>
+<script>
+let frm = document.frm;
+
+frm.btn.onclick = function(){
+	console.log('잘 작동합니다');
+	frm.btnOutput.onclick();
+	
+}
+
+</script>
+</body>
+</html>

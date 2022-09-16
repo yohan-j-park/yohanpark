@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>date(2).html</title>
+</head>
+<body>
+<form name='frm'>
+	<span>아이디</span>
+	<input type='text' name='id' value='hong'/>
+	<br/>
+	<span>가입일자</span>
+	<input type='date' name='nal'/>
+	<br/>
+	<span>생일</span>
+	<input type='date' name='birth'/>
+</form>
+<script>
+let frm = document.frm;
+// Date type -> date tag
+frm.nal.valueAsDate = new Date();
+
+
+// String type -> date tag
+let d = "2022-01-15";
+frm.birth.valueAsDate = new Date(Date.parse(d));
+console.log(Date.parse(d));
+console.log(Date.parse());
+console.log(new Date());
+console.log(new Date(1642204800000));
+
+</script>
+</body>
+</html>

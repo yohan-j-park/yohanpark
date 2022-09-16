@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>async_test(2).html</title>
+</head>
+<body>
+<input type='text' size='40'/>
+<script>
+function a(){
+	let r;
+	let w1 = new Worker('web_worker1.js');
+	w1.onmessage = function(ev){
+		r = ev.data;
+	}
+	let p = new Promise(function(resolve,reject){
+		resolve(r);
+	})
+	return p;
+}
+function b(){
+	let r;
+	let w2 = new Worker('web_worker2.js');
+	w2.onmessage = function(ev){
+		r = ev.data;
+	}
+	let p = new Promise(function(resolve,reject){
+		resolve(r);
+	})
+	return p;
+}
+function c(){
+	let r;
+	let w3 = new Worker('web_worker3.js');
+	w3.onmessage = function(ev){
+		r = ev.data;
+	}
+	let p = new Promise(function(resolve,reject){
+		
+	})
+		resolve(r);
+	return p;
+}
+async function main(){
+	let r1 = await a();
+	let r2 = await b();
+	let r3 = await c();
+	
+	console.log('r1=', r1);
+	console.log('r2=', r2);
+	console.log('r3=', r3);
+}
+
+main();
+
+</script>
+</body>
+</html>

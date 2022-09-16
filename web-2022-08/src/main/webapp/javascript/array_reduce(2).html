@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>array_reduce(2).html</title>
+</head>
+<body>
+<script>
+let students=[
+	{'name' : 'hong', 'grade' : 1},
+	{'name' : 'kim',  'grade' : 1},
+	{'name' : 'lee',  'grade' : 2},
+	{'name' : 'park', 'grade' : 2},
+	{'name' : 'choi', 'grade' : 3}
+];
+let groupby = function(array,key){
+	let r = array.reduce(function(data,obj){
+		var k = obj[key];
+		if(!data[k]) data[k] = []; 	// data={1:[]}
+			data[k].push(obj);
+		return data;
+	},{});
+	return r;
+};
+
+let gp = groupby(students, 'grade');
+
+// for of를 사용하여 2학년만 출력
+for(r of gp['2']){
+	console.log('name :', r.name, 'grade:', r.grade);
+}
+
+// forEach를 사용하여 1학년만 출력
+console.log('---------------------');
+gp['1'].forEach(function(v){
+	console.log('name:', v.name, 'grade:', v.grade);
+})
+</script>
+</body>
+</html>
