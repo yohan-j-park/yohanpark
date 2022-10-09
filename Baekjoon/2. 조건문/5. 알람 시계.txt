@@ -1,0 +1,32 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int H;
+       int M;
+  
+       
+       H = input.nextInt();
+       M = input.nextInt();
+       
+       if(H==0 && M<45){
+           H = H+23;
+           M = (60-(45-M));
+           System.out.print(H + " " + M);
+       }
+      else if(H==0 && M>=45){
+           M = M-45;
+           System.out.print(H + " " + M);
+       }
+      else if(H>0 && M<45){
+          H = H-1;
+          M = (60-(45-M));
+          System.out.print(H + " " + M);
+      }
+       else if(H>0 && M>=45){
+           M = M-45;
+           System.out.print(H + " " + M);
+       }
+    }
+}

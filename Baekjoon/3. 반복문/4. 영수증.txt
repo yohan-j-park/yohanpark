@@ -1,0 +1,23 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int price = input.nextInt();
+       int ea = input.nextInt();
+        
+       int amount = 0;
+       
+       for(int i=0; i<ea; i++){
+           int a = input.nextInt();
+           int b = input.nextInt();
+           amount += a*b;
+       }
+            if(amount==price){
+                System.out.println("Yes");
+            }
+            else if(amount != price) {
+                System.out.println("No");
+            }
+    }
+}

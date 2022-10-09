@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int A;
+       int B;
+
+       A = input.nextInt();
+       B = input.nextInt();
+       
+	   if(A>B){
+		   System.out.print(">");
+	   }
+	   else if (A<B){
+		   System.out.print("<");
+	   }
+        else if (A==B){
+            System.out.print("==");
+        }
+    }
+}

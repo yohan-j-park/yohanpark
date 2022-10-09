@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int A;  //시
+       int B;  //분
+       int C;  //조리시간(분)
+        
+       A = input.nextInt();
+       B = input.nextInt();
+       C = input.nextInt();
+        
+       A = ( A*60 + B + C )/60;
+       B = ( A*60 + B + C )%60;
+       
+      if(A>=24){
+          A = A-24;
+      }
+      System.out.println(A + " " + B);
+    }
+}

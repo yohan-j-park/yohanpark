@@ -1,0 +1,17 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       double A;
+       double B;
+       double divide;
+       
+       A = input.nextDouble();
+       B = input.nextDouble();
+       
+       divide = A / B;
+       
+       System.out.println(divide);
+    }
+}

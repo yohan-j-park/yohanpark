@@ -1,0 +1,17 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int A;
+       int B;
+       int minus;
+       
+       A = input.nextInt();
+       B = input.nextInt();
+       if(0<A && B<10) {
+       minus = A - B;
+       System.out.println(minus);
+       }
+    }
+}

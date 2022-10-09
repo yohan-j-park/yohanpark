@@ -1,0 +1,17 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int A;
+       int B;
+       int gop;
+       
+       A = input.nextInt();
+       B = input.nextInt();
+       if(0<A && B<10) {
+       gop = A * B;
+       System.out.printf("%d*%d = %d",A,B,gop);
+       } 
+    }
+}

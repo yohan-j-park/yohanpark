@@ -1,0 +1,24 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int A;
+       int B;
+        
+       A = input.nextInt();
+       B = input.nextInt(); 
+       
+       // 472*5 + 472*8*10 + 472*3*100
+       // int는 반올림이 아니라 버림 
+       
+       int one = (B%10)*A;
+       int ten = ((B%100)/10)*A;      
+       int hun = (B/100)*A;    
+       
+       System.out.println(one);
+       System.out.println(ten);
+       System.out.println(hun);
+       System.out.println(A*B);
+    }
+}
