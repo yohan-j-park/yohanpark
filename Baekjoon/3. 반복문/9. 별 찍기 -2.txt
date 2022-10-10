@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+
+        for(int i=1; i<N+1; i++) {
+            for(int j=N; j>0; j--) {
+                if(i<j){
+                    System.out.print(" ");
+                }
+                else{
+                    System.out.print("*");
+                }
+            }
+            System.out.println("");
+        }
+    }
+}
