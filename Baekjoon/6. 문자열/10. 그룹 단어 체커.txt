@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+
+public class Main {
+    public static void main(String[] args){
+
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        String str = input.nextLine();
+
+        int result = 0;
+
+        for(int i = 0; i < N ; i++) {
+            String group = input.nextLine();
+            boolean check = true;
+            if(group.length()>2)
+            for(int j = 1; j < group.length(); j++) {
+                for(int k = j-1; k >= 0; k--)
+                    if(group.charAt(j) != group.charAt(j-1) && group.charAt(j) == group.charAt(k)) 
+                        check = false;
+            }
+            if(check==true) result++;
+        }
+        System.out.println(result);
+    }
+}

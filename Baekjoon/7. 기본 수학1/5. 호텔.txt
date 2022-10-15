@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+		public static void main(String[] args)  {
+					
+			Scanner input = new Scanner(System.in);
+			int T = input.nextInt();
+            
+            for(int i=0; i<T; i++){
+			    int H = input.nextInt();
+                int W = input.nextInt();
+                int N = input.nextInt();
+                int X = (N/H) + 1;
+                int Y = N%H;    
+            
+                if(Y == 0){
+                    X -= 1;
+                    Y = H;
+                }
+                System.out.println((Y*100)+X);
+           }
+		}
+    }

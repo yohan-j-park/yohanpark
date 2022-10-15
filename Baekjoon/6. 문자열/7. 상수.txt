@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        StringBuilder numA = new StringBuilder(input.next());
+        StringBuilder numB = new StringBuilder(input.next());
+       
+        int numIntegerA = Integer.parseInt(numA.reverse().toString());
+        int numIntegerB = Integer.parseInt(numB.reverse().toString());
+
+        int c = (numIntegerA > numIntegerB) ? numIntegerA : numIntegerB ;
+        
+        System.out.println(c);
+           
+    }
+}

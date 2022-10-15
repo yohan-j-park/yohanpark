@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int A = input.nextInt();
+        int B = input.nextInt();
+        int C = input.nextInt();
+        
+        int BEP = 0;
+        
+        if(B>=C){
+            BEP = -1;
+        }
+        else{
+            BEP = (A/(C-B))+1;    // C-B: 고정비를 제외한 순수익
+        }
+        System.out.println(BEP);
+    }
+}

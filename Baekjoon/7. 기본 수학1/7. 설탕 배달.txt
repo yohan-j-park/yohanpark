@@ -1,0 +1,23 @@
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+       int N = input.nextInt();
+       int five = 0;
+       int three = 0;
+       
+       five = N/5;    // 5킬로그램 봉지 갯수 저장
+       N = N%5;       // 남은 설탕 kg
+       while(five>=0){
+           if(N%3==0){        //남은 설탕 킬로그램 수를 3으로 나눈 나머지가 0이면
+               three=N/3;     // 3킬로그램 봉지 갯수
+               N=N%3;         // 남은 설탕 kg
+               break;
+           }
+           five--;          // 남은 설탕 킬로그램수를 3으로 나눈 나머지가 1,2라면 5킬로그램 봉지 한개를 뜯어서
+           N=N+5;           // 기존에 5를 추가한다.
+       }
+        System.out.printf("%d", N==0 ? five+three : -1);
+    }
+}

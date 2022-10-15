@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        
+        int N = input.nextInt();
+        int count = 0;
+        
+        for(int i=0; i<N; i++){
+            int a = input.nextInt();
+            boolean sosu = true;
+            
+            if(a == 1 )
+                continue;
+            for(int j=2; j<=Math.sqrt(a); j++){
+                if(a%j == 0){
+                    sosu = false;
+                }
+            }
+            
+            if(sosu){
+                count++;
+            }
+        }
+        System.out.println(count);
+        
+    }
+}
