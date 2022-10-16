@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        boolean[] arr = new boolean[246913];
+        int N=1;
+        while(N!=0){
+        N = sc.nextInt();
+        for(int i=2; i<=N; i++) {
+            for(int j=2; i*j<=N*2; j++) {
+                arr[i*j]=true;
+            }
+        }
+            if(N==0)  break;
+            int count=0;
+            for(int i=N+1; i<=N*2-1; i++) {
+                if(arr[i]==false) count++;
+            }
+            if(N==1) System.out.println(1);
+            else{
+            System.out.println(count);
+            }
+        }
+    }
+}
