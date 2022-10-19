@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import collection.ListFrame;
+import collection.SetFrame;
 
 import java.awt.BorderLayout;
 import javax.swing.JDesktopPane;
@@ -18,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MyInterMain extends JFrame {
+// JInternalFrame을 하나씩만 생성하게 처리
+   JInternalFrame mi, ms; 
 
    private JPanel contentPane;
    private JDesktopPane desktopPane;
@@ -30,6 +33,7 @@ public class MyInterMain extends JFrame {
    private JMenu mnNewMenu_3;
    private JMenuItem mntmNewMenuItem_2;
    private JMenuItem mntmNewMenuItem_3;
+   private JMenuItem mntmNewMenuItem_4;
 
    /**
     * Launch the application.
@@ -61,10 +65,6 @@ public class MyInterMain extends JFrame {
       setContentPane(contentPane);
       contentPane.setLayout(new BorderLayout(0, 0));
       contentPane.add(getDesktopPane(), BorderLayout.CENTER);
-      
-      MemberInput memberinput = new MemberInput();
-      memberinput.setLocation(228, 74);
-      desktopPane.add(memberinput);
       desktopPane.updateUI();   //중요
    }
 
@@ -110,10 +110,12 @@ public class MyInterMain extends JFrame {
          
          mntmNewMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               JInternalFrame mi = new MemberInput();
-               desktopPane.add(mi);
-               desktopPane.updateUI();
-               mi.toFront();
+               if(mi==null) {
+                   mi = new MemberInput(MyInterMain.this);  // MemberInput과 MyInterMain의 연결고리
+                   desktopPane.add(mi);
+                   desktopPane.updateUI();
+                   mi.toFront();                 
+               }
             }
          });    
       }
@@ -122,6 +124,17 @@ public class MyInterMain extends JFrame {
    public JMenuItem getMntmNewMenuItem_1() {
       if (mntmNewMenuItem_1 == null) {
          mntmNewMenuItem_1 = new JMenuItem("회원조회");
+         mntmNewMenuItem_1.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 if(ms==null) {
+                     ms = new MemberSearch(MyInterMain.this);       //연결고리
+                     desktopPane.add(ms);
+                     desktopPane.updateUI();
+                     ms.toFront();                     
+                 }
+                 
+             }
+         });
       }
       return mntmNewMenuItem_1;
    }
@@ -130,6 +143,7 @@ public class MyInterMain extends JFrame {
          mnNewMenu_3 = new JMenu("Util");
          mnNewMenu_3.add(getMntmNewMenuItem_2());
          mnNewMenu_3.add(getMntmNewMenuItem_3());
+         mnNewMenu_3.add(getMntmNewMenuItem_4());
       }
       return mnNewMenu_3;
    }
@@ -163,4 +177,18 @@ public class MyInterMain extends JFrame {
       }
       return mntmNewMenuItem_3;
    }
+    public JMenuItem getMntmNewMenuItem_4() {
+        if (mntmNewMenuItem_4 == null) {
+        	mntmNewMenuItem_4 = new JMenuItem("SetFrame");
+        	mntmNewMenuItem_4.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        JInternalFrame lotto = new SetFrame();
+        	        desktopPane.add(lotto);
+        	        desktopPane.updateUI();
+        	        lotto.toFront();
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_4;
+    }
 }

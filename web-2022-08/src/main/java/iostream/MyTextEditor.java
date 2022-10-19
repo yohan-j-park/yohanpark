@@ -22,7 +22,12 @@ import java.io.OutputStream;
 import java.awt.event.ActionEvent;
 
 public class MyTextEditor extends JFrame {
-    protected static Editor target;     // 정적형 멤버 Editor 추가 (클릭 된 창이 target이 되도록 함.)
+    protected static Editor target;     
+//  정적형 멤버 Editor 추가 (클릭 된 창이 target이 되도록 함.) 
+//  Editor를 MyTextEditor e = new Editor(); 처럼 객체로 선언하지 않고 사용할 수 있기 때문 - 메모리에 또 남음..
+//  static을 사용하지 않으면 myTextEditor에 인스턴스를 항상 가지고 다녀야 함  
+//  e.target != frame.target  
+    
     private JPanel contentPane;
     private JMenuBar menuBar;
     private JMenu mnNewMenu;
@@ -100,7 +105,7 @@ public class MyTextEditor extends JFrame {
         	mntmNewMenuItem = new JMenuItem("새 파일");
         	mntmNewMenuItem.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
-        	        JInternalFrame editor = new Editor();
+        	        JInternalFrame editor = new Editor();      //부모 editor = new 자식() : 부모객체를 자식객체에 넣을 수 있다(다형성)
         	        desktopPane.add(editor);
         	        desktopPane.updateUI();
         	        editor.toFront();
@@ -116,19 +121,19 @@ public class MyTextEditor extends JFrame {
         	mntmNewMenuItem_1.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
         	     try {   
-        	        JFileChooser fc = new JFileChooser();
+        	        JFileChooser fc = new JFileChooser();      //JFileChooser 열기를 누르면 선택할 파일 목록을 불러오게 해 주는 클래스
         	        int flag = fc.showOpenDialog(MyTextEditor.this);
-        	        if(flag == JFileChooser.APPROVE_OPTION) {
+        	        if(flag == JFileChooser.APPROVE_OPTION) {  // 열기버튼을 클릭한 경우(클릭한 것이 참이라면)
         	            File f = fc.getSelectedFile();
-        	            StringBuffer sb = new StringBuffer();
-        	            int readCnt = -1;
+        	            StringBuffer sb = new StringBuffer();      // 선택한 데이터를 저장하는 StringBuffer (sb = sb+new String()보다 200~400배 빠름)
+        	            int readCnt = -1;  // readCnt = byte를 읽은 크기를 말함
         	            byte[] bytes = new byte[4096];
         	            InputStream is = new FileInputStream(f);
-        	            while((readCnt = is.read(bytes)) != -1) {
-        	                sb.append(new String(bytes, 0, readCnt));
+        	            while((readCnt = is.read(bytes)) != -1) {      // 읽은 byte 수가 readCnt에 저장됨.(쓰레기 파일을 만들지 않기 위해)
+        	                sb.append(new String(bytes, 0, readCnt));  // StringBuffer에 bytes를 0부터 읽은 크기까지 넣음   
         	            }
         	            Editor editor = new Editor();
-        	            editor.setFileName(f.getPath());
+        	            editor.setFileName(f.getPath());   // f.getPath() :file은 filename+경로(저장된위치)로 구성되어 있는데 getPath는 경로를 불러와줌
         	            editor.getTextArea().setText(sb.toString());
         	            
         	            desktopPane.add(editor);
@@ -149,21 +154,21 @@ public class MyTextEditor extends JFrame {
         if (mntmNewMenuItem_2 == null) {
         	mntmNewMenuItem_2 = new JMenuItem("저장");
         	mntmNewMenuItem_2.addActionListener(new ActionListener() {
-        	    public void actionPerformed(ActionEvent e) {
+        	    public void actionPerformed(ActionEvent e) {       //저장 버튼을 누르면
         	        // 파일명이 noname인지 확인
-        	        String fn = target.getFileName();
-        	        if(fn.equals("noname.txt")) {
-        	            JFileChooser fc = new JFileChooser();
-        	            int flag = fc.showSaveDialog(MyTextEditor.this);
+        	        String fn = target.getFileName();         // 타겟의 이름을 가져온다
+        	        if(fn.equals("noname.txt")) {             // 타겟의 이름이 noname.txt면(이름이 없으면)
+        	            JFileChooser fc = new JFileChooser();      
+        	            int flag = fc.showSaveDialog(MyTextEditor.this);   
         	            if(flag == JFileChooser.APPROVE_OPTION) { //확인버튼을 클릭한 경우
-        	                File f = fc.getSelectedFile();
-        	                target.setFileName(f.getPath());
-        	                fileSave();
+        	                File f = fc.getSelectedFile();    //f = fc에서 선택한 파일이다
+        	                target.setFileName(f.getPath());  // 타겟의 이름을 지정한다(경로와 함께)
+        	                fileSave();    //파일을 저장함.
         	            
         	        }
         	    }
         	        else {
-        	            fileSave();
+        	            fileSave();    //(noname이 아닐 때 파일을 저장한다)
         	        }
        	     }
         });
@@ -175,7 +180,13 @@ public class MyTextEditor extends JFrame {
         	mntmNewMenuItem_3 = new JMenuItem("새 이름으로");
         	mntmNewMenuItem_3.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
-        	        
+        	        JFileChooser fc = new JFileChooser();      
+                    int flag = fc.showSaveDialog(MyTextEditor.this);   
+                    if(flag == JFileChooser.APPROVE_OPTION) { //확인버튼을 클릭한 경우
+                        File f = fc.getSelectedFile();    //f = fc에서 선택한 파일이다
+                        target.setFileName(f.getPath());  // 타겟의 이름을 지정한다(경로와 함께)
+                        fileSave();    
+                    }
         	    }
         	});
         }
