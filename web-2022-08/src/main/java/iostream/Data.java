@@ -5,11 +5,14 @@ import java.util.Vector;
 
 
 public class Data implements Serializable{      // 직렬화
-    public static long serialVerionUID = 100L;      //인식표, 한 번 설정되면 초기화가 되지 않도록 static을 사용해야함
+    public static long serialVerionUID = 100L;      
+    //인식표, 한 번 설정되면 초기화가 되지 않도록 static을 사용해야함
+    //서로 다른 컴퓨터에서 작업해도 같은 객체라고 인식하기 하기 위함
     
     String id, mName, addr, phone;
     int point;
     
+    public Data() {}
     public Data(String id, String mName, String addr, String phone, int point) {
         this.id = id;
         this.mName = mName;
@@ -43,8 +46,22 @@ public class Data implements Serializable{      // 직렬화
                     
     }
 
+// 객체의 동등비교: hashCode값도 같고 equals도 같으면 동등객체
 
-
+    @Override
+    public int hashCode() {     //기본: 패키지명.클래스명@자신의 hashCode => 객체마다 전부 다름. (객체동등비교하기 위해 재정의)
+        
+        return this.id.hashCode();  //여기서 return하는 id는 고정문자열이다.
+    }
+    @Override
+    public boolean equals(Object obj) {
+        boolean b = false;
+        if(obj instanceof Data) {   
+            Data d = (Data)obj;
+            b = d.getId().equals(this.id);
+        }
+        return b;
+    }
     public String getId() {
         return id;
     }

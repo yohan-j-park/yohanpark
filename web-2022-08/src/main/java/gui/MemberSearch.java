@@ -20,12 +20,14 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MemberSearch extends JInternalFrame {
     MyInterMain main;
-    
+    MemberDao dao;
     private JPanel panel;
-    private JTextField textField;
+    private JTextField findStr;
     private JButton btnNewButton;
     private JScrollPane scrollPane;
     private JTable table;
@@ -65,7 +67,7 @@ public class MemberSearch extends JInternalFrame {
         setBounds(100, 100, 823, 491);
         getContentPane().add(getPanel(), BorderLayout.NORTH);
         getContentPane().add(getScrollPane(), BorderLayout.CENTER);
-
+        dao = new MemberDao();
     }
    
 
@@ -74,21 +76,42 @@ public class MemberSearch extends JInternalFrame {
         	panel = new JPanel();
         	panel.setPreferredSize(new Dimension(10, 35));
         	panel.setLayout(new BorderLayout(0, 0));
-        	panel.add(getTextField(), BorderLayout.CENTER);
+        	panel.add(getFindStr(), BorderLayout.CENTER);
         	panel.add(getBtnNewButton(), BorderLayout.EAST);
         }
         return panel;
     }
-    public JTextField getTextField() {
-        if (textField == null) {
-        	textField = new JTextField();
-        	textField.setColumns(10);
+    public JTextField getFindStr() {
+        if (findStr == null) {
+        	findStr = new JTextField();
+        	findStr.setColumns(10);
         }
-        return textField;
+        return findStr;
     }
     public JButton getBtnNewButton() {
         if (btnNewButton == null) {
-        	btnNewButton = new JButton("조회");
+        	btnNewButton = new JButton("검색");
+        	btnNewButton.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        String find = findStr.getText();
+//        	        MemberDao dao = new MemberDao();
+//        	        Vector<Vector> vector = new Vector<Vector>();
+        	        List<Data> list = dao.read();      //list를 통째로 가져옴
+        	        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        	        model.setRowCount(0);
+        	        
+        	        for(Data d : list) {
+        	            if(d.getId()    .contains(find) ||
+        	               d.getmName() .contains(find) ||
+        	               d.getAddr()  .contains(find) ||
+        	               d.getPhone() .contains(find)){
+        	                model.addRow(d.getVector());
+        	            }
+        	        }
+        	        table.updateUI();
+
+        	    }
+        	});
         }
         return btnNewButton;
     }
@@ -118,6 +141,8 @@ public class MemberSearch extends JInternalFrame {
             
             model.setDataVector(vector, header);
             
+          
+            
             
         	table = new JTable(model);
         	table.addMouseListener(new MouseAdapter() {
@@ -145,7 +170,7 @@ public class MemberSearch extends JInternalFrame {
         	        mi.getTfIrum().setText(irum);
         	        mi.getTfAddr().setText(addr);
         	        mi.getTfPhone().setText(phone);
-        	        mi.getTfPoint().setText(point+"");
+        	        mi.getTfPoint().setText(point.toString());
         	    }
         	});
         }

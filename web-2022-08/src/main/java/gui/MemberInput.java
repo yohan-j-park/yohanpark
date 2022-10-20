@@ -158,7 +158,7 @@ public class MemberInput extends JInternalFrame {
     }
     public JButton getBtnSave() {
         if (btnSave == null) {
-        	btnSave = new JButton("저장");
+        	btnSave = new JButton("저 장");
         	btnSave.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
         	        MemberDao dao = new MemberDao();
@@ -178,7 +178,20 @@ public class MemberInput extends JInternalFrame {
     }
     public JButton getBtnModify() {
         if (btnModify == null) {
-        	btnModify = new JButton("수정");
+        	btnModify = new JButton("수 정");
+        	btnModify.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        MemberDao dao = new MemberDao();
+                    String id = tfId.getText();
+                    String irum = tfIrum.getText();
+                    String addr = tfAddr.getText();
+                    String phone = tfPhone.getText();
+                    int point = Integer.parseInt(tfPoint.getText());
+                    
+                    Data d = new Data(id, irum, addr, phone, point);
+                    dao.modify(d);
+        	    }
+        	});
         	btnModify.setBounds(135, 159, 91, 23);
         }
         return btnModify;
@@ -186,6 +199,14 @@ public class MemberInput extends JInternalFrame {
     public JButton getBtnDelete() {
         if (btnDelete == null) {
         	btnDelete = new JButton("삭 제");
+        	btnDelete.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        MemberDao dao = new MemberDao();
+        	        String id = ((MemberInput)main.mi).getTfId().getText();    
+        	        // id를 PK라고 가정했을 때 id값을 가져와서 delete라는 메소드를 호출하여 id값을 삭제한다.
+        	        dao.delete(id);
+        	    }
+        	});
         	btnDelete.setBounds(250, 159, 91, 23);
         }
         return btnDelete;

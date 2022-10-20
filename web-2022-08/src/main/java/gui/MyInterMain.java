@@ -20,8 +20,7 @@ import java.awt.event.ActionEvent;
 
 public class MyInterMain extends JFrame {
 // JInternalFrame을 하나씩만 생성하게 처리
-   JInternalFrame mi, ms; 
-
+   JInternalFrame mi, ms, si, ss; 
    private JPanel contentPane;
    private JDesktopPane desktopPane;
    private JMenuBar menuBar;
@@ -34,7 +33,9 @@ public class MyInterMain extends JFrame {
    private JMenuItem mntmNewMenuItem_2;
    private JMenuItem mntmNewMenuItem_3;
    private JMenuItem mntmNewMenuItem_4;
-
+   private JMenuItem mntmNewMenuItem_5;
+   private JMenuItem mntmNewMenuItem_6;
+   
    /**
     * Launch the application.
     */
@@ -95,6 +96,8 @@ public class MyInterMain extends JFrame {
    public JMenu getMnNewMenu_1() {
       if (mnNewMenu_1 == null) {
          mnNewMenu_1 = new JMenu("성적관리");
+         mnNewMenu_1.add(getMntmNewMenuItem_5());
+         mnNewMenu_1.add(getMntmNewMenuItem_6());
       }
       return mnNewMenu_1;
    }
@@ -190,5 +193,37 @@ public class MyInterMain extends JFrame {
         	});
         }
         return mntmNewMenuItem_4;
+    }
+    public JMenuItem getMntmNewMenuItem_5() {
+        if (mntmNewMenuItem_5 == null) {
+        	mntmNewMenuItem_5 = new JMenuItem("성적 입력");
+        	mntmNewMenuItem_5.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        if(si==null) {
+        	        si = new ScoreInput(MyInterMain.this);
+        	        desktopPane.add(si);
+        	        desktopPane.updateUI();
+        	        si.toFront();
+        	        }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_5;
+    }
+    public JMenuItem getMntmNewMenuItem_6() {
+        if (mntmNewMenuItem_6 == null) {
+        	mntmNewMenuItem_6 = new JMenuItem("성적 조회");
+        	mntmNewMenuItem_6.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        if(ss==null) {
+        	        ss = new ScoreSearch(MyInterMain.this);
+                    desktopPane.add(ss);
+                    desktopPane.updateUI();
+                    ss.toFront();
+        	        }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_6;
     }
 }
