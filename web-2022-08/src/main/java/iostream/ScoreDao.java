@@ -54,13 +54,57 @@ public class ScoreDao implements ScoreInterface{
 
     @Override
     public void modify(ScoreVo vo) {
-        // TODO Auto-generated method stub
+        // list를 최신정보로 갱신
+        this.list = read();
         
+        // vo객체를 검색
+        int index = list.indexOf(vo);
+        //hashCode를 재정의하지 않으면 검색을 하지 못함
+        // index번째 내가 찾는 serial번호가 있는지
+        
+
+        // 수정
+        list.set(index, vo);    
+        
+        //파일에 저장
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            
+            oos.flush();
+            oos.close();
+            fos.close();
+            
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(int serial) {
-        // TODO Auto-generated method stub
+        list = read();
+        ScoreVo vo = new ScoreVo();
+        vo.setSerial(serial);
+        int index = list.indexOf(vo);
+        if(index != -1) {
+            list.remove(index);
+            
+            try {
+                FileOutputStream fos = new FileOutputStream(fileName);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(list);
+                oos.flush();
+                oos.close();
+                fos.close();
+                
+                
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
         
     }
 

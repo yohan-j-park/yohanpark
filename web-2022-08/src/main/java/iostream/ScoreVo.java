@@ -15,6 +15,7 @@ public class ScoreVo implements Serializable{
         this.subject = subject;
         this.score = score;
     }
+    public ScoreVo() {}
     public Vector getVector() {
         Vector v = new Vector();
         v.add(serial);
@@ -34,8 +35,8 @@ public class ScoreVo implements Serializable{
     @Override
     public boolean equals(Object obj) {
         boolean b = false;
-        if(obj instanceof ScoreVo) {
-            ScoreVo vo = (ScoreVo)obj;
+        if(obj instanceof ScoreVo) {        //Object가 ScoreVo타입일 때만 비교하겠다.
+            ScoreVo vo = (ScoreVo)obj;      
             b = (vo.getSerial() == this.serial);
         }
         return b;
