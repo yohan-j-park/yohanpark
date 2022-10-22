@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class Main {
+	static int[] arr = {};
+	static int[] tmp = {};
+	static int count = 0;
+	static int result = -1;
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		arr = new int[n];
+		tmp = new int[n];
+		for(int i=0;i<n;i++) {
+			arr[i] = sc.nextInt();
+		}
+		
+		merge_sort(0,arr.length-1,m);
+		System.out.print(result);
+	}
+	
+	public static int merge_sort(int start, int end, int k){
+		int answer = -1 ;
+		
+		if(start < end) {
+			int mid = (start+end) / 2;
+			merge_sort(start, mid, k );
+			merge_sort(mid+1, end, k );
+			
+			int p = start;
+			int q = mid +1; 
+			int idx = p;
+			 
+			while(p<=mid || q<=end) {
+				count++;
+				if(q > end || ( p<=mid && arr[p] < arr[q] )) {
+					tmp[idx++] = arr[p++];
+					
+				} else {
+					tmp[idx++] = arr[q++];
+				}
+				
+				if (count == k) { 
+					result = tmp[idx-1];
+				} 
+			}
+			
+			for(int i=start;i<=end;i++) {
+				arr[i] = tmp[i];
+			}
+		}
+		return answer;
+	}
+	
+	
+}

@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main{
+
+	public static StringBuilder stringbuilder = new StringBuilder();
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+
+		int N = sc.nextInt(); // 원판의 개수 N
+
+		stringbuilder.append((int)(Math.pow(2,N)-1)).append('\n');
+
+		Hanoi(N, 1, 2, 3);
+
+		System.out.println(stringbuilder);
+	}
+
+	public static void Hanoi(int N, int A, int B, int C) { //하노이탑 수행과정
+        if(N == 1) { // 원반이 1 개일 때
+            stringbuilder.append(A + " " + C + "\n");
+			return;
+		}
+
+		// 기둥 A에 있는 N개의 원반을 기둥 C를 보조 기둥으로 사용해 기둥 B로 옮기는 작업이다.
+	    
+		// (N-1)개의 원반을 A에서 B로 옮김
+		Hanoi(N-1, A, C, B);
+
+		// A에 남은 원반 1개를 B에서 C로 이동시킨다.
+		stringbuilder.append(A + " " + C + "\n");
+
+		// (N-1)개의 원반을 B에서 C로 옮김
+		Hanoi(N-1, B, A, C);
+
+	}
+}
