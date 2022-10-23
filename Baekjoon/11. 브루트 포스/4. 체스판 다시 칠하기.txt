@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Main{
+	static boolean arr[][];
+	static int min = 64;
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		int y= sc.nextInt();
+		
+		arr = new boolean [x][y];
+		for(int i = 0 ; i < x; i++) {
+			String str = sc.next();
+			for(int j = 0; j < y; j++) {
+				if(str.charAt(j) == 'W') {
+					arr[i][j] = true;
+				}else {
+					arr[i][j] = false;
+				}
+			}
+		}
+		
+		int N = x - 7;
+		int M = y - 7;
+		for(int i = 0 ; i < N; i++) {
+			for(int j = 0; j < M; j++) {
+				int bcount = 0;
+				int wcount = 0;
+				for(int a = i; a < i + 8; a++) {
+					for(int b = j; b < j + 8; b++) {
+						if((a + b) % 2 == 0) {
+							if(arr[a][b] != true) {			// W
+								wcount++;
+							}else {
+								bcount++;
+							}
+						}
+						else {
+							if(arr[a][b] != true) {
+								bcount++;
+							}else {
+								wcount++;
+							}
+						}
+					}
+				}
+				min = Math.min(min, wcount);
+				min = Math.min(min,bcount);
+			}
+		}
+		
+		System.out.println(min);
+		
+		
+	}
+}
