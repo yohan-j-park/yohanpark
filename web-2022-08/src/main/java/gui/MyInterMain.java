@@ -20,7 +20,13 @@ import java.awt.event.ActionEvent;
 
 public class MyInterMain extends JFrame {
 // JInternalFrame을 하나씩만 생성하게 처리
-   JInternalFrame mi, ms, si, ss; 
+   JInternalFrame mi, ms;
+   ScoreInput si; 
+   ScoreSearch ss; 
+   SelectBox sb;
+   MemberInputDB midb;
+   MemberSearchDB msdb;
+   
    private JPanel contentPane;
    private JDesktopPane desktopPane;
    private JMenuBar menuBar;
@@ -35,6 +41,9 @@ public class MyInterMain extends JFrame {
    private JMenuItem mntmNewMenuItem_4;
    private JMenuItem mntmNewMenuItem_5;
    private JMenuItem mntmNewMenuItem_6;
+   private JMenuItem mntmNewMenuItem_7;
+   private JMenuItem mntmNewMenuItem_8;
+   private JMenuItem mntmNewMenuItem_9;
    
    /**
     * Launch the application.
@@ -90,6 +99,8 @@ public class MyInterMain extends JFrame {
          mnNewMenu = new JMenu("회원관리");
          mnNewMenu.add(getMntmNewMenuItem());
          mnNewMenu.add(getMntmNewMenuItem_1());
+         mnNewMenu.add(getMntmNewMenuItem_8());
+         mnNewMenu.add(getMntmNewMenuItem_9());
       }
       return mnNewMenu;
    }
@@ -147,6 +158,7 @@ public class MyInterMain extends JFrame {
          mnNewMenu_3.add(getMntmNewMenuItem_2());
          mnNewMenu_3.add(getMntmNewMenuItem_3());
          mnNewMenu_3.add(getMntmNewMenuItem_4());
+         mnNewMenu_3.add(getMntmNewMenuItem_7());
       }
       return mnNewMenu_3;
    }
@@ -225,5 +237,53 @@ public class MyInterMain extends JFrame {
         	});
         }
         return mntmNewMenuItem_6;
+    }
+    public JMenuItem getMntmNewMenuItem_7() {
+        if (mntmNewMenuItem_7 == null) {
+        	mntmNewMenuItem_7 = new JMenuItem("SelectBox");
+        	mntmNewMenuItem_7.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        if(sb==null) {
+        	            sb = new SelectBox(MyInterMain.this);
+        	            desktopPane.add(sb);
+        	            desktopPane.updateUI();
+        	            sb.toFront();
+        	        }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_7;
+    }
+    public JMenuItem getMntmNewMenuItem_8() {
+        if (mntmNewMenuItem_8 == null) {
+        	mntmNewMenuItem_8 = new JMenuItem("회원가입(DB)");
+        	mntmNewMenuItem_8.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	       if(midb==null) {
+        	           midb = new MemberInputDB(MyInterMain.this);
+        	           desktopPane.add(midb);
+        	           desktopPane.updateUI();
+        	           midb.toFront();
+        	       }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_8;
+    }
+    public JMenuItem getMntmNewMenuItem_9() {
+        if (mntmNewMenuItem_9 == null) {
+        	mntmNewMenuItem_9 = new JMenuItem("회원조회(DB)");
+        	mntmNewMenuItem_9.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        if(msdb==null) {
+        	            msdb = new MemberSearchDB(MyInterMain.this);
+        	            desktopPane.add(msdb);
+        	            desktopPane.updateUI();
+        	            msdb.toFront();
+        	        }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_9;
     }
 }
