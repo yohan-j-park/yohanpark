@@ -7,10 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.util.List;
 import java.util.Vector;
 
-import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -21,13 +23,11 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
 
-import jdbc.MemberDto;
-import jdbc.MemberVo;
+import iostream.ScoreDao;
+import jdbc.ScoreDto;
+import jdbc.ScoreVo;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-public class MemberSearchDB extends JInternalFrame {
+public class ScoreSearchDB extends JInternalFrame {
     private JPanel panel;
     private JButton btnNewButton;
     private JTextField findStr;
@@ -35,7 +35,6 @@ public class MemberSearchDB extends JInternalFrame {
     private JTable table;
     
     MyInterMain main;
-//    MemberInputDB midb;
     Connection conn;
 
     /**
@@ -45,7 +44,7 @@ public class MemberSearchDB extends JInternalFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MemberSearchDB frame = new MemberSearchDB();
+                    ScoreSearchDB frame = new ScoreSearchDB();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -57,46 +56,43 @@ public class MemberSearchDB extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public MemberSearchDB() {
-        super("회원조회DB",true,true,true,true);
-        setVisible(true);
+    public ScoreSearchDB() {
+        super("성적 조회DB",true,true,true,true);
         addInternalFrameListener(new InternalFrameAdapter() {
             @Override
             public void internalFrameClosing(InternalFrameEvent e) {
-                main.msdb = null;
+                main.ssdb = null;
             }
         });
-        setBounds(100, 100, 450, 300);
+        setVisible(true);
+        setBounds(100, 100, 768, 352);
+        getContentPane().setLayout(new BorderLayout(0, 0));
         getContentPane().add(getPanel(), BorderLayout.NORTH);
         getContentPane().add(getScrollPane(), BorderLayout.CENTER);
 
     }
     
-    public MemberSearchDB(MyInterMain main) {
+    public ScoreSearchDB(MyInterMain main) {
         this();
         this.main = main;
     }
+    
     public void select() {
-        // 검색어를 가져와 MemberDto.select 호출 -> 반환형: Vector타입의 vector(Vector<Vector>)
         String f = findStr.getText();
-        MemberDto dto = new MemberDto();
+        ScoreDto dto = new ScoreDto();
         Vector<Vector> list = dto.select(f);
-        
-        // DefaultTableModel에 있는 모든 데이터를 삭제
         DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.setRowCount(0);
         
-        // DefaultTableModel model 에 리턴받은 Vector 데이터를 추가
         for(Vector v : list) {
             model.addRow(v);
         }
-        
-        // model을 table에 설정
     }
+
     public JPanel getPanel() {
         if (panel == null) {
         	panel = new JPanel();
-        	panel.setPreferredSize(new Dimension(10, 35));
+        	panel.setPreferredSize(new Dimension(10, 26));
         	panel.setLayout(new BorderLayout(0, 0));
         	panel.add(getBtnNewButton(), BorderLayout.EAST);
         	panel.add(getFindStr(), BorderLayout.CENTER);
@@ -108,7 +104,7 @@ public class MemberSearchDB extends JInternalFrame {
         	btnNewButton = new JButton("검색");
         	btnNewButton.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
-        	        select();
+        	        select(); 
         	    }
         	});
         }
@@ -118,13 +114,13 @@ public class MemberSearchDB extends JInternalFrame {
         if (findStr == null) {
         	findStr = new JTextField();
         	findStr.addKeyListener(new KeyAdapter() {
-        	    @Override
-        	    public void keyReleased(KeyEvent e) {
-        	        if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-        	            select();
-        	        }
-        	    }
-        	});
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        select();
+                    }
+                }
+            });
         	findStr.setColumns(10);
         }
         return findStr;
@@ -138,26 +134,26 @@ public class MemberSearchDB extends JInternalFrame {
     }
     public JTable getTable() {
         if (table == null) {
-        	table = new JTable();
-        	table.addMouseListener(new MouseAdapter() {
-        	    @Override
-        	    public void mouseClicked(MouseEvent e) {
-        	        int row = table.getSelectedRow();
-        	        String id = (String)table.getValueAt(row, 0);
-        	        MemberDto dto = new MemberDto();
-        	        MemberVo vo = dto.SelectOne(id);   //id를 매개변수로 받아 vo를 리턴하는 메소드
-        	        
-        	        if(main.midb == null) {        // main에 midb가 없다면
-        	            main.midb = new MemberInputDB(main);   // main에 midb를 생성
-        	            main.getDesktopPane().add(main.midb);
-        	        }
-        	            main.midb.loadData(vo);
-        	            main.midb.toFront();
-        	    }
-        	});
-        	String[] header = {"아이디","성명","성별","연락처","등록일"};
-        	DefaultTableModel model = new DefaultTableModel(null, header);
-        	table.setModel(model);
+            table = new JTable();
+            table.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int row = table.getSelectedRow();
+                    Integer serial = (Integer)table.getValueAt(row, 0);
+                    ScoreDto dto = new ScoreDto();
+                    ScoreVo vo = dto.SelectOne(serial);   
+                    
+                    if(main.sidb == null) {        // main에 midb가 없다면
+                        main.sidb = new ScoreInputDB(main);   // main에 midb를 생성
+                        main.getDesktopPane().add(main.sidb);
+                    }
+                        main.sidb.loadData(vo);
+                        main.sidb.toFront();
+                }
+            });
+            String[] header = {"번호","아이디","시험날짜","과목","점수"};
+            DefaultTableModel model = new DefaultTableModel(null, header);
+            table.setModel(model);
         }
         return table;
     }

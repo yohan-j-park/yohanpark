@@ -20,12 +20,14 @@ import java.awt.event.ActionEvent;
 
 public class MyInterMain extends JFrame {
 // JInternalFrame을 하나씩만 생성하게 처리
-   JInternalFrame mi, ms;
-   ScoreInput si; 
-   ScoreSearch ss; 
-   SelectBox sb;
-   MemberInputDB midb;
-   MemberSearchDB msdb;
+   JInternalFrame mi, ms;              // 다형성
+   ScoreInput si;                      // 자식 객체를 생성하여 부모에 대입 
+   ScoreSearch ss;                     // 자식 객체를 생성하여 부모에 대입 
+   SelectBox sb;                       // 자식 객체를 생성하여 부모에 대입
+   MemberInputDB midb;                 // 자식 객체를 생성하여 부모에 대입
+   MemberSearchDB msdb;                // 자식 객체를 생성하여 부모에 대입
+   ScoreInputDB sidb;
+   ScoreSearchDB ssdb;
    
    private JPanel contentPane;
    private JDesktopPane desktopPane;
@@ -44,6 +46,8 @@ public class MyInterMain extends JFrame {
    private JMenuItem mntmNewMenuItem_7;
    private JMenuItem mntmNewMenuItem_8;
    private JMenuItem mntmNewMenuItem_9;
+   private JMenuItem mntmNewMenuItem_10;
+   private JMenuItem mntmNewMenuItem_11;
    
    /**
     * Launch the application.
@@ -109,6 +113,8 @@ public class MyInterMain extends JFrame {
          mnNewMenu_1 = new JMenu("성적관리");
          mnNewMenu_1.add(getMntmNewMenuItem_5());
          mnNewMenu_1.add(getMntmNewMenuItem_6());
+         mnNewMenu_1.add(getMntmNewMenuItem_10());
+         mnNewMenu_1.add(getMntmNewMenuItem_11());
       }
       return mnNewMenu_1;
    }
@@ -259,12 +265,12 @@ public class MyInterMain extends JFrame {
         	mntmNewMenuItem_8 = new JMenuItem("회원가입(DB)");
         	mntmNewMenuItem_8.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
-        	       if(midb==null) {
-        	           midb = new MemberInputDB(MyInterMain.this);
+        	       if(midb==null) {    //midb or MyInteMain.this.miDB
+        	           midb = new MemberInputDB(MyInterMain.this);     // 
         	           desktopPane.add(midb);
         	           desktopPane.updateUI();
-        	           midb.toFront();
         	       }
+        	       MyInterMain.this.midb.toFront();
         	    }
         	});
         }
@@ -285,5 +291,37 @@ public class MyInterMain extends JFrame {
         	});
         }
         return mntmNewMenuItem_9;
+    }
+    public JMenuItem getMntmNewMenuItem_10() {
+        if (mntmNewMenuItem_10 == null) {
+        	mntmNewMenuItem_10 = new JMenuItem("성적 입력DB");
+        	mntmNewMenuItem_10.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        if(sidb==null) {
+        	            sidb = new ScoreInputDB(MyInterMain.this);
+        	            desktopPane.add(sidb);
+        	            desktopPane.updateUI();
+        	            sidb.toFront();
+        	        }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_10;
+    }
+    public JMenuItem getMntmNewMenuItem_11() {
+        if (mntmNewMenuItem_11 == null) {
+        	mntmNewMenuItem_11 = new JMenuItem("성적 조회DB");
+        	mntmNewMenuItem_11.addActionListener(new ActionListener() {
+        	    public void actionPerformed(ActionEvent e) {
+        	        if(ssdb==null) {
+        	            ssdb = new ScoreSearchDB(MyInterMain.this);
+        	            desktopPane.add(ssdb);
+        	            desktopPane.updateUI();
+        	            ssdb.toFront();
+        	        }
+        	    }
+        	});
+        }
+        return mntmNewMenuItem_11;
     }
 }

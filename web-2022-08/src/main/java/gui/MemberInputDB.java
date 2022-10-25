@@ -98,6 +98,20 @@ public class MemberInputDB extends JInternalFrame {
        
     }
 
+    public void loadData(MemberVo vo) {
+        tfId.setText(vo.getId());
+        tfIrum.setText(vo.getIrum());
+        tfPhone.setText(vo.getPhone());
+        tfPicture.setText(vo.getPhoto());
+        if(vo.getGender().equals("m")) {
+            btnGenderM.setSelected(true);
+        }else {
+            btnGenderF.setSelected(true);
+        }
+        
+        
+    }
+    
     public JLabel getLblNewLabel() {
         if (lblNewLabel == null) {
         	lblNewLabel = new JLabel("아이디");
@@ -191,7 +205,20 @@ public class MemberInputDB extends JInternalFrame {
         	btnModify = new JButton("수 정");
         	btnModify.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
+        	        String id = tfId.getText();
+        	        String irum = tfIrum.getText();
+        	        String phone = tfPhone.getText();
+        	        String gender = btnGenderM.isSelected()? "m" : "f";
+        	        String picture = tfPicture.getText();
         	        
+        	        MemberVo vo = new MemberVo(id,irum,gender,phone,picture);
+        	        MemberDto dto = new MemberDto();
+        	        int cnt = dto.update(vo);
+        	        if(cnt>0) {
+        	            // 작동
+        	        }else {
+        	            // 오류
+        	        }
         	    }
         	});
         	btnModify.setBounds(133, 150, 74, 23);
@@ -203,7 +230,19 @@ public class MemberInputDB extends JInternalFrame {
         	btnDelete = new JButton("삭 제");
         	btnDelete.addActionListener(new ActionListener() {
         	    public void actionPerformed(ActionEvent e) {
-        	        
+        	        String id = tfId.getText();
+        	        MemberDto dto = new MemberDto();
+        	        int cnt = dto.delete(id);
+        	        if(cnt>0) {
+        	            // 작동
+        	            tfId.setText("");
+        	            tfIrum.setText("");
+        	            tfPhone.setText("");
+        	            tfPicture.setText("");
+        	        }
+        	        else {
+        	            // 오류
+        	        }
         	    }
         	});
         	btnDelete.setBounds(214, 150, 66, 23);

@@ -47,12 +47,49 @@ public class MemberDto {
     
     public int update(MemberVo vo) {
         int cnt = 0;
-        
+        try {
+            conn = new DBConn("mydb").getConn();
+            conn.setAutoCommit(false);
+            // id는 수정 불가능하다고 가정
+            String sql = "update member set name=?, gender=? ,phone=? ,photo=? where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, vo.getIrum());
+            ps.setString(2, vo.getGender());
+            ps.setString(3, vo.getPhone());
+            ps.setString(4, vo.getPhoto());
+            ps.setString(5, vo.getId());
+            
+            cnt = ps.executeUpdate();
+            if(cnt>0) conn.commit();
+            else conn.rollback();
+            
+            ps.close();
+            conn.close();
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
         return cnt;
     }
     
     public int delete(String id) {
         int cnt = 0;
+        try {
+            conn = new DBConn("mydb").getConn();
+            conn.setAutoCommit(false);
+            String sql = "delete from member where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            cnt = ps.executeUpdate();
+            if(cnt>0) conn.commit();
+            else conn.rollback();
+            
+            ps.close();
+            conn.close();
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
         return cnt;
     }
     
@@ -85,6 +122,31 @@ public class MemberDto {
         }
         
         return list;
+    }
+    
+    public MemberVo SelectOne(String id) {
+        MemberVo vo = new MemberVo();
+        try {
+            String sql = "select * from member where id =?";
+            conn = new DBConn("mydb").getConn();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                vo.setId(rs.getString("id"));
+                vo.setIrum(rs.getString("name"));
+                vo.setGender(rs.getString("gender"));
+                vo.setPhone(rs.getString("phone"));
+                vo.setmDate(rs.getString("mdate"));
+                vo.setPhoto(rs.getString("photo"));
+            }
+            
+            
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return vo;
     }
     
 }
