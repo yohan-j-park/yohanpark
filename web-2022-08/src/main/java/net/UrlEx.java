@@ -12,7 +12,7 @@ public class UrlEx {
             URL url = new URL(domain);
             InputStream is = url.openStream();
             InputStreamReader isr = new InputStreamReader(is);  //byte stream에서 char stream으로 변환
-            BufferedReader br = new BufferedReader(isr);
+            BufferedReader br = new BufferedReader(isr);    // buffer: data를 끊어서 읽을 수 있음
             String data="";
             while((data=br.readLine()) != null) {
                 /*
