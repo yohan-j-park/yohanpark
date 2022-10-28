@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -25,14 +27,26 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MenuKeyEvent;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import org.json.simple.JSONObject;
 
 public class ServerMain extends JFrame {
 	ServerSocket server;
 	ServerThread st;
+	BufferedWriter bw;
+	BufferedReader br;
 	
 	Vector<ServerThread> clients = new Vector<ServerThread>();
+	boolean flagServer = true;
+	Vector<String> users = new Vector<String>();
+	
+	// JSON에서 정수는 모두 long타입이다.
+	final static int SERVER_START = 1;		//정석
+	final static int SERVER_STOP = 2;		// 상수는 카멜타입을 사용할 수 없고 _를 사용한다
+	final static int LOGIN = 3;
+	final static int LOGOUT = 4;
+	final static int MESSAGE = 5;
+	final static int USERS = 6;			// 유저들의 명단
+	
 
 	private JPanel contentPane;
 	private JTextField tfIp;
@@ -49,8 +63,6 @@ public class ServerMain extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JTextField tfMessage;
 	
-	BufferedWriter bw;
-	BufferedReader br;
 
 	/**
 	 * Launch the application.
@@ -83,13 +95,28 @@ public class ServerMain extends JFrame {
 						btnSend.setEnabled(true);
 						btnWhisper.setEnabled(true);
 						server = new ServerSocket(6666);
-						while(true) {
-							Socket socket = server.accept();		// 스레드를 만들지 않으면 클라이언트가 들어올 때 까지 아무것도 못함..
-							st = new ServerThread(socket, ServerMain.this);
-							st.start();
-							clients.add(st);
-							
+						
+						flagServer = true;	
+						//while문이 돌기 전에 true로 놓는 이유는 flagServer를 중지시켰다가 다시 실행 할 경우를 생각해서
+						while(flagServer) {
+							Socket socket = server.accept();	// server.accept(): blocking	
+							if(flagServer) {
+							//blocking을 해제하지 않고 종료하면 서버가 폭주함
+							// 스레드를 만들지 않으면 클라이언트가 들어올 때 까지 아무것도 못함..
+								st = new ServerThread(socket, ServerMain.this);
+								st.start();
+								clients.add(st);
+							}
 						}
+						
+						for(ServerThread st : clients) {
+							st.br.close();
+							st.bw.close();
+							st.socket.close();
+						}
+						clients.clear();
+						server.close();
+						
 						
 					} catch (IOException e) {
 						
@@ -107,22 +134,58 @@ public class ServerMain extends JFrame {
 	
 	public void stop() {
 		// 1) 접속 된 모든 클라이언트들에게 서버 중지 사실을 알린다.
-		for(ServerThread st : clients) {
-			String msg = "서버가 종료되었습니다.\n";
-			st.sendMsgAll(msg);
-			clients.remove(st);
-		}
-		
-		// 2) ServerSocket 종료
 		try {
-			server.close();
-		} catch (IOException e) {}
+			JSONObject jData = new JSONObject(); 	
+			jData.put("user", "server");
+			jData.put("command", SERVER_STOP);
+			jData.put("message", "서버가 중지되었습니다.");
+			
+			for(ServerThread st : clients) {
+				st.bw.write(jData.toJSONString());
+				st.bw.flush();
+			}
+
 		
-		// 3) 버튼들을 토클
+		} catch (Exception e) {}
+		
+		// 2) 버튼들을 토클
 		btnStart.setEnabled(true);
 		btnStop.setEnabled(false);
 		btnSend.setEnabled(false);
 		btnWhisper.setEnabled(false);
+		
+		// 3) 서버를 중지하기 위한 가상의 클라이언트로 접속
+		flagServer = false;		// -> Thread의 while문이 돌지 않게 됨
+		try {
+			Socket tempSocket = new Socket("127.0.0.1", 6666);	// accept 해제 127.~ : localhost
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void send() {
+		String msg = tfMessage.getText();
+		
+		JSONObject obj = new JSONObject();
+		obj.put("user", "server");
+		obj.put("command", ServerMain.MESSAGE);
+		obj.put("message", msg);
+		
+		textArea.append(msg+ "\n");
+		textArea.setCaretPosition(textArea.getText().length());
+		
+		for(ServerThread st : clients) {
+			try {
+				st.bw.write(obj.toJSONString());
+				st.bw.write("\n");
+				st.bw.flush();
+				
+			}catch(Exception e) {
+				
+			}
+		}
 	}
 	
 	public ServerMain() {
@@ -211,6 +274,11 @@ public class ServerMain extends JFrame {
 		if (list == null) {
 			list = new JList();
 		}
+//		테스트용
+//		users.add("kim");
+//		users.add("hong");
+//		list.setListData(users);
+		
 		return list;
 	}
 	public JLabel getLblNewLabel_2() {
@@ -241,11 +309,11 @@ public class ServerMain extends JFrame {
 			btnSend = new JButton("전 송");
 			btnSend.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-						String msg = tfMessage.getText();
-						st.sendMsgAll(msg);
-					    textArea.append(msg+"\n");
-					    tfMessage.setText("");
-					
+//						String msg = tfMessage.getText();
+//						st.sendMsgAll(msg);
+//						textArea.append(msg+"\n");
+						send();
+						tfMessage.setText("");
 				}
 			});
 			btnSend.setEnabled(false);

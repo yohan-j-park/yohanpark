@@ -7,8 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,8 +23,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.json.simple.JSONObject;
+
 public class ClientMain extends JFrame {
 	ClientThread ct;
+	Vector<String> users = new Vector<String>();
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -78,10 +83,22 @@ public class ClientMain extends JFrame {
 	
 	public void disconnect() {
 		// 1) 서버에게 자신의 종료 사실 통보
-		String msg = "Client_Disconnect\n";
-		ct.sendMsg(msg);
+		JSONObject obj = new JSONObject();
+		obj.put("user", tfUser.getText());
+		obj.put("command", ServerMain.LOGOUT);
+		obj.put("message", "Client_Disconnect");
+		
+		ct.sendMsg(obj.toJSONString());
+		
 		
 		// 2) ct 종료
+		try {
+			ct.br.close();
+			ct.bw.close();
+			ct.socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		ct=null;
 		
 		
@@ -93,6 +110,7 @@ public class ClientMain extends JFrame {
 	}
 	
 	public ClientMain() {
+		setTitle("멀티 채팅 클라이언트");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1003, 531);
 		contentPane = new JPanel();
@@ -220,7 +238,9 @@ public class ClientMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String msg = tfMessage.getText();
 					ct.sendMsg(msg);
-				    tfMessage.setText("");	
+					textArea.append(msg+"\n");
+				    tfMessage.setText("");
+					
 				}
 			});
 			btnSend.setBackground(SystemColor.textHighlight);
@@ -270,6 +290,7 @@ public class ClientMain extends JFrame {
 					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 					String msg = tfMessage.getText();
 					ct.sendMsg(msg);
+					
 					}
 				}
 			});
