@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       StringTokenizer st = new StringTokenizer(br.readLine());
+       
+       HashSet<String> hashset = new HashSet<String>(); 
+        
+       int n = Integer.parseInt(st.nextToken());
+       int m = Integer.parseInt(st.nextToken());
+       int count = 0;
+       for(int i=0; i<n; i++) {
+           hashset.add(br.readLine());
+       }
+       
+       for(int i=0; i<m; i++){
+           String str = br.readLine();
+           if(hashset.contains(str)) count++;
+       }
+       System.out.println(count);
+          
+    } 
+}
