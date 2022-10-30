@@ -31,13 +31,9 @@ import org.json.simple.JSONObject;
 
 public class ServerMain extends JFrame {
 	ServerSocket server;
-	ServerThread st;
-	BufferedWriter bw;
-	BufferedReader br;
-	
-	Vector<ServerThread> clients = new Vector<ServerThread>();
+	Vector<ServerThread> clients = new Vector<ServerThread>();	// 동적 배열, 접속한 클라이언트의 정보를 실시간으로 저장하는 목적
 	boolean flagServer = true;
-	Vector<String> users = new Vector<String>();
+	Vector<String> users = new Vector<String>();	// 동적 배열, 접속한 클라이언트의 정보를 실시간으로 저장하는 목적
 	
 	// JSON에서 정수는 모두 long타입이다.
 	final static int SERVER_START = 1;		//정석
@@ -87,7 +83,7 @@ public class ServerMain extends JFrame {
 			Thread t = new Thread(new Runnable() {		// cpu는 cpu대로 ui는 ui대로 일한다
 				
 				
-				public void run() {
+				public void run() {		//Runnable 인터페이스 run()메소드 오버라이딩
 					try {
 						textArea.append("서버가 시작되었습니다.\n");
 						btnStart.setEnabled(false);
@@ -99,12 +95,14 @@ public class ServerMain extends JFrame {
 						flagServer = true;	
 						//while문이 돌기 전에 true로 놓는 이유는 flagServer를 중지시켰다가 다시 실행 할 경우를 생각해서
 						while(flagServer) {
-							Socket socket = server.accept();	// server.accept(): blocking	
+							Socket socket = server.accept();	
+							// server.accept(): blocking모드/ accept()가 호출되면 프로그램은 실행을 멈추고 클라이언트 포크가
+							// 6666번으로 연결할 때 까지 대기한다. 클라이언트가 연결되면 accept()메소드는 Scoket객체를 반환한다.
 							if(flagServer) {
 							//blocking을 해제하지 않고 종료하면 서버가 폭주함
 							// 스레드를 만들지 않으면 클라이언트가 들어올 때 까지 아무것도 못함..
-								st = new ServerThread(socket, ServerMain.this);
-								st.start();
+								ServerThread st = new ServerThread(socket, ServerMain.this);
+								st.start();		// 멀티스레드로 동작,
 								clients.add(st);
 							}
 						}
@@ -125,7 +123,7 @@ public class ServerMain extends JFrame {
 					
 				}
 			});
-			t.start();		// 스레드 생성
+			t.start();		// 스레드 생성  Thread의 start()메소드를 호출하면 run()메소드가 실행된다.
 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -183,7 +181,7 @@ public class ServerMain extends JFrame {
 				st.bw.flush();
 				
 			}catch(Exception e) {
-				
+				e.printStackTrace();
 			}
 		}
 	}
@@ -350,8 +348,7 @@ public class ServerMain extends JFrame {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					if(e.getKeyCode()==MenuKeyEvent.VK_ENTER) {
-						String msg = tfMessage.getText()+"\n";
-						st.sendMsgAll(msg);
+						send();
 					}
 				}
 				

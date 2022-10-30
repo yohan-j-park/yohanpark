@@ -88,7 +88,14 @@ public class ClientMain extends JFrame {
 		obj.put("command", ServerMain.LOGOUT);
 		obj.put("message", "Client_Disconnect");
 		
-		ct.sendMsg(obj.toJSONString());
+		try {
+			ct.bw.write(obj.toJSONString());
+			ct.bw.write("\n");
+			ct.bw.flush();
+		}catch(IOException e1) {
+			e1.printStackTrace();
+		}
+//		ct.sendMsg(obj.toJSONString());
 		
 		
 		// 2) ct 종료
@@ -238,9 +245,6 @@ public class ClientMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String msg = tfMessage.getText();
 					ct.sendMsg(msg);
-					textArea.append(msg+"\n");
-				    tfMessage.setText("");
-					
 				}
 			});
 			btnSend.setBackground(SystemColor.textHighlight);
@@ -256,6 +260,7 @@ public class ClientMain extends JFrame {
 			btnWhisper.setForeground(Color.WHITE);
 			btnWhisper.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 				}
 			});
 			btnWhisper.setBackground(SystemColor.textHighlight);

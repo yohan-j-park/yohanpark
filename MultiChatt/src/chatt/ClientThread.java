@@ -57,6 +57,8 @@ public class ClientThread extends Thread{
 			try {
 				String msg = br.readLine();		//blocking mode
 				JSONObject obj = (JSONObject)parser.parse(msg);
+				
+				main.getTextArea().append(obj.get("user") + " : ");
 				main.getTextArea().append(obj.get("message")+"\n");
 				main.getTextArea().setCaretPosition(main.getTextArea().getText().length());
 				
@@ -69,17 +71,20 @@ public class ClientThread extends Thread{
 				
 				case ServerMain.USERS:
 					JSONArray array = (JSONArray)obj.get("data");
+					if(array == null) break;
 					main.users.clear();
 					for(Object ob : array) {
 						main.users.add((String)ob);
 					}
 					main.getList().setListData(main.users);
+					main.getList().updateUI();
 					break;
 				
 				case ServerMain.LOGIN:
 					String u = (String)obj.get("user");
-//					main.users.add(u);
+					main.users.add(u);
 					main.getList().setListData(main.users);
+					main.getList().updateUI();
 					break;
 				}
 
