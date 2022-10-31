@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +17,6 @@ public class ClientThread extends Thread{
 	BufferedWriter bw;
 	BufferedReader br;
 	Socket socket;
-	
 	boolean flag = true;
 	
 	public ClientThread(Socket s, ClientMain m) {
@@ -56,10 +56,14 @@ public class ClientThread extends Thread{
 		while(flag) {
 			try {
 				String msg = br.readLine();		//blocking mode
-				JSONObject obj = (JSONObject)parser.parse(msg);
+				if(msg == null) break;
+				String u = "";
 				
-				main.getTextArea().append(obj.get("user") + " : ");
+				JSONObject obj = (JSONObject)parser.parse(msg);
+				if(!obj.get("message").equals("")){
+				main.getTextArea().append(obj.get("user")+ " : ");
 				main.getTextArea().append(obj.get("message")+"\n");
+				}
 				main.getTextArea().setCaretPosition(main.getTextArea().getText().length());
 				
 				Long o = (Long)obj.get("command");
@@ -72,20 +76,21 @@ public class ClientThread extends Thread{
 				case ServerMain.USERS:
 					JSONArray array = (JSONArray)obj.get("data");
 					if(array == null) break;
-					main.users.clear();
+					main.userListModel.clear();
 					for(Object ob : array) {
-						main.users.add((String)ob);
+						main.userListModel.addElement((String)ob);
+//						main.users.add((String)ob); 에서 바뀜
 					}
-					main.getList().setListData(main.users);
-					main.getList().updateUI();
+					break;
+
+				case ServerMain.LOGIN:
+					u = (String)obj.get("user");
+					main.userListModel.addElement(u);
 					break;
 				
-				case ServerMain.LOGIN:
-					String u = (String)obj.get("user");
-					main.users.add(u);
-					main.getList().setListData(main.users);
-					main.getList().updateUI();
-					break;
+				case ServerMain.LOGOUT:
+					u = (String)obj.get("user");
+					main.userListModel.removeElement(u);
 				}
 
 			} catch (Exception e) {
@@ -120,6 +125,24 @@ public class ClientThread extends Thread{
 			bw.write("\n");
 			bw.flush();		// 버퍼를 지워줌
 			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendWhisper(List<String> users, String msg) {	// List import할 때 java.awt.List(JList)로 되지 않게 주의
+		try {
+		JSONObject obj = new JSONObject();
+		obj.put("user", main.getTfUser().getText());
+		obj.put("command", ServerMain.WHISPER);
+		obj.put("message", msg);
+		// sendMsg에다가 List라는 Object를 추가하는 기능을 추가
+		obj.put("users", users);	// 배열[  ] 구조인 List를 map구조인 JSONObject에 Value로 넣는다
+		
+		bw.write(obj.toJSONString());
+		bw.write("\n");
+		bw.flush();
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

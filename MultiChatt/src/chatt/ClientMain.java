@@ -10,8 +10,9 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Vector;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,7 +28,11 @@ import org.json.simple.JSONObject;
 
 public class ClientMain extends JFrame {
 	ClientThread ct;
-	Vector<String> users = new Vector<String>();
+	DefaultListModel userListModel = new DefaultListModel();	// JList에서 데이터가 저장되는 공간
+	
+//	Vector<String> users = new Vector<String>(); 
+//	을 없애고 DefaultListModel을 사용함 (접속한 유저가 바로바로 최신화가 안되는 오류 때문에..)  
+
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -88,32 +93,27 @@ public class ClientMain extends JFrame {
 		obj.put("command", ServerMain.LOGOUT);
 		obj.put("message", "Client_Disconnect");
 		
+		// 2) ct 종료
 		try {
 			ct.bw.write(obj.toJSONString());
 			ct.bw.write("\n");
 			ct.bw.flush();
-		}catch(IOException e1) {
-			e1.printStackTrace();
-		}
-//		ct.sendMsg(obj.toJSONString());
-		
-		
-		// 2) ct 종료
-		try {
+			ct.flag = false;
 			ct.br.close();
 			ct.bw.close();
 			ct.socket.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			
+		}catch(IOException e1) {
+			e1.printStackTrace();
 		}
 		ct=null;
-		
 		
 		// 3) 버튼 상태 변경
 		btnConnect.setEnabled(true);
 		btnDisconnect.setEnabled(false);
 		btnSend.setEnabled(false);
 		btnWhisper.setEnabled(false);
+		userListModel.clear();
 	}
 	
 	public ClientMain() {
@@ -209,9 +209,9 @@ public class ClientMain extends JFrame {
 		}
 		return scrollPane;
 	}
-	public JList getList() {
+	public JList getList() {	// List의 UI만 다루는 메소드
 		if (list == null) {
-			list = new JList();
+			list = new JList(userListModel);
 		}
 		return list;
 	}
@@ -244,7 +244,13 @@ public class ClientMain extends JFrame {
 			btnSend.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String msg = tfMessage.getText();
+					if(!msg.equals("")) {
 					ct.sendMsg(msg);
+//					textArea.append(msg+ "\n");
+//					textArea.setCaretPosition(textArea.getText().length());
+					}
+					tfMessage.setText("");
+					
 				}
 			});
 			btnSend.setBackground(SystemColor.textHighlight);
@@ -259,7 +265,11 @@ public class ClientMain extends JFrame {
 			btnWhisper.setEnabled(false);
 			btnWhisper.setForeground(Color.WHITE);
 			btnWhisper.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(ActionEvent e) {	
+				//JList에 있는 유저에게 메세지를 전달할건지 가져와야한다. (getList().selectedValuesList())
+					String msg = tfMessage.getText();
+					List<String> users = getList().getSelectedValuesList();
+					ct.sendWhisper(users, msg);
 					
 				}
 			});
@@ -294,8 +304,12 @@ public class ClientMain extends JFrame {
 				public void keyReleased(KeyEvent e) {
 					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 					String msg = tfMessage.getText();
+					if(!msg.equals("")) {
 					ct.sendMsg(msg);
-					
+//					textArea.append(msg+ "\n");
+					textArea.setCaretPosition(textArea.getText().length());
+					}
+					tfMessage.setText("");
 					}
 				}
 			});

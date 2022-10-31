@@ -7,12 +7,16 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
 public class ServerThread extends Thread {		//Thread에서 가장 중요한 객체 br,bw
+	String user;
 	BufferedWriter bw;
 	BufferedReader br;
 	ServerMain main;
@@ -55,48 +59,65 @@ public class ServerThread extends Thread {		//Thread에서 가장 중요한 객�
 				
 				Long o = (Long)obj.get("command");				
 				switch(o.intValue()) {	// static이 아니며 Integer 객체에서 int형 값을 뽑아내는 메소드이다 
-				case ServerMain.LOGOUT:
-					main.clients.remove(this);
-					flag = false;
-					break;
+				
 				case ServerMain.LOGIN:
 					String u = (String)obj.get("user");
+					this.user = u;
 					
 					
 					// 자기 자신에게 users에 저장된 모든 목록을 전송
-					if(main.users.size()>0) {
+					if(main.userListModel.size()>0) {
 					JSONObject usersObj = new JSONObject();
 					usersObj.put("command",ServerMain.USERS);
 					usersObj.put("user","server");
 					usersObj.put("message", u + "님이 접속함");
-					usersObj.put("data", main.users);
 					
-					bw.write(usersObj.toJSONString());
-					bw.write("\n");
-					bw.flush();
-//				JSONArray array = new JSONArray();
+					Object[] array = main.userListModel.toArray();
+					Vector<String> userVector = new Vector(Arrays.asList(array));
+					usersObj.put("data", userVector);	//접속자 명단
+					sendMsg(usersObj);
+					
 					}
 
-				//접속된 모든 유저에게 신규유저의 아이디를 전송
-				JSONObject newObj = new JSONObject();
-				newObj.put("command", ServerMain.LOGIN);
-				newObj.put("user", u);
-				newObj.put("message", u + "님이 접속함");
+					//접속된 모든 유저에게 신규유저의 아이디를 전송
+					JSONObject newObj = new JSONObject();
+					newObj.put("command", ServerMain.LOGIN);
+					newObj.put("user", u);
+					newObj.put("message", u + "님이 접속함");
+					
+					sendMsgAll(newObj);
+					
+					//서버 자신을 JList에 추가
+					main.userListModel.addElement(u);
+					
+					break;
 				
-				sendMsgAll(newObj.toJSONString());
-				
-				//서버 자신을 JList에 추가
-				main.users.add(u);
-				main.getList().setListData(main.users);
-				main.getList().updateUI();
-				
-				break;
+				case ServerMain.LOGOUT:
+					main.clients.remove(this);
+					main.userListModel.removeElement(user);
+					flag = false;
+					sendMsgAll(obj);
+					break;
+					
+				case ServerMain.WHISPER:
+					sendWhisper(obj);
+					break;
+					
+				default:
+					sendMsgAll(obj);
 				}
+				
 			} catch (Exception e) {
-
 				e.printStackTrace();
+				JSONObject obj = new JSONObject();
+				obj.put("user", "server");
+				obj.put("command", ServerMain.SERVER_STOP);
+				obj.put("message", "서버에 예기치 않은 오류가 발생");
+				sendMsg(obj);
+				flag = false;
 			}
 		}
+		
 		try {
 			br.close();
 			bw.close();
@@ -107,17 +128,49 @@ public class ServerThread extends Thread {		//Thread에서 가장 중요한 객�
 		}
 	}
 	
-	public void sendMsgAll(String msg) {
+	public void sendMsg(JSONObject obj) {
+		try {
+			bw.write(obj.toJSONString());
+			bw.write("\n");
+			bw.flush();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}	
+		
+	public void sendMsgAll(JSONObject obj) {
 		for(ServerThread st : main.clients) {
-			try {
-				st.bw.write(msg);
-				st.bw.write("\n");
-				st.bw.flush();
-				
-			} catch (IOException e) {
+			if(st.isAlive()) {
 
-				e.printStackTrace();
+				try {
+					st.bw.write(obj.toJSONString());
+					st.bw.write("\n");
+					st.bw.flush();
+					
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+				
 			}
+		}
+	}
+	
+	public void sendWhisper(JSONObject obj) {
+		List<String> receiveUser = (List) obj.get("users");
+		if(receiveUser == null) return;
+		for(ServerThread st : main.clients) {	//서버메인에서 클라이언트들을 하나씩 가져와 서버스레드에 넣는다
+			if(receiveUser.contains(st.user) && st.isAlive()) {
+
+				try {
+					st.bw.write(obj.toJSONString());
+					st.bw.write("\n");
+					st.bw.flush();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
 	}
 }
