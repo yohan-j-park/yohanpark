@@ -6,13 +6,13 @@
 	padding:0;
 	box-sizing:border-box;
 	width:1200px;
-	min-height:400px;	
+	min-height:360px;	
 	margin:30px auto;
 	border:5px solid #409167;
-	padding:20px;
-	border-radius:15px;
 	box-shadow:3px 3px 5px #999;
 	background-color:#25d165;
+	padding:20px;
+	border-radius:15px;
 	position:relative;
 	overflow:auto;
 }
@@ -90,6 +90,10 @@
 #right span{
 	display:inline-block;
 	text-align:center;
+}
+#right .items{
+	height:173px;
+	overflow:auto;
 }
 #right .serial{width:100px;}
 #right .id{width:100px;}

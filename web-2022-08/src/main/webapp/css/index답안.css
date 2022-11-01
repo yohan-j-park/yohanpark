@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 main{
-	width:1300px;
+	min-width:1500px;
 	margin:20px auto;
 	border:3px solid #aaa;
 }
@@ -14,9 +14,10 @@ header{
 	background-color:#ddd;
 	height:120px;
 	position:relative;
-	background-image:url(../images/omen.jpg);
+	background-image:url(../images/농담곰배경.jpg);
 	background-repeat:no-repeat;
-	background-size:cover;
+	background-size:100% 200px;
+	background-position: center center;
 }
 header>nav{
 	background-color:#22B14C; 
@@ -45,9 +46,11 @@ nav a:hover{
 	transform: scale(2,2);	
 }
 .content{
-	height:300px;
+	min-height:380px;
+	min-width:1500px;
 }
 footer{
+	
 	height:120px;
 	background-color:#ccc;
 }
