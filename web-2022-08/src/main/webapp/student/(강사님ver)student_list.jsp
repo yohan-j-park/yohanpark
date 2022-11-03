@@ -24,12 +24,11 @@ List<StudentVo> list = dao.select(pageVo);
 	<h2>학생정보 조회</h2>
 	<form name='frm_search' method='post'>
 		<input type='button' value='입력' name='btnInsert'/>
-		<input type='search' name='findstr' size='40' value="<%=pageVo.getFindStr()%>"/>
+		<input type='search' name='findStr' size='40' value="<%=pageVo.getFindStr()%>"/>
 		<input type='button' value='조회' name='btnSelect'/>
 		<input type='text' name='nowPage' value="<%=pageVo.getNowPage()%>"/>
 	</form>
 	<ul>
-		<a href='http://localhost:8888/web-2022-08/student/(%EA%B0%95%EC%82%AC%EB%8B%98ver)student_input_form.jsp'>
 		<li class='title'> <!-- 타이틀 영역 -->
 			<span class='no'>No</span>
 			<span class='id'>아이디</span>
@@ -40,11 +39,11 @@ List<StudentVo> list = dao.select(pageVo);
 			<span class='email'>이메일</span>
 			<span class='zipcode'>우편번호</span>
 		</li>
-		<% for(int i=1; i<list.size(); i++){ 
+		<% for(int i=0; i<list.size(); i++){ 
 			StudentVo v = list.get(i);
 		%>
-			<li class='item'>
-				<span class='no'><%=i %></span>
+			<li class='item' onclick = "view('<%=v.getId()%>')"> <!-- Id는 문자라 v.getId()를 ''로 감싸야 한다. --> 
+				<span class='no'><%=i+1 %></span>
 				<span class='id'><%=v.getId() %></span>
 				<span class='name'><%=v.getName() %></span>
 				<span class='gender'><%=v.getGender() %></span>
@@ -54,18 +53,20 @@ List<StudentVo> list = dao.select(pageVo);
 				<span class='zipcode'><%=v.getZipcode() %></span>
 		<%} %>
 		<li class='btn_page'> <!-- page이동 버튼 -->
-			<input type='button' value='처음'/>
-			<input type='button' value='이전'/>
+		<%if(pageVo.getStartPage()>1){ %>  <!-- 현재 보고있는 페이지가 첫페이지일때 처음,이전버튼 없애기 -->
+			<input type='button' value='처음' onclick='movePage(1)'/>
+			<input type='button' value='이전' onclick='movePage(<%=pageVo.getStartPage()-1%>)'/>
+			<%} %>
+			<%for(int i=pageVo.getStartPage(); i<=pageVo.getEndPage(); i++){ %>
+				<input type='button' value='<%=i %>' onclick='movePage(<%=i %>)'/>
+			<%} %>	
+		<%if(pageVo.getTotPage()>pageVo.getEndPage()){ %> <!-- 현재 보고있는 페이지가 마지막일 때 다음,맨끝버튼 없애기 -->	
+			<input type='button' value='다음' onclick='movePage(<%=pageVo.getEndPage()+1 %>)'/>
+			<input type='button' value='맨끝' onclick='movePage(<%=pageVo.getTotPage()%>)'/>
+			<%} %>
 			
-			<input type='button' value='1'/>
-			<input type='button' value='2'/>
-			<input type='button' value='3'/>
-			<input type='button' value='4'/>
-			
-			<input type='button' value='다음'/>
-			<input type='button' value='맨끝'/>
 		</li>
-		</a>
+		
 	</ul>
 </div>
 
