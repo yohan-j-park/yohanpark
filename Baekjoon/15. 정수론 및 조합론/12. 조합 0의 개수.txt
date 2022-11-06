@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    
+    public static long how_many(long t, long d) {
+        long ret = 0;
+        long dt = d;
+        while(t >= dt) {
+            ret += (t / dt);
+            dt *= d;
+        }
+        
+        return ret;
+    }
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        
+        long n, m;
+        long d5 = 5, d2 = 2;
+        long num_5, num_2;
+        
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        
+        
+        
+        num_5 = how_many(n, d5);
+        num_2 = how_many(n, d2);
+        
+        
+        num_5 -= how_many(m, d5);
+        num_2 -= how_many(m, d2);
+        
+        
+        num_5 -= how_many(n-m, d5);
+        num_2 -= how_many(n-m, d2);
+        
+        System.out.println(num_5 > num_2 ? num_2:num_5);
+        return;
+    }
+
+} 
