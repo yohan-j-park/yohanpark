@@ -13,11 +13,7 @@
 	if(request.getParameter("inc") != null){
 		inc = request.getParameter("inc");
 	}
-	
 	String sessionId = (String)session.getAttribute("sessionId");
-	
-	
-	
 	%>
 		<main>
 			<div class='login'>
@@ -35,7 +31,7 @@
 				 width='250px'
 				 height='120px'/>
 				<nav>
-					<a href='index.jsp?inc=student/(강사님ver)student_input_form.jsp'>학생관리</a>
+					<a href='student.do'>학생관리</a>
 					<a href='index.jsp?inc=javascript/score_crud.html'>성적관리</a>
 					<a href='index.jsp?inc=javascript/member_control.html'>회원관리</a>
 					<a href='#'>제품관리</a>
@@ -51,8 +47,6 @@
 				대한민국
 			</footer>
 		</main>
-	<script>
-	
-	</script>
+
 	</body>
 </html>
