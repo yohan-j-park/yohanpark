@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* student_list */
+body{
+	color:white;
+}
+.list_body{
+	background-color:#19273b;
+	padding:20px 0px;
+	width:90%;
+	margin:30px auto;
+	border-radius:15px;
+	white-space:nowrap;
+}
+
+h1{
+	text-align:center;
+}
+
+.c1 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c2 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c3 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c4 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c5 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c6 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c7 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c8 {
+	width : 11%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+#r1 {	
+	background-color : #212529;
+	color : white;
+	margin:3px 0;
+}
+
+.item{
+	color:white;
+}
+
+#bottom_line {
+	border-top : 1px solid black
+}
+.pageNumber {
+	text-align: center;
+}
+
+input[name=btnInsert]{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+

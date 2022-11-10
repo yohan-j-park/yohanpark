@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/* student_input_form */
+#student_input_form{
+	display : inline-block;
+	margin : 10px auto;
+}
+.cc1{
+	display : inline-block;
+	width : 73px;
+	text-align : right;
+}
+.cc2{
+	display : inline-block;	
+}
+
+/*#student_input_form:nth-child(2){
+	width : 100px;
+}*/
