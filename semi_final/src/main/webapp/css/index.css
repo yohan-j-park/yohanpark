@@ -1,0 +1,157 @@
+@charset "UTF-8";
+body {
+		background: linear-gradient(#141e30, #243b55);
+		display:flex;
+		overflow:auto;
+		font-family: sans-serif;
+	}
+	
+@media screen and (max-width:1000px) {
+	body {
+		background: linear-gradient(#141e30, #243b55);
+		display:flex;
+	}
+	header>nav{ 
+	font-size: 8px;
+	}
+}
+@media screen and (max-width:600px) {
+
+	header>nav{ 
+		font-size: 8px;
+	}
+}
+
+
+.index_main{ 
+	width:90%;
+	margin:20px auto;
+
+	border-radius:10px;
+	border:1px solid black;
+	overflow:auto;
+	box-shadow: 0 0 3px #03e2ff,
+                0 0 8px #03e2ff,
+                0 0 16px #03e2ff,
+                0 0 35px #03e2ff;
+}
+
+
+div.login{border:1px solid #999;
+		  text-align:right;
+}
+header{
+	height:100px;
+	background: rgba(0, 0, 0, 0.5);
+	background-image:url('../images/futuristic_header.gif');
+	background-repeat: no-repeat;
+	background-size: cover;
+	position:relative;
+}
+hearder>.logo{
+	font-size:20pt;
+	font-weight:bolder;
+	padding-left:15px;
+}
+header>nav{ 
+	background: rgba(0, 0, 0, 0.5);
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+	padding:3px;
+	display:flex;
+	font-size: 18px;
+	justify-content:space-evenly;
+	max-width:900px;
+	width:70%;
+	white-space:nowrap;
+	text-align:center;
+	position:absolute;
+	right:15px;
+	bottom:15px;
+	border-radius:10px;
+}
+header>img{
+	width:80px;
+	height:80px;
+	margin-left:15px;
+}
+
+/*a태그들 효과 */
+
+nav>a{
+	color: #03e9f4;
+	min-width:10px;
+	text-decoration:none;
+	padding:2px 5px;
+	transition:background-color 0.8s;
+}
+
+#logintag{
+	color:#03e9f4;
+	margin:10px;
+	display:inline-block;
+	text-decoration:none;
+	font-size:17px;
+}
+
+
+
+#logintag:hover{
+	color:#fff;
+	transition:background-color 0.5s;
+}
+
+#logouttag{
+	margin-left:10px;
+	color:#03e9f4;
+	display:inline-block;
+	text-decoration:none;
+	font-size:17px;
+}
+
+#logouttag:hover{
+	color:#fff;
+	transition:background-color 0.5s;
+}
+
+#hometag{
+	margin-left:25px;
+	color:#03e9f4;
+	text-decoration:none;
+	font-size:15px;
+}
+
+#hometag:hover{
+	color:#fff;
+	transition:background-color 0.5s;
+}
+
+a:hover{
+	background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e2ff,
+                0 0 20px #03e2ff,
+                0 0 40px #03e2ff,
+                0 0 80px #03e2ff;
+}
+
+#loginspan{
+	color:#03e9f4;
+	margin:10px;
+	display:inline-block;
+}
+
+/*컨텐츠 디브 */
+
+div.content{
+	min-height:700px;
+	overflow:auto;
+	-ms-overflow-style: none;
+}
+
+footer{
+	background-color:#000;
+	height:120px;
+	display: block;
+}
+

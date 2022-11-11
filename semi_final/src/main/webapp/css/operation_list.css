@@ -1,0 +1,115 @@
+@charset "UTF-8";
+/* student_list */
+.back-video{
+	width:100%;
+	position:absolute;
+
+	z-index:-1;
+	-ms-overflow-style: none;
+}
+.list_body{
+	width:100%;
+	white-space:nowrap;
+	position:relative;
+	-ms-overflow-style: none;
+}
+#table_wrapper{
+	padding:10px;
+	background-color:black;
+	color:#3dcbde;
+	width:50%;
+	margin-left:23%;
+}
+
+.op_listTitle{
+	color:#3ac1d3;
+	text-align:center;
+	margin:40px;
+}
+
+.c1 {
+	width : 7%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c2 {
+	width : 13%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c3 {
+	width : 7%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c4 {
+	width : 9%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c5 {
+	width : 16%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c6 {
+	width : 16%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c7 {
+	width : 9%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c8 {
+	width : 9%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+.c9 {
+	width : 13%;
+	margin: 3px 0;
+	text-align : center;
+	display:inline-block;
+}
+#r1 {	
+	background-color : #000;
+	color : #3ac1d3;
+	margin:3px 0;
+}
+
+.item{
+	color:#3ac1d3;
+}
+
+#bottom_line {
+	border-top : 1px solid black;
+	margin: 10px 0;
+}
+.pageNumber {
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
