@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/* student_input_form */
+#input_wrapper h2{
+	color:#3dcbde;
+	text-align:center;
+}
+#input_wrapper span.cc1{
+	display:inline-block;
+	color:#3dcbde;
+	width:80px;
+	text-align:right;
+}
+#input_wrapper{
+ 	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	background-image:url('../images/robot_modify.jpg');
+	background-repeat:no-repeat;
+	background-size:100%;
+	background-position: center center;
+}
+#input_wrapper .btnGroup{
+	margin-bottom:100px;
+}
+#input_wrapper .btn{
+  color: #03e9f4;
+  text-decoration: none;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background-color:#0595;
+}
+
+#input_wrapper .btn:hover {
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
