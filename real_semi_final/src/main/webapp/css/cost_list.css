@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.back-video{
+	width:100%;
+	position:absolute;
+
+	z-index:-1;
+	-ms-overflow-style: none;
+}
+
+
+.cost_body{
+	width:100%;
+	white-space:nowrap;
+	position:relative;
+	-ms-overflow-style: none;
+}
+
+
+#table_wrapper{
+	position:absolute;
+	margin-top: 50px;
+	height: 550px;
+	padding:10px;
+	background-color:black; 
+	background-image: url("../images/cost_list.jpg");
+	color:#3dcbde;
+	width:60%;
+	margin-left:23%;
+}
+
+
+h2{
+	text-align:center;
+}
+
+
+.c1{
+	width : 33%;
+	margin: 5px 0;
+	text-align : center;
+	display:inline-block;
+}
+
+.c2{
+	width : 33%;
+	margin: 5px 0;
+	text-align : center;
+	display:inline-block;
+}
+
+.c3{
+	width : 33%;
+	margin: 5px 0;
+	text-align : center;
+	display:inline-block;
+}
+
+
+#cost_table1 {	
+	margin-top: 300px;
+	background-color : #000;
+	color : #E0E0E0;
+	margin:3px 0;
+}
+
+
+
+#cost_table2:hover{
+	transform: scale(1.03);
+	font-weight: bolder;
+	border-radius: 10px;
+	box-shadow: 0 0 5px #03e2ff,
+                0 0 20px #03e2ff,
+                0 0 40px #03e2ff,
+                0 0 80px #03e2ff;
+	/* background-color: #FFB74D; */
+	color: #0288D1;
+	transition:background-color 0.3s;
+	/* 마우스 커서 추가 */
+	
+}

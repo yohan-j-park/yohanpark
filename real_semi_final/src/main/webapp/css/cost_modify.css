@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.back-video{
+	width:100%;
+	position:absolute;
+
+	z-index:-1;
+	-ms-overflow-style: none;
+}
+
+.cost_modify_body{
+	width:100%;
+	white-space:nowrap;
+	position:relative;
+	-ms-overflow-style: none;
+}
+
+#table_wrapper{
+	text-align: center;
+	position:absolute;
+	margin-top: 50px;
+	height: 550px;
+	padding:10px;
+	background-color:black; 
+	background-image: url("../images/cost_list.jpg");
+	color:#3dcbde;
+	width:60%;
+	margin-left:23%;
+}
+
+h2{
+	text-align:center;
+}
+
+
+
+
+span{
+	display: inline-block;
+	text-align: right;
+}
+
+#cost_modify_table1{
+	margin-bottom: 10px;
+}
+
+
+	
+cost_modify_table{
+	float: right;
+}
+	
+#cost_modify_table2{
+	margin-bottom: 10px;
+}	
+	
