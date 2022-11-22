@@ -41,14 +41,14 @@ public Student(String name, String address, String phone, int kor, int eng, int 
 
 @Override // 어노테이션
    public String toString() {
-       String str =  "이 름 : "   + this.name  + "\n"
-                   + "주 소 : "  + this.address + "\n"
-                   + "연락처 : " + this.phone + "\n"
-                   + "국 어: " + this.kor + "\n"
-                   + "영 어: " + this.eng + "\n"
-                   + "수 학: " + this.mat + "\n"
-                   + "총 점: " + (this.kor + this.eng + this.mat) + "\n"
-                   + "평 균: " +  (this.kor + this.eng + this.mat) /3 ;
+       String str =  "이 름 : "  + this.name                       + "\n"
+                   + "주 소 : "  + this.address                    + "\n"
+                   + "연락처 : "  + this.phone                      + "\n"
+                   + "국 어 : "  + this.kor                        + "\n"
+                   + "영 어 : "  + this.eng                        + "\n"
+                   + "수 학 : "  + this.mat                        + "\n"
+                   + "총 점 : "  +(this.kor + this.eng + this.mat) + "\n"
+                   + "평 균 : "  +(this.kor + this.eng + this.mat) /3 ;
        return str;
    }
    

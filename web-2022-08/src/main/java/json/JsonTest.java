@@ -74,10 +74,11 @@ public class JsonTest {
 	 System.out.println(jArray.toJSONString());
 	 for(int i=0; i<jArray.size(); i++){
 		 jObject = (JSONObject)jArray.get(i);
-		 Iterator<String> iter = jObject.keySet().iterator();// 반환형 set구조 
+		 Iterator<String> iter = jObject.keySet().iterator();// 반환형 set구조
 		 while(iter.hasNext()) {
 			 String key = (String)iter.next(); // 배열마다 가지고 있는 key의 개수가 다를 수도 있기 때문
 			 JSONArray values = (JSONArray)jObject.get(key);
+			
 			 System.out.println(values.toJSONString());
 		 }
 	 } // 첨자가 필요 없을 때

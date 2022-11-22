@@ -9,7 +9,7 @@
 <body>
 <div>
 <%
-	String v="충돌";
+	//String v="충돌";
 %>
 	<font color='red' size='7'>
 	본 내용은 외부에 정의 된 페이지 내용입니다.	

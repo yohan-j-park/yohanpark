@@ -1,6 +1,6 @@
-/**
- 10/4 3일차 완성
- */
+/*
+
+
 import blocks from './blocks.js'
 // DOM
 let playground = document.querySelector(".playground > ul");
@@ -32,6 +32,7 @@ init()
 
 // functions
 function init(){     /* 화면이 처음 실행될 때 실행되는 함수 이부분 어려움.. */
+/*
 	tempMovingItem = { ...MovingItem }; //spread operator (배열 안의 값만 가져옴, 중요)
 	// movingItem의 값이 변경되어도 tempMovingItem의 값이 변경되지 않음
 	 // init을 하게되면 tempMovingItem을 잠깐 담아둠
@@ -180,3 +181,4 @@ restartButton.addEventListener("click",()=>{
 	gameText.style.display = "none"
 	init()
 })
+ */

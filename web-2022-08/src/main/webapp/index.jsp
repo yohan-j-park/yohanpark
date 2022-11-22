@@ -12,7 +12,7 @@
 	String inc="temp.html";
 	if(request.getParameter("inc") != null){
 		inc = request.getParameter("inc");
-	}
+	} 
 	String sessionId = (String)session.getAttribute("sessionId");
 	%>
 		<main>
@@ -31,9 +31,9 @@
 				 width='250px'
 				 height='120px'/>
 				<nav>
-					<a href='student.do'>학생관리</a>
+					<a href='index.jsp?inc=student/(강사님ver)student_list.jsp'>학생관리</a>
 					<a href='index.jsp?inc=javascript/score_crud.html'>성적관리</a>
-					<a href='index.jsp?inc=javascript/member_control.html'>회원관리</a>
+					<a href='index.jsp?inc=member/member_control.jsp'>회원관리</a>
 					<a href='#'>제품관리</a>
 					<a href='#'>생산관리</a>
 					<a href='#'>방명록</a>

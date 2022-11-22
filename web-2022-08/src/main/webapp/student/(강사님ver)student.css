@@ -8,13 +8,16 @@
 a{
 	text-decoration:none;
 }
+
 #std_input{
 	width:600px;
+	min-height:360px;
 	margin:30px auto;
-	border:4px solid #aaa;
-	padding:30px 50px;
+	border:5px solid #aaa;
+	padding:20px;
 	border-radius:15px;
 	box-shadow:3px 3px 4px #ccc;
+	
 }
 #std_input>form span{
 	display:inline-block;

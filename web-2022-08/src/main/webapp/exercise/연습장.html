@@ -11,13 +11,22 @@
 
 </form>
 <script>
-let frm = document.frm;
 
-frm.btn.onclick = function(){
-	console.log('잘 작동합니다');
-	frm.btnOutput.onclick();
-	
-}
+let students = [
+	  {id:1, name:"james"},
+	  {id:2, name:"tim"},
+	  {id:3, name:"john"},
+	  {id:4, name:"brian"}
+	];
+
+	let names = students.map(function(students){
+		if(students.name=="john"){
+		return students.names;}
+		})
+		
+//	let names = students.map(student =>student.name); arrow function
+	console.log(names[0]); 
+
 
 </script>
 </body>

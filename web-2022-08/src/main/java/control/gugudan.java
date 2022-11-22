@@ -39,13 +39,12 @@ public class gugudan {
 	}
 	// 100만원을 투자하여 매일 1%씩 복리로 수익을 봤을 때 1년후 금액은?
 	public void test3() {
-		int won = 1000000;
+		double won = 10000000;
 		// double won = 1000000d;
-		double bokri = 1.01d;
-		for(int i=1; i<=30; i++) {
-			won = (int) (won*bokri);
-		  //won = (Math.round(won*bokri*100)/100);
-			System.out.println(won);
+		double bokri = 0.95;
+		for(int i=1; i<=365; i++) {
+		won = won*bokri;
+			System.out.println(i+ "일차: " + won);
 			
 		}
 	}

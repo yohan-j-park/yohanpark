@@ -13,13 +13,15 @@ public class StringEx {
 		//그러나
 		String s3 = new String( "일지매" );
 		String s4 = new String( "일지매" );
-		System.out.println(s3==s4); // false
+		/* String으로 선언된 변수는 단어 그 자체가 아니라 주소값만 가져오기 때문에 항상 4Byte다.
+		   new String()으로 선언된 변수는 heap메모리에 단어를 찾지 않고 일단 생성한다. */
+		System.out.println(s3==s4); // false / new String으로 선언되어 주소값이 다르기 때문.
 		System.out.println(s3.equals(s4)); //문자 열 비교 , true
 		System.out.println("------------------");
 		
 		String jumin = "123456-1";
 		// jumin.charAt(6); <- X
-		char c = jumin.charAt(7); 
+		char c = jumin.charAt(7);
 		System.out.println(c); // 1	
 		
 		int r = Character.getNumericValue(c);
@@ -63,7 +65,9 @@ try {
 	System.out.println("utf: " + new String(utf));
 } catch (UnsupportedEncodingException e) {
 	// TODO Auto-generated catch block
-	e.printStackTrace(); // try ~ catch : 오류가 날 가능성이 있는 코드를 catch하겠다
+	e.printStackTrace();
+	// try ~ catch : 오류가 날 가능성이 있는 코드를 catch하겠다 -> 
+	// 				 발생 된 오류를 조치하고 다시 실행하게 하거나 안전하게 프로그램을 끝내게 하는 구절
 }
 
 

@@ -73,7 +73,10 @@ frm.btnOutput.onclick = function(){
 
 // 성적현황 리스트 클릭 시 성적관리CRUD로 데이터값 이동
 function view(serial){
-	let index = list.findIndex(d=>d.serial==serial);
+	/* let index = list.findIndex(d=>d.serial==serial);*/
+	let index = list.findIndex(function(d){
+		return d.serial==serial
+	});
 	frm.serial.value = list[index].serial;
 	frm.id.value = list[index].id;
 	frm.subject.value = list[index].subject;

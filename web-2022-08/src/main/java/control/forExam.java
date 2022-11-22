@@ -16,6 +16,7 @@ public class forExam {
 			if(count==2) {
 				System.out.println(i);
 			}			
+			
 		}
 	}
 	// 정수를 입력 받아 아래와 같이 출력하시오 test2
