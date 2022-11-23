@@ -15,7 +15,7 @@
 	</div>
 	<form name='frm_member' enctype='multipart/form-data' method='post'>
 		<div id="leftphoto">
-		<img src='' id='photo'/>		
+		<img src='' id='photo' name='img' class='img'/>		
 		</div>
 		<div id='rightinfo'>
 		<span>아이디</span>
@@ -34,6 +34,7 @@
 		<input type='button' value='DELETE' name='btnDelete' onclick='deleteFunc(this.form)'/>
 		</div>
 		<input type='file' id='photo_file' onchange='preview()' name='sysFile'/>
+		<input type='text' name='delFile'/>
 		
 	</form>
 	<div id='list'>

@@ -7,13 +7,16 @@ public class MemberVo {
     String phone="";
     String oriFile="";
     String sysFile="";
+    String delFile="";
     
+
     public String getId() {return id;}
     public String getName() {return name;}
     public String getGender() {return gender;}
     public String getPhone() {return phone;}
     public String getOriFile() {return oriFile;}
     public String getSysFile() {return sysFile;}
+    public String getDelFile() {return delFile;}
     
     public void setId(String id) {this.id = id;}
     public void setName(String name) {this.name = name;}
@@ -21,6 +24,7 @@ public class MemberVo {
     public void setPhone(String phone) {this.phone = phone;}
     public void setOriFile(String oriFile) {this.oriFile = oriFile;}
     public void setSysFile(String sysFile) {this.sysFile = sysFile;} 
+    public void setDelFile(String delFile) {this.delFile = delFile;}
     
    
 }

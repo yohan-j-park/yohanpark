@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,12 +19,40 @@ public class MemberServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        String job = req.getParameter("job");
+       if(job==null) job="";
+       switch(job) {
+           case "":
+               select(req, resp);
+               break;
+           case "view":
+               view(req, resp);
+               break;
+           case "delete":
+               delete(req, resp);
+               break;
+       }
 
-       select(req, resp);
-     //view(req, resp);
-     //delete(req, resp);
     }
        
+    protected void view(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        MemberDao dao = new MemberDao();
+        JSONObject obj = dao.view(id);
+        PrintWriter out = resp.getWriter();
+        out.print(obj.toJSONString()); 
+    }
+    
+    protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        String delFile = req.getParameter("delFile");
+        MemberDao dao = new MemberDao();
+        String msg = dao.delete(id,delFile);
+        PrintWriter out = resp.getWriter();
+        out.print(msg);
+        
+        
+    }
+    
     protected void select(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String findStr = req.getParameter("findStr");
         MemberDao dao = new MemberDao();
@@ -33,7 +62,7 @@ public class MemberServlet extends HttpServlet{
         out.print(array.toJSONString());    
     }
     
-    
+
 }
        
     

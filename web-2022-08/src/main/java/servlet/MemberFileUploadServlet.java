@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,10 +24,25 @@ import member.MemberVo;
 )
 @WebServlet(urlPatterns = "/memberUpload.do")
 public class MemberFileUploadServlet extends HttpServlet{
-    String path = "C:\\Users\\82109\\eclipse-workspace\\web-2022-08\\src\\main\\webapp\\upload\\";
-    MemberVo vo = new MemberVo();
+   public static String path = 
+           "C:\\Users\\82109\\eclipse-workspace\\web-2022-08\\src\\main\\webapp\\upload\\";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        MemberVo vo = new MemberVo();
+        String job = req.getParameter("job");
+        MemberDao dao = new MemberDao();
+        
+        switch(job) {
+            case "update":
+                update(req,resp);
+                break; 
+        }
+        /*
+         * if(job.equals("update")) {
+         * 
+         * return;
+         * }
+         */
         Collection<Part> parts = req.getParts(); 
         for(Part p : parts) {
             if(p.getHeader("Content-Disposition").contains("filename=")) {    
@@ -61,13 +77,60 @@ public class MemberFileUploadServlet extends HttpServlet{
                         
             }
         }   
-        
-        MemberDao dao = new MemberDao();
-        String msg = dao.insert(vo);
-        
+               
+        String msg=dao.insert(vo);
         req.setAttribute("msg", msg);
         RequestDispatcher rd = req.getRequestDispatcher("member/member_insert_result.jsp");
         rd.include(req, resp);
+    }
+    private void update(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+        MemberVo vo = new MemberVo();
+        Collection<Part> parts = req.getParts(); 
+        for(Part p : parts) {
+            
+            if(p.getHeader("Content-Disposition").contains("filename=")) {    
+                if(p.getSize()>0) {
+                    
+                    String sysFile = new Date().getTime() + "-" + p.getSubmittedFileName();
+                    String oriFile = p.getSubmittedFileName();
+                    vo.setSysFile(sysFile);
+                    vo.setOriFile(oriFile);
+                    
+                    p.write(path + sysFile);
+                    p.delete();
+                    
+                    
+                }
+            }else {
+                String tag = p.getName();
+                String value = req.getParameter(tag);
+                req.setAttribute(tag, value);
+                switch(tag) {
+                    case "id":
+                        vo.setId(value);
+                        break;
+                    case "name":
+                        vo.setName(value);
+                        break;
+                    case "phone":
+                        vo.setPhone(value);
+                        break;
+                    case "gender":
+                        vo.setGender(value);
+                        break;
+                    case "delFile":
+                        vo.setDelFile(value);
+                }
+                        
+            }
+        }   
+        
+        MemberDao dao = new MemberDao();
+        String msg = dao.update(vo);
+        
+        PrintWriter out = resp.getWriter();
+        out.print(msg);
+        
     }
     
 }
