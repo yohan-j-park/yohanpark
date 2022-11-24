@@ -10,13 +10,22 @@
 <div class='frm_login'>
 	<form name='frm_login' method='post' action = 'member/login_result.jsp'>
 		<span>아이디</span>
-		<input type='text' name='mId' value='a001'/><br/>
+		<input type='text' name='mId' value='a005'/><br/>
 		<span>암호</span>
 		<input type='password' name='pwd' value='1111'/><br/>
 		<input type='submit' value='로그인'/>
+		<a href='http://192.168.35.63:8888/web-2022-08/member/findpwd.jsp'>암호찾기</a>
 	</form>
-
-
 </div>
+
+<script>
+var frm = document.frm_login;
+var findPwd = frm.findPwd;
+findPwd.onclick = function(){
+ frm.sender.value="p_yohan@naver.com";
+ frm.action='../SendNaverServlet.do';
+ frm.submit();
+}
+</script>
 </body>
 </html>

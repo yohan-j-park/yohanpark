@@ -73,8 +73,8 @@
 
 </div>
 <script>
-let frm = document.frm_input;
-frm.btnFindZip.onclick = function(){
+/* let frm_input = document.frm_input;
+frm_input.btnFindZip.onclick = function(){
 	new daum.Postcode({
 		oncomplete : function(data){
 			frm.address.value = data.address;
@@ -94,32 +94,32 @@ function idCheck(){
  /* frm.chk_id.addEventListener("click",idCheck); */
 
 // 연락처 패턴에 맞게 입력
-regphone = /^\d{2,3}-\d{3,4}-\d{4}$/;
+/* regphone = /^\d{2,3}-\d{3,4}-\d{4}$/;
 function phoneCheck(){
 	if(!regphone.test(frm.phone.value)){
-		alert('유효한 휴대폰 번호를 입력해 주세요');
+		alert('유효한 휴대폰 번호를 입력해 주세요'); 
 	}
 }
 /* frm.submit.addEventListener("click",phoneCheck); */ 
 
 // 이메일 패턴에 맞게 입력
-regemail = /^\w{3,}@[a-z]{3,}(\.[a-z]{2,3}){1,2}$/;
+/* regemail = /^\w{3,}@[a-z]{3,}(\.[a-z]{2,3}){1,2}$/;
 function emailCheck(){
 	if(!regemail.test(frm.email.value)){
 		alert('유효한 이메일주소를 입력해 주세요');
 	}else{alert('인증번호가 발송되었습니다.')};
-}
+} */
 /* frm.chk_email.addEventListener("click",emailCheck); */
 
 // 암호와 암호확인의 값이 동일한지 체크
-function pwdCheck(){
+/* function pwdCheck(){
 	if(frm.pwd.value != frm.pwd2.value){
 		alert('암호가 일치하지 않습니다.')
 	}
-}
+} */
 /* frm.submit.addEventListener("click",pwdCheck); */
 
-/*
+
 function chkForm(frm){
 	let b=true;
 	if(frm.pwd.value != frm.pwd2.value){
@@ -128,7 +128,7 @@ function chkForm(frm){
 	}
 	return b;
 }
-*/
+
 </script>
 
 </body>

@@ -7,8 +7,6 @@
 <title>thumbnail/thumbnail_result.jsp</title>
 </head>
 <body>
-<h2>Thumb nail result</h2>
-info
 <ul>
 	${info }
 </ul>

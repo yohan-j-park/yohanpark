@@ -1,5 +1,7 @@
 package student;
 
+import crypto.AES;
+
 public class StudentVo {    
     String id;
     String name;
@@ -48,6 +50,8 @@ public class StudentVo {
         this.phone = phone;
     }
     public void setPwd(String pwd) {
+//        AES aes = new AES();
+//        this.pwd = aes.encrypt(pwd);
         this.pwd = pwd;
     }
     public void setAddress(String address) {

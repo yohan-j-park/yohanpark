@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import crypto.AES;
 import jdbc.DBConn;
 
 public class StudentDao {
@@ -23,6 +24,13 @@ public class StudentDao {
     
     public boolean insert(StudentVo vo)  {
         boolean b = false;
+        
+        // 사용자암호를 암호화하기
+        String temPwd = vo.getPwd();
+        AES aes = new AES();
+        String encPwd = aes.encrypt(temPwd);
+        vo.setPwd(encPwd);
+        
         String sql = "insert into student(id,name,phone,pwd,address,address2,gender,email,zipcode)"
                 + " values(?,?,?,?,?,?,?,?,?)";
         
@@ -164,6 +172,13 @@ public class StudentDao {
     }
     
     public boolean modify(StudentVo vo) {
+        
+        // 사용자암호를 암호화하기
+        String temPwd = vo.getPwd();
+        AES aes = new AES();
+        String encPwd = aes.encrypt(temPwd);
+        vo.setPwd(encPwd);
+        
         boolean b=false;
         String sql = " update student set name=?, gender=?, phone=?, zipcode=?,"
                 +    " address=?, address2=?, email=? where id=? and pwd=?  ";
@@ -196,6 +211,15 @@ public class StudentDao {
     }
     
     public boolean delete(StudentVo vo) {
+        if(conn == null) conn = new DBConn("mydb").getConn();
+        
+        // 사용자암호를 암호화하기
+        String temPwd = vo.getPwd();
+        AES aes = new AES();
+        String encPwd = aes.encrypt(temPwd);
+        vo.setPwd(encPwd);
+        
+        
         boolean b=false;
         String sql = "delete from student where id=? and pwd=?"; 
         try {
