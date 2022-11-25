@@ -1,5 +1,6 @@
 package servlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import crypto.AES;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,14 +28,16 @@ public class SendPwdServlet extends HttpServlet{
  // 메일과 연관된 변수
  String host = "smtp.naver.com"; 
  String pwd="";
+ String sender = "p_yohan@naver.com";
  @Override
  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-  RequestDispatcher rd = req.getRequestDispatcher("./member/findpwd.jsp");
+     
+  //RequestDispatcher rd = req.getRequestDispatcher("./member/findpwd.jsp");
  
   String mId = req.getParameter("mid");
   String email = req.getParameter("email");
-  String sender = req.getParameter("sender");
   String rStr ="";
+  String msg="";
   AES aes = new AES();
   pwd = checkPwd(mId,email);
   if(!pwd.equals("")) {      
@@ -58,7 +60,7 @@ public class SendPwdServlet extends HttpServlet{
 
     @Override
     protected PasswordAuthentication getPasswordAuthentication() {
-     return new PasswordAuthentication("p_yohan@naver.com","");
+     return new PasswordAuthentication("이메일@naver.com","비밀번호");
     }
 
    });   
@@ -67,7 +69,6 @@ public class SendPwdServlet extends HttpServlet{
    MimeMessage message = new MimeMessage(pass);
    message.setFrom(new InternetAddress(sender));
    message.addRecipient(Message.RecipientType.TO,new InternetAddress(email));
-//   message.setSubject(subject);
    message.setSentDate(new Date());
    message.setContent(mId, "text/html;charset=utf-8");
    message.setContent(rStr, "text/html;charset=utf-8");
@@ -75,13 +76,16 @@ public class SendPwdServlet extends HttpServlet{
    
    // 메일 전송
    Transport.send(message);
-   req.setAttribute("msg", email + "님에게 메일이 정상적으로 전송됨.");
-   
+//   req.setAttribute("msg", email + "님에게 메일이 정상적으로 전송됨.");
+   msg = email + "님에게 메일이 정상적으로 전송됨.";
   }catch(Exception ex){
    req.setAttribute("msg", "메일 전송중 오류 발생");
    System.out.println(ex);
+   msg = "메일 전송중 오류 발생";
   }
-  rd.forward(req, resp);
+//  rd.forward(req, resp);
+   PrintWriter out = resp.getWriter();
+   out.print(msg);
  }
  public String checkPwd(String mId, String email) {
      

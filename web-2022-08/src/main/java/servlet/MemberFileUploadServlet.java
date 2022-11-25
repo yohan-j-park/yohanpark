@@ -81,7 +81,7 @@ public class MemberFileUploadServlet extends HttpServlet{
         String msg=dao.insert(vo);
         req.setAttribute("msg", msg);
         RequestDispatcher rd = req.getRequestDispatcher("member/member_insert_result.jsp");
-        rd.include(req, resp);
+        rd.forward(req, resp);
     }
     private void update(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
         MemberVo vo = new MemberVo();
@@ -124,7 +124,6 @@ public class MemberFileUploadServlet extends HttpServlet{
                         
             }
         }   
-        
         MemberDao dao = new MemberDao();
         String msg = dao.update(vo);
         

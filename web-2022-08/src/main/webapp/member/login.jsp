@@ -19,13 +19,7 @@
 </div>
 
 <script>
-var frm = document.frm_login;
-var findPwd = frm.findPwd;
-findPwd.onclick = function(){
- frm.sender.value="p_yohan@naver.com";
- frm.action='../SendNaverServlet.do';
- frm.submit();
-}
+
 </script>
 </body>
 </html>

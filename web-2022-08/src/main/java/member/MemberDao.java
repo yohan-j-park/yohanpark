@@ -20,7 +20,7 @@ public class MemberDao {
     }
     
     public String insert(MemberVo vo) {
-        String msg = "dao.insert()";
+        String msg = "입력 완료";
         String sql = "insert into member(id, name, gender, phone, sysFile, oriFile) "
                 +    " values(?,?,?,?,?,?)";
         try {

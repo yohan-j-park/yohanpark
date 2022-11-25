@@ -12,6 +12,92 @@ var divHtml = document.querySelector('#html');
 var divJsp = document.querySelector('#jsp');
 var divJson = document.querySelector('#json');
 
+
+
+var city = document.querySelector('#city');
+var theater = document.querySelector('#theater');
+var movie = document.querySelector('#movie');
+
+city.onchange = function(){
+	var xhr = new XMLHttpRequest();
+	xhr.open('get','theater.jsp?city=' + city.value);
+	xhr.send();
+	xhr.onreadystatechange = function(){
+		if(xhr.status==200 && xhr.readyState==4){
+			var data = xhr.responseText;
+			var json = JSON.parse(data);
+			var html;
+			for(k of json){
+				html += `<option value="${k}"> ${k} </option>`;
+/* 
+				var op = new Option(k,k);
+				theater.appendChild(op);
+*/
+			}
+			theater.innerHTML = html;
+		}
+	}
+}
+
+theater.onchange = function(){
+	var xhr = new XMLHttpRequest();
+	xhr.open('get','movie.jsp?theater=' + theater.value);
+	xhr.send();	
+	xhr.onreadystatechange = function(){
+		if(xhr.status==200 && xhr.readyState==4){
+			var data = xhr.responseText;
+			var json = JSON.parse(data);
+			movie.length=0;
+//			var html;
+			for(k of json){
+				var op = new Option(k,k);
+				movie.appendChild(op);
+//				html += `<option value ="${k}"> ${k} </option>`;
+			}
+//			movie.innerHTML = html;
+		}
+	}
+}
+
+
+var cnt=0;
+var btnInsert = document.querySelector('#btnInsert');
+btnInsert.addEventListener('click',function(){
+	var appendZone = document.querySelector('#appendZone');
+	cnt++;
+	
+	//추가 할 div 생성
+	var div = document.createElement("div");	//1)
+	div.style.backgroundColor='#ddd';
+	div.style.padding='5px';
+	div.style.marginBottom='2px';
+	
+	var txt = document.createElement("input");	//2)
+	txt.setAttribute("type","text");
+	txt.setAttribute("value","아무거나" + cnt);
+	div.appendChild(txt);
+	
+	var btn = document.createElement("input");	//3)
+	btn.setAttribute("type","button");
+	btn.setAttribute("value", "삭제" + cnt);
+	btn.addEventListener('click',function(ev){
+		var tag = ev.srcElement;
+		var parent = tag.parentNode;	// = div
+		appendZone.removeChild(parent);
+	})
+	div.appendChild(btn);
+	
+	appendZone.appendChild(div);	
+})
+// 삭제버튼
+var btnDelete = document.querySelector('#btnDelete');
+btnDelete.addEventListener('click',function(){
+	var appendZone = document.querySelector('#appendZone');
+	appendZone.innerHTML = '';
+	cnt = 0;
+})
+
+
 btnText.addEventListener('click',function(){
 	
 	var xhr = new XMLHttpRequest();		//1) 객체 생성
@@ -26,7 +112,7 @@ btnText.addEventListener('click',function(){
 
 btnHtml.addEventListener('click',function(){
 	
-	// $(divHtml).load('data.html');   31~39를 한 줄로 요약
+	// $(divHtml).load('data.html');   한 줄로 요약
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open('get', 'data.html');
@@ -151,3 +237,6 @@ emp = function(){
 		xhr.send();
 	})
 }
+
+
+
