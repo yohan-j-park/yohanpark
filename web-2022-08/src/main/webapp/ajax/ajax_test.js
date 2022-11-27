@@ -64,13 +64,16 @@ var cnt=0;
 var btnInsert = document.querySelector('#btnInsert');
 btnInsert.addEventListener('click',function(){
 	var appendZone = document.querySelector('#appendZone');
+	appendZone.width='650px';
 	cnt++;
 	
 	//추가 할 div 생성
 	var div = document.createElement("div");	//1)
+	div.setAttribute("class","appenddiv");
 	div.style.backgroundColor='#ddd';
+	div.style.width='650px';
 	div.style.padding='5px';
-	div.style.marginBottom='2px';
+	div.style.margin='5px';
 	
 	var txt = document.createElement("input");	//2)
 	txt.setAttribute("type","text");
@@ -140,11 +143,12 @@ btnJson.addEventListener('click',function(){
 	xhr.open('get','data_json.jsp');
 	xhr.onreadystatechange = function(){
 		if(xhr.status==200 && xhr.readyState==4){
-			var data = xhr.responseText;
-			var json = JSON.parse(data);
-			var html = "<li>id: "  + json.id
-					 + "<li>name: "+ json.name
-					 + "<li>phone: "+ json.phone;
+			var json = JSON.parse(xhr.responseText);
+			/*var data = xhr.responseText;
+			var json = JSON.parse(data);*/
+			var html =` <li>id:     + json.id
+					    <li>name:   + json.name
+					    <li>phone:  + json.phone`;
 			divJson.innerHTML = html;
 		}
 	}
@@ -165,14 +169,15 @@ std = function(){
 		xhr.onreadystatechange = function(){
 		if(xhr.status==200 && xhr.readyState==4){
 			var jsonArray = JSON.parse(xhr.responseText);
+			console.log(jsonArray);
 			var html= "<div>";
 			for(obj of jsonArray){
-				html += "<div>"
-					 + "	<span>" + obj.id + "</span>"
-					 + "	<span>" + obj.name + "</span>"
-					 + "	<span>" + obj.phone + "</span>"
-					 + "	<span>" + obj.address + "</span>"
-					 + "</div>";	
+				html +=`<div style='width:600px;'>
+						  	<span style='display:inline-block; width:100px;'>  ${obj.id}  </span>
+						  	<span style='display:inline-block; width:100px;'>  ${obj.name}  </span>
+						  	<span style='display:inline-block; width:150px;'>  ${obj.phone}  </span>
+						  	<span style='display:inline-block; width:100px;'>  ${obj.address}  </span>
+					    </div>`;	
 			}
 			html += "</div>";
 			divList.innerHTML = html;
