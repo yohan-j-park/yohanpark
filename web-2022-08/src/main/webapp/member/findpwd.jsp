@@ -31,7 +31,7 @@
  <form name='form_mail' method='post' action='../SendPwdServlet.do'>
    <label>아이디</label><input type='text' name='mid'  value="a005"><br/>
    <label>이메일 <font color='grey'>(*암호찾기 메일은 가입 시 입력한 이메일로 전송됩니다.)</font></label>
-   <input type='text' name='email' value="p_yohan@naver.com"><br/>
+   <input type='text' name='email' value="받는사람@naver.com"><br/>
    <div class='content'>
    </div>
    <hr/>

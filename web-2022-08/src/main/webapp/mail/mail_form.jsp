@@ -29,7 +29,7 @@
 <div id='mail'>
  <h1>메일 쓰기</h1>
  <form name='form_mail' method='post'>
-   <label>수 신</label><input type='text' name='receiver' value="p_yohan@naver.com"><br/>
+   <label>수 신</label><input type='text' name='receiver' value="받는사람@naver.com"><br/>
    <label>제 목</label><input type='text' name='subject'  value="방가..."><br/>
    <div class='content'>
    <label>내 용</label><textarea rows="5" cols="60" name="content">ㅋㅋㅋ</textarea>
