@@ -47,7 +47,7 @@ public class SendNaverServlet extends HttpServlet{
 
     @Override
     protected PasswordAuthentication getPasswordAuthentication() {
-     return new PasswordAuthentication("p_yohan@naver.com","계정암호");
+     return new PasswordAuthentication("메일주소@naver.com","계정암호");
     }
 
    });   

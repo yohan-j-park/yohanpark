@@ -33,7 +33,6 @@
    <label>이메일 <font color='grey'>(*암호찾기 메일은 가입 시 입력한 이메일로 전송됩니다.)</font></label>
    <input type='text' name='email' value="p_yohan@naver.com"><br/>
    <div class='content'>
-   <!-- <input type='hidden' name='sender' value="p_yohan@naver.com" -->>
    </div>
    <hr/>
    <div class='btn'>

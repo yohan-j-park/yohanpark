@@ -28,7 +28,7 @@ public class SendPwdServlet extends HttpServlet{
  // 메일과 연관된 변수
  String host = "smtp.naver.com"; 
  String pwd="";
- String sender = "p_yohan@naver.com";
+ String sender = "보내는사람@naver.com";
  @Override
  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
      

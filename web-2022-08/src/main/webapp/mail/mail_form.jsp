@@ -48,7 +48,7 @@
 <script>
  var frm = document.form_mail;
  function sendMail(){
-  frm.sender.value="p_yohan@naver.com";
+  frm.sender.value="보내는사람@naver.com";
   frm.action='../SendNaverServlet.do';
   frm.submit();
  }
