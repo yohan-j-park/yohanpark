@@ -1,0 +1,30 @@
+@charset "UTF-8";
+#main>*{
+	box-sizing: border-box;
+}
+#main{
+	width:1000px;
+	min-height:500px;
+	border:2px solid #ccc;
+	padding:30px;
+	margin:30px auto;
+}
+#main>header{
+	position: relative;
+	height: 120px;
+	background-color:#ddd;
+}
+header>nav{
+	position:absolute;
+	bottom:5px;
+	right:5px;
+}
+header>.title{
+	color:#65647C;
+	font-size:1.5em;  /* 1.5배 */
+	font-weight:bolder;
+	padding:20px;
+}
+input[type=button]{
+	cursor:pointer;
+}

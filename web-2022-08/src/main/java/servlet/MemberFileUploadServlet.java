@@ -28,21 +28,20 @@ public class MemberFileUploadServlet extends HttpServlet{
            "C:\\Users\\82109\\eclipse-workspace\\web-2022-08\\src\\main\\webapp\\upload\\";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MemberVo vo = new MemberVo();
+       
         String job = req.getParameter("job");
-        MemberDao dao = new MemberDao();
         
         switch(job) {
+            case "insert":
+                insert(req,resp);
+                break;
             case "update":
                 update(req,resp);
                 break; 
         }
-        /*
-         * if(job.equals("update")) {
-         * 
-         * return;
-         * }
-         */
+    }
+    private void insert(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+        MemberVo vo = new MemberVo();
         Collection<Part> parts = req.getParts(); 
         for(Part p : parts) {
             if(p.getHeader("Content-Disposition").contains("filename=")) {    
@@ -77,7 +76,7 @@ public class MemberFileUploadServlet extends HttpServlet{
                         
             }
         }   
-               
+        MemberDao dao = new MemberDao();
         String msg=dao.insert(vo);
         req.setAttribute("msg", msg);
         RequestDispatcher rd = req.getRequestDispatcher("member/member_insert_result.jsp");
