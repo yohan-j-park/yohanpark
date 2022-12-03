@@ -41,11 +41,13 @@ public class ScoreServlet extends HttpServlet{
                break;
            case "update":
                update(req, resp);
+               break;
            case "insertR":
                insertR(req,resp);
                break;
            case "updateR":
                updateR(req,resp);
+               break;
            }
        }
        
@@ -127,6 +129,7 @@ public class ScoreServlet extends HttpServlet{
         rd.include(req, resp);
     }
     private void updateR(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+        System.out.println("updateR연결");
         ScoreVo vo = new ScoreVo();
         ScorePageVo pVo = new ScorePageVo(); 
         

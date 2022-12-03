@@ -22,8 +22,8 @@
 		<input type='button' value='저장' class='btnInsertR'/>
 		<input type='button' value='취소' class='btnSelect'/>
 		
-		<input type='text' name='findStr' value="${pVo.findStr }"/>	<!-- 나중에 히든으로 바꾸기 -->
-		<input type='text' name='nowPage' value='${pVo.nowPage }'/>	<!-- 나중에 히든으로 바꾸기 -->
+		<input type='hidden' name='findStr' value="${pVo.findStr }"/>	<!-- 나중에 히든으로 바꾸기 -->
+		<input type='hidden' name='nowPage' value='${pVo.nowPage }'/>	<!-- 나중에 히든으로 바꾸기 -->
 	</form>
 </div>
 </body>

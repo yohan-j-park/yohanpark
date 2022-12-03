@@ -10,6 +10,7 @@
 <title>mybatisScore/score.jsp</title>
 <script defer src='../mybatisScore/score.js'></script>
 
+  
 </head>
 <body>
 	<div id='score'>
@@ -18,7 +19,7 @@
 			<input type='button' value='입력' class='btnInsert'/>
 			<input type='search' name='findStr' value="${pVo.findStr }" autocomplete='off'/>
 			<input type='button' value='검색' class='btnSearch'/>
-			<input type='text' name='nowPage' value='${pVo.nowPage }'/>	<!-- 나중에 히든으로 바꾸기 -->
+			<input type='hidden' name='nowPage' value='${pVo.nowPage }'/>	<!-- 나중에 히든으로 바꾸기 -->
 			<input type='hidden' name='id'/>	<!-- 나중에 히든으로 바꾸기 -->
 		</form>
 		<br/>

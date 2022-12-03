@@ -9,7 +9,7 @@ $('.btnInsert').on('click',function(){
 })	
 
 $('.btnInsertR').on('click',function(){
-		var param = $('.frm').serialize();
+	var param = $('.frm').serialize();
 	$.post('../mybatisScore/scorebean.jsp?job=insertR',param, function(data){
 		$('section').html(data);	
 	})
@@ -44,19 +44,9 @@ $('.btnUpdate').on('click',function(){
 })	
 
 $('.btnUpdateR').on('click',function(){
-	var frm = $('.frm')[0];
-	frm.enctype='multipart/form-data';
-	var data = new FormData(frm);
-	$.ajax({
-		type : 'POST',
-		url : 'scoreServlet.do?job=updateR',
-		data : data,
-		contentType : false,
-		processData : false,
-		success : function(resp){
-			$('section').html(resp);
-		}
-		
+	var param = $('.frm').serialize();
+	$.post('../mybatisScore/scorebean.jsp?job=updateR',param, function(data){
+		$('section').html(data);	
 	})
 })
 

@@ -58,6 +58,7 @@ public class ScoreDao {
     public String update(ScoreVo vo) {
         String msg="";
         int cnt = sqlSession.update("score.update", vo);
+        System.out.println(cnt);
             if(cnt>0) {
                 sqlSession.commit();
                 msg="수정됨";
