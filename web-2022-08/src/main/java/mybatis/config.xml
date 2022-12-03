@@ -17,6 +17,7 @@
 
   <mappers>
   	<mapper resource="mybatis/member.xml"/>
+  	<mapper resource="score/score.xml"/>
   </mappers>
 </configuration>
 

@@ -22,15 +22,20 @@ public class MyFactory {
      
         return factory;
     }
-    public static void main(String[] args) {
-        //session 객체를 통해 CRUD를 실제 실행함
-       SqlSession session = MyFactory.getFactory().openSession(); 
-       if(session==null) {
-           System.out.println("factory 실행 오류");
-       }else {
-           System.out.println("factory가 생성되었습니다.");
-       }
-    }
+    
+//    main method는 출력을 위해 만든 것. 없어도 됨
+//    
+//    public static void main(String[] args) {
+//    
+//       session 객체를 통해 CRUD를 실제 실행함
+//    
+//       SqlSession session = MyFactory.getFactory().openSession(); 
+//       if(session==null) {
+//           System.out.println("factory 실행 오류");
+//       }else {
+//           System.out.println("factory가 생성되었습니다.");
+//       }
+//    }
     
     
 }
