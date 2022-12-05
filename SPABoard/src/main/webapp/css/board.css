@@ -1,0 +1,41 @@
+#board>.frm_search{
+    text-align: right;
+}
+#board>.title{
+    background: #777;
+    color:#fff;
+    padding:2px;
+    margin:3px 0;
+}
+#board .title{
+    display: flex;
+}
+#board .item{
+    display: flex;
+}
+#board label{
+    display: inline-block;
+    width:66px;
+    text-align: right;
+}
+#board .no{ width:70px;}
+#board .subject{width:300px; flex-grow:12;}
+#board .id{ flex-grow:1;}
+#board .nal{ flex-grow:1;}
+#board .hit{ flex-grow:1;}
+#board .item:hover{
+    background-color: #ddd;
+    cursor: pointer;
+}
+#board .item:last-child {
+    border-bottom:1px solid #ccc;
+    margin:3px 0;
+}
+#board .btnZone{
+    text-align: center;
+}
+#board .btnZone input{
+    border-radius: 14px;
+    border:1px solid #bbb;
+    padding:2px 7px;
+}

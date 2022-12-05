@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+    
+    <select id='totList' parameterType="board.PageVo" resultType="Integer">
+        SELECT COUNT(id) totSize FROM board
+        WHERE id=#{findStr} OR SUBJECT LIKE '%${findStr}%'
+        OR doc LIKE '%${findStr}%'
+    </select>
+    
+    <select id="select" parameterType="board.PageVo" resultType="board.BoardVo">
+        select sno, id, grp, seq, deep, hit, date_format(nal, '%y-%m-%d') nal,
+              (select count(pSno) from boardAtt where pSno=board.sno) attCnt,
+              concat( lpad(' ', deep*3, '&#160;'),
+                  case
+                    when deep>0 then concat('└', subject)
+                    else subject
+                  end
+              ) subject
+        from board
+        WHERE id=#{findStr} OR SUBJECT LIKE '%${findStr}%'
+        OR doc LIKE '%${findStr}%'
+        order by grp desc, seq asc, deep asc
+        limit ${startNo}, ${listSize}
+    
+    </select>
+</mapper>
