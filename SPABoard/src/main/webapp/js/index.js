@@ -1,7 +1,9 @@
 /**
  * index
  */
- 
+$('.index').on('click', function(ev){
+    window.location.href='index.jsp';
+});
  (spa = function(){
     
     //게시판 링크를 클릭한 경우

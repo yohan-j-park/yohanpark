@@ -13,8 +13,8 @@
 <body>
 <div id='board'>
    <form class='frm_search' method='post'>
-      <input type='text' name='nowPage' value='${pVo.nowPage }'/>
-      <input type='text' name='sno' />
+      <input type='hidden' name='nowPage' value='${pVo.nowPage }'/>
+      <input type='hidden' name='sno' />
       <input type='button' value='입력' class='btnInsert'/>
       <input type='text' name='findStr' size='40' value='${pVo.findStr }'/>
       <input type='button' value='조회' class='btnSearch'/>

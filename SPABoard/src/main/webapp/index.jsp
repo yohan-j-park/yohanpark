@@ -6,18 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Starbucks Korea</title>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css'>
 <link rel='icon' href='images/starbucks.png'/>
 <link rel='stylesheet' href='css/index.css'/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script defer src='js/index.js'></script>
 </head>
 <body>
 <div id='main'>
     <header>
-        <nav>
-            <a href='index.jsp'>HOME</a>
-            <a href='#' class='board'>게시판</a>
-        </nav>
+		<nav>
+			<button type="button" class="btn btn-outline-dark text-white index" style='background-color:rgb(139, 188, 204)'>Home</button>
+			<button type="button" class="btn bg-primary text-white board">게시판</button>
+		</nav>
     </header>
     <div id='content'>
         <div class='info'>
@@ -30,8 +32,8 @@
         </div>
     </div>
     <footer>
-        <font size='5' color='#00f'>S P A</font><br/>
-        servlet,jstl,jquery,mysql로 만들어진 Single Page Application
+        <font size='5' color='white'>S P A</font><br/>
+        <font color='white'>servlet,jstl,jquery,mysql로 만들어진 Single Page Application</font>
     </footer>
 </div>
 </body>
