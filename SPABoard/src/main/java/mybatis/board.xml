@@ -66,7 +66,7 @@
     
     <!-- repl -->
     <update id='seqUp' parameterType='board.BoardVo'>
-        update board set seq=seq+1 where seq>${seq} and grp=${grp}
+        update board set seq=seq+1 where seq&lt;${seq} and grp=${grp}
     </update>
     
     <insert id='repl' parameterType='board.BoardVo'>
