@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="static.mapper.guestbook.GuestbookMapper">
+
+	<select id='totSize' parameterType='kr.jobtc.springboot.guestbook.GPageVo' resultType='Integer'>
+		select count(id) from guestbook
+		where id  like '%${pVo.findStr}%'
+		or	  doc like '%${pVo.findStr}%'
+		or 	  nal like '%${pVo.findStr}%'
+	</select>
+		
+	<select id='list' parameterType='kr.jobtc.springboot.guestbook.GPageVo' resultType='kr.jobtc.springboot.guestbook.GuestbookVo'>
+		select * from guestbook
+		where id  like '%${pVo.findStr}%'
+		or	  doc like '%${pVo.findStr}%'
+		or 	  nal like '%${pVo.findStr}%'
+		order by nal desc, id asc
+		limit #{pVo.startNo}, #{pVo,listSize}
+	</select>
+
+</mapper>
