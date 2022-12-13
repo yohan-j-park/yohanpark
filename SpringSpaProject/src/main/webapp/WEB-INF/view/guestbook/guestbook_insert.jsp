@@ -7,13 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-guestbook_insert.jsp
-<span>아이디</span>
-<input type='text' id='id'/>
-<span>작성일</span>
-<input type='date' id='date'/><br/>
-<span>암호</span>
-<input type='password' id='pwd'/><br/>
-<input type='button' value='작성' id='btnInsertR'/>
+<div class='item1'>
+	<form name='frm_guestbook' class='frm_guestbook' method='post'>
+		<label>작성자</label>
+		<input type='text' name='id'>
+		<label>작성일</label>
+		<output>2022-12-09</output><br/>
+		<textarea rows='7' cols='60' name='doc'></textarea>
+		<br/>
+		<label>암호</label>
+		<input type='password' name='pwd'>
+		<input type='button' value='작성' class='btnGuestbookSave'>
+	</form>
+</div>
+<style>
+.item1{
+	text-align:center;
+	width:990px;
+	margin:10px auto;
+}
+
+</style>
 </body>
 </html>

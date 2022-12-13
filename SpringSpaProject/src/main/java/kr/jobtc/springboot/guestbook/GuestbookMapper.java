@@ -2,6 +2,13 @@ package kr.jobtc.springboot.guestbook;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Mapper
 public interface GuestbookMapper {
-	public List<GuestbookVo> list(String findStr);
+	public int totSize(GPageVo vo);
+	public List<GuestbookVo> list(GPageVo vo);
+//			매퍼의 resultType		parameterType
 }
