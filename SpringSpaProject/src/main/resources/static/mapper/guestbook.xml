@@ -17,5 +17,17 @@
 		order by nal desc, id asc
 		limit #{startNo}, #{listSize}
 	</select>
-
+	
+	<insert id='insert' parameterType="kr.jobtc.springboot.guestbook.GuestbookVo">
+		insert into guestbook(id, doc, nal, pwd)
+		values(#{id}, #{doc}, now(), #{pwd} )
+	</insert>
+	
+	<delete id='delete' parameterType="kr.jobtc.springboot.guestbook.GuestbookVo">
+		delete from guestbook where sno = #{sno} and pwd = #{pwd}
+	</delete>
+	
+	<update id='update' parameterType="kr.jobtc.springboot.guestbook.GuestbookVo">
+		update guestbook set doc=#{doc} where sno = #{sno} and pwd = #{pwd}
+	</update>
 </mapper>

@@ -1,6 +1,10 @@
 package kr.jobtc.springboot.guestbook;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,4 +37,34 @@ public class GuestbookController {
 		// application.properties에서 mcv.view ~에서 접두사 접미사가 붙어 페이지url이 완성된다.
 		return mv;
 	}
+	
+	
+	
+	@RequestMapping("/guestbook/guestbook_insert")
+	public String insert(GuestbookVo vo, HttpServletResponse resp) {		//form tag에 있는 setter들이 모두 돌아서 적용됨
+		// 확장성을 고려하여 이곳에 mapper를 호출하지 않는다.
+		boolean b = dao.insert(vo);
+		String msg="";
+			if(!b) msg="저장중 오류 발생";
+		return msg;
+	}
+	
+	@RequestMapping("/guestbook/guestbook_delete")
+	public String delete(GuestbookVo vo, HttpServletResponse resp) {
+		String msg="";
+		boolean b = dao.delete(vo);
+			if(!b) msg="삭제중 오류 발생";
+			
+		return msg;
+	}
+	
+	@RequestMapping("/guestbook/guestbook_update")
+	public String update(GuestbookVo vo, HttpServletResponse resp) {
+		String msg="";
+		boolean b = dao.update(vo);
+			if(!b) msg="수정중 오류 발생";
+
+		return msg;
+	}
 }
+
