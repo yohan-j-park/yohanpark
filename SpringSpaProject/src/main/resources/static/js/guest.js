@@ -49,7 +49,7 @@ modifyView = function(frm){
 	docValue = frm.doc.value;
 	let div = frm.querySelector('.updateZone')
 	div.style.visibility='visible';
-	$(frm.btnZone).css('visibility','hidden');
+	$('.btnZone').css('visibility','hidden');
 	let textarea = frm.doc;
 	$(textarea).prop('readOnly', false); 
 	$(frm.parentNode).css('background-color','#ccc');
@@ -59,7 +59,7 @@ modifyCancel = function(frm){
 	frm.doc.value = docValue;
 	let div = frm.querySelector('.updateZone')
 	div.style.visibility='hidden';
-	$(frm.btnZone).css('visibility','visible');
+	$('.btnZone').css('visibility','visible');
 	let textarea = frm.doc;
 	$(textarea).prop('readOnly', true); 
 	$(frm.parentNode).css('background-color','#aaa');
