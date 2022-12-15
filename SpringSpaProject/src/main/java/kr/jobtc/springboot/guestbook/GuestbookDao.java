@@ -92,5 +92,13 @@ public class GuestbookDao {
 		return b;
 		
 	}
+	
+	public List<GuestbookVo> guestbook10(){
+		List<GuestbookVo> list = null;
+
+		list = mapper.guestbook10();
+		
+		return list;
+	}
 	public GPageVo getgVo() {return gVo;}
 }

@@ -99,3 +99,7 @@ update = function(frm){
 		$('#content').load('/guestbook/guestbook_select',param);
 	});
 }
+
+$('.lastguestbook').on('click',function(ev){
+	window.location.href='/';
+})

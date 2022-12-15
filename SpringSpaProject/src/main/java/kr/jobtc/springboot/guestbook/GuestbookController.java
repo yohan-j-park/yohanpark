@@ -1,7 +1,5 @@
 package kr.jobtc.springboot.guestbook;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -65,6 +63,15 @@ public class GuestbookController {
 			if(!b) msg="수정중 오류 발생";
 
 		return msg;
+	}
+	
+	@RequestMapping("/guestbook/guestbook10")
+	public ModelAndView guestbook10(){
+		ModelAndView mv = new ModelAndView();
+		List<GuestbookVo> guestbook10 = dao.guestbook10();
+		mv.addObject("guestbook10",guestbook10);
+		mv.setViewName("guestbook/guestbook10");	
+		return mv;
 	}
 }
 

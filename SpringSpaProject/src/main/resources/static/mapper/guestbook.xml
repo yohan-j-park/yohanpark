@@ -18,6 +18,12 @@
 		limit #{startNo}, #{listSize}
 	</select>
 	
+	<select id='guestbook10' resultType="kr.jobtc.springboot.guestbook.GuestbookVo">
+		select * from guestbook
+		order by sno desc
+		limit 0,10
+	</select>
+	
 	<insert id='insert' parameterType="kr.jobtc.springboot.guestbook.GuestbookVo">
 		insert into guestbook(id, doc, nal, pwd)
 		values(#{id}, #{doc}, now(), #{pwd} )

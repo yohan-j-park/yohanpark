@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,7 @@
 <script defer src='js/index.js'></script>
 </head>
 <body>
+
 <div id='main'>
     <header>
 		<img src='/images/spring1.png' class='img'/>
@@ -24,10 +27,11 @@
     </header>
     <div id='content'>
         <div class='info1'>
-            방명록리스트                      
+            <a href="javascript:void(0)" style="text-decoration:none; color:white;" class='guestbook10'>최신 방명록</a>
+           <!--  <jsp:include page='./guestbook/guestbook10.jsp'></jsp:include> -->                     
         </div>
 		 <div class='info2'>
-            게시물리스트           
+            <a href="javascript:void(0)" style="text-decoration:none; color:white;" class='board10'>최신 게시물</a>
         </div>
     </div>
     <footer>
