@@ -43,7 +43,35 @@ $('.lastboard').on('click',function(){
             $('#content').html(data);
             
         })*/
+    $('.btnInsert').on('click', function(){
+    	param = $('.frm_search').serialize();
+    	$.post("/board/board_insert", param, function(data){
+    		$('#content').html(data);
+    	})
+    })
        
+    $('.btnInsertR').on('click', function(){
+    	var frm = $('.frm')[0];
+    	var param = new FormData(frm);
+    	
+    	$.ajax({
+    		type : 'POST',
+    		url : '/board/board_insertR',
+    		contentType : false,
+    		processData : false,
+    		data : param,
+    		dataType : 'html',
+    		success : function(data){
+    			$('#content').html(data);
+    		}
+    	})
+    })
+    $('.btnSelect').on('click', function(){
+    	param = $('.frm').serialize();
+    	$.post("/board/board_select", param, function(data){
+    			$('#content').html(data);
+    	})
+    })
 
 /*
 (board = function(){
@@ -53,28 +81,6 @@ $('.lastboard').on('click',function(){
     
     
     
-    $('.btnInsert').on('click', function(){
-        param = $('.frm_search').serialize();
-        $.post(url + "job=insert", param, function(data){
-            $('#content').html(data);
-        })
-    })
-    $('.btnInsertR').on('click', function(){
-        var frm = $('.frm')[0];
-        var param = new FormData(frm);
-       
-        $.ajax({
-            type : 'POST',
-            url : 'board/fileUpload.do?job=insertR',
-            contentType : false,
-            processData : false,
-            data : param,
-            dataType : 'html',
-            success : function(data){
-                $('#content').html(data);
-            }
-        })
-    })
     
     
     $('.btnUpdate').on('click', function(){
@@ -100,12 +106,6 @@ $('.lastboard').on('click',function(){
         })
     })
     
-    $('.btnSelect').on('click', function(){
-        param = $(frm).serialize();
-        $.post("/board/board_select, param, function(data){
-            $('#content').html(data);
-        })
-    })
     $('.btnRepl').on('click', function(){
         param = $(frm).serialize();
         $.post(url+ "job=repl", param, function(data){

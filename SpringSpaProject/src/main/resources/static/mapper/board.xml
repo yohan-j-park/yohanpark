@@ -57,6 +57,19 @@
         update board set hit=hit+1 where sno = ${_parameter}
     </update>
     
+     <insert id='insertR' parameterType='kr.jobtc.springboot.board.BoardVo'>
+        insert into board(sno, grp, seq, deep, id, subject, doc, nal, hit)
+        values(getSerial('i'), getSerial(''), 0,0, #{id}, #{subject}, #{doc}, sysdate(), 0)
+    </insert>
+    
+    <insert id='insertAttList' parameterType='kr.jobtc.springboot.board.AttVo'>
+        insert into boardAtt(pSno, sysFile, oriFile)
+        values
+        <foreach collection="list" item="vo" separator=",">
+            (getSerial(''), #{vo.sysFile}, #{vo.oriFile} )
+        </foreach>
+    </insert>
+    
 	<delete id='delete' parameterType='kr.jobtc.springboot.board.BoardVo'>
         delete from board where sno=${sno}
     </delete> 

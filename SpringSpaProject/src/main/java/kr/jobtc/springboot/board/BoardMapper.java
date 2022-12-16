@@ -21,4 +21,7 @@ public interface BoardMapper {
 	public List<String> delFileList(int sno);
 	public int attDeleteAll(int sno);
 	
+	public int insertR(BoardVo vo);
+	public int insertAttList(List<AttVo> attList);
+	
 }

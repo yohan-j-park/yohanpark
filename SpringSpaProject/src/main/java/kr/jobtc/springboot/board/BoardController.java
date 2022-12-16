@@ -14,7 +14,6 @@ public class BoardController {
 	BoardService service;
 	@RequestMapping("/board/board_select")
 	public ModelAndView select(PageVo pVo) {
-		System.out.println(pVo.getFindStr());
 		ModelAndView mv = new ModelAndView();
 		List<BoardVo> list = service.select(pVo);
 		pVo = service.getpVo();
@@ -26,7 +25,6 @@ public class BoardController {
 	
 	@RequestMapping("/board/board10")
 	public ModelAndView board10(){
-		System.out.println("board10 연결");
 		ModelAndView mv = new ModelAndView();
 		List<BoardVo> list = service.board10();
 		mv.addObject("list", list);
@@ -45,6 +43,7 @@ public class BoardController {
 			msg="삭제 중 오류 발생";
 		}
 		mv = select(pVo);
+		mv.addObject("pVo",pVo);
 		mv.addObject("msg",msg);
 		mv.setViewName("/board/board_select");
 		return mv;
@@ -63,6 +62,15 @@ public class BoardController {
 		mv.addObject("pVo", pVo);
 		
 		mv.setViewName("board/board_view");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/board/board_insert")
+	public ModelAndView insert(PageVo pVo) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("pVo",pVo);
+		mv.setViewName("board/board_insert");
 		
 		return mv;
 	}

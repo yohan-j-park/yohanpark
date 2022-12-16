@@ -16,12 +16,37 @@ public class BoardService {
 
 	@Autowired
 	BoardMapper mapper;
-
+	Object savePoint;
+	
 	@Autowired
 	PlatformTransactionManager manager;
 	TransactionStatus status;
 
-
+	
+	
+	public boolean insertR(BoardVo vo) {
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		savePoint = status.createSavepoint();
+		int cnt = mapper.insertR(vo);
+		boolean flag = true;
+		if(cnt < 1) {
+			status.rollbackToSavepoint(savePoint);
+			flag=false;
+		}
+		return flag;
+	}
+	
+	public void insertAttList(List<AttVo> attList) {
+		int cnt = mapper.insertAttList(attList);
+		if(cnt>0) {
+			manager.commit(status);
+			
+		}else {
+			status.rollbackToSavepoint(savePoint);
+		}
+	}
+	
+	
 	public List<BoardVo> select(PageVo pVo) {
 		int totSize = mapper.totList(pVo);
 		pVo.setTotSize(totSize);
