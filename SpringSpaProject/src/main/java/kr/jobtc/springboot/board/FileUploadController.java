@@ -33,10 +33,13 @@ public class FileUploadController {
 			boolean flag = service.insertR(vo);
 			if(!flag) return "저장중 오류 발생";
 			
-			//FileUpload 불러와야함
-			attList = fileUpload(mul);
-			
-			service.insertAttList(attList);
+			for(MultipartFile m : mul) {
+				if(!m.isEmpty()) {
+					//FileUpload 불러와야함
+					attList = fileUpload(mul);
+					service.insertAttList(attList);					
+				}
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
