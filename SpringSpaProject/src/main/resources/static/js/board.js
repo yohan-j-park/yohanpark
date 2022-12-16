@@ -38,11 +38,7 @@ $('.lastboard').on('click',function(){
             $('#content').html(data);
         })
     })    
-       /* $.post("/board/board_select", param, function(data){
-			console.log("ok");
-            $('#content').html(data);
-            
-        })*/
+
     $('.btnInsert').on('click', function(){
     	param = $('.frm_search').serialize();
     	$.post("/board/board_insert", param, function(data){
@@ -72,6 +68,29 @@ $('.lastboard').on('click',function(){
     			$('#content').html(data);
     	})
     })
+    
+        $('.btnUpdate').on('click', function(){
+        param = $('.frm').serialize();
+        $.post("/board/board_update", param, function(data){
+            $('#content').html(data);
+        })
+    })
+    $('.btnUpdateR').on('click', function(){
+        var frm = $('.frm')[0];
+        var param = new FormData(frm);
+       
+        $.ajax({
+            type : 'POST',
+            url : '/board/board_updateR',
+            contentType : false,
+            processData : false,
+            data : param,
+            dataType : 'html',
+            success : function(data){
+                $('#content').html(data);
+            }
+        })
+    })
 
 /*
 (board = function(){
@@ -83,28 +102,7 @@ $('.lastboard').on('click',function(){
     
     
     
-    $('.btnUpdate').on('click', function(){
-        param = $(frm).serialize();
-        $.post(url+ "job=update", param, function(data){
-            $('#content').html(data);
-        })
-    })
-    $('.btnUpdateR').on('click', function(){
-        var frm = $('.frm')[0];
-        var param = new FormData(frm);
-       
-        $.ajax({
-            type : 'POST',
-            url : 'board/fileUpload.do?job=updateR',
-            contentType : false,
-            processData : false,
-            data : param,
-            dataType : 'html',
-            success : function(data){
-                $('#content').html(data);
-            }
-        })
-    })
+
     
     $('.btnRepl').on('click', function(){
         param = $(frm).serialize();

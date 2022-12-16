@@ -77,4 +77,25 @@
     <delete id='attDeleteAll' parameterType="Integer">
         delete from boardAtt where pSno=#{_parameter}
     </delete>
+    
+    <update id="update" parameterType="kr.jobtc.springboot.board.BoardVo">
+        update board set subject = #{subject}, doc = #{doc}
+        where sno = ${sno}
+    </update>
+    
+    <insert id='attUpdate' parameterType='kr.jobtc.springboot.board.BoardVo'>
+        insert into boardAtt(pSno, sysFile, oriFile)
+        values
+        <foreach collection="attList" item="vo" separator=",">
+            (${sno}, #{vo.sysFile}, #{vo.oriFile} )
+        </foreach>
+    </insert>
+    
+    <delete id="attDelete" parameterType="String">
+    delete from boardAtt where sysFile in(
+         <foreach collection="array" item="file" separator=",">
+             #{file}
+         </foreach>
+     )
+    </delete>
 </mapper>

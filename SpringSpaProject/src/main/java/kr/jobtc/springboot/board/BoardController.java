@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class BoardController {
 	
+	public BoardController() {}
+	
 	@Autowired
 	BoardService service;
 	@RequestMapping("/board/board_select")
@@ -71,6 +73,17 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pVo",pVo);
 		mv.setViewName("board/board_insert");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/board/board_update")
+	public ModelAndView update(PageVo pVo) {
+		ModelAndView mv = new ModelAndView();
+		BoardVo bVo = service.view(pVo.getSno(), "");
+		mv.addObject("pVo",pVo);
+		mv.addObject("bVo",bVo);
+		mv.setViewName("board/board_update");
 		
 		return mv;
 	}

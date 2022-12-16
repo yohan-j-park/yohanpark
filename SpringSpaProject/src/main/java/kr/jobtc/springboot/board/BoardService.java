@@ -1,5 +1,6 @@
 package kr.jobtc.springboot.board;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 @Transactional
 public class BoardService {
 	PageVo pVo;
+	 
 
 	@Autowired
 	BoardMapper mapper;
@@ -22,12 +24,13 @@ public class BoardService {
 	PlatformTransactionManager manager;
 	TransactionStatus status;
 
+	public BoardService() {}
 	
 	
-	public boolean insertR(BoardVo vo) {
+	public boolean insertR(BoardVo bVo) {
 		status = manager.getTransaction(new DefaultTransactionDefinition());
 		savePoint = status.createSavepoint();
-		int cnt = mapper.insertR(vo);
+		int cnt = mapper.insertR(bVo);
 		boolean flag = true;
 		if(cnt < 1) {
 			status.rollbackToSavepoint(savePoint);
@@ -45,6 +48,40 @@ public class BoardService {
 			status.rollbackToSavepoint(savePoint);
 		}
 	}
+	
+	 public boolean updateR(BoardVo bVo, String[] delFile) {
+	        System.out.println("service.update");
+	        System.out.println(bVo.getSno());
+	        System.out.println(bVo.getSubject());
+	       
+	        boolean b=true;
+	        
+	        status = manager.getTransaction(new DefaultTransactionDefinition());
+	        savePoint = status.createSavepoint();
+	        int cnt = mapper.update(bVo);		//내용 업데이트
+	        if(cnt<1) {
+	            b=false;
+	        }else if(bVo.getAttList().size()>0) {
+	            int attCnt = mapper.attUpdate(bVo);	//첨부파일 추가
+	            if(attCnt<1) b=false;
+	        }
+	       
+	        if(b) {
+	        	manager.commit(status);
+	            if(delFile != null && delFile.length>0) {
+	                // 첨부 파일 데이터 삭제
+	                cnt = mapper.attDelete(delFile);
+	                if(cnt>0) {
+	                    fileDelete(delFile); // 파일 삭제
+	                }else {
+	                    b=false;
+	                }
+	            }
+	        }
+	        else status.rollbackToSavepoint(savePoint);
+ 
+	        return b;
+	    }
 	
 	
 	public List<BoardVo> select(PageVo pVo) {
@@ -121,11 +158,11 @@ public class BoardService {
 
 		return b;
 	}
-	public void fileDelete(String[] delFiles) {
-//		for(String f : delFiles) {
-//			
-//			if(file.exists()) file.delete();
-//		}
+	public void fileDelete(String[] delFile) {
+		for(String f : delFile) {
+			File file = new File(FileUploadController.path + f);
+			if(file.exists()) file.delete();
+		}
 	}
 	
 	public PageVo getpVo() {
