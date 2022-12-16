@@ -17,11 +17,7 @@ public class ClientThread extends Thread{
 	BufferedWriter bw;
 	BufferedReader br;
 	Socket socket;
-<<<<<<< HEAD
-	boolean flag = true;
-=======
 	boolean flag=true;
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	
 	public ClientThread(Socket s, ClientMain m) {
 		this.main = m;
@@ -58,18 +54,6 @@ public class ClientThread extends Thread{
 		
 		while(flag) {
 			try {
-<<<<<<< HEAD
-				String msg = br.readLine();		//blocking mode
-				if(msg == null) break;
-				String u = "";
-				
-				JSONObject obj = (JSONObject)parser.parse(msg);
-				if(!obj.get("message").equals("")){
-				main.getTextArea().append(obj.get("user")+ " : ");
-				main.getTextArea().append(obj.get("message")+"\n");
-				}
-				main.getTextArea().setCaretPosition(main.getTextArea().getText().length());
-=======
 				String msg = br.readLine();
 				System.out.println(msg);
 				if(msg == null) break;
@@ -79,7 +63,6 @@ public class ClientThread extends Thread{
 				
 				main.getTextArea().append(obj.get("user")+" : ");
 				main.getTextArea().append(obj.get("message")+"\n");
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 				
 				main.getTextArea()
 					.setCaretPosition(main.getTextArea().getText().length());
@@ -94,19 +77,6 @@ public class ClientThread extends Thread{
 					JSONArray array = (JSONArray)obj.get("data");
 					if(array == null) break;
 					main.userListModel.clear();
-<<<<<<< HEAD
-					for(Object ob : array) {
-						main.userListModel.addElement((String)ob);
-//						main.users.add((String)ob); 에서 바뀜
-					}
-					break;
-
-				case ServerMain.LOGIN:
-					u = (String)obj.get("user");
-					main.userListModel.addElement(u);
-					break;
-				
-=======
 					for(Object ob : array) {	
 						main.userListModel.addElement((String)ob);
 //						main.users.add(ob)에서 바뀜
@@ -116,7 +86,6 @@ public class ClientThread extends Thread{
 					u = (String)obj.get("user");
 					main.userListModel.addElement(u);
 					break;
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 				case ServerMain.LOGOUT:
 					u = (String)obj.get("user");
 					main.userListModel.removeElement(u);
@@ -157,24 +126,20 @@ public class ClientThread extends Thread{
 		}
 	}
 	
-<<<<<<< HEAD
-	public void sendWhisper(List<String> users, String msg) {	// List import할 때 java.awt.List(JList)로 되지 않게 주의
+	public void sendWhisper(List<String> users, String msg) {
 		try {
-		JSONObject obj = new JSONObject();
-		obj.put("user", main.getTfUser().getText());
-		obj.put("command", ServerMain.WHISPER);
-		obj.put("message", msg);
-		// sendMsg에다가 List라는 Object를 추가하는 기능을 추가
-		obj.put("users", users);	// 배열[  ] 구조인 List를 map구조인 JSONObject에 Value로 넣는다
-		
-		bw.write(obj.toJSONString());
-		bw.write("\n");
-		bw.flush();
-		
+			JSONObject obj = new JSONObject();
+			obj.put("user", main.getTfUser().getText());
+			obj.put("command", ServerMain.WHISPER);
+			obj.put("message", msg);
+			obj.put("users", users);
+			
+			bw.write(obj.toJSONString());
+			bw.write("\n");
+			bw.flush();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-=======
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
+	
 }

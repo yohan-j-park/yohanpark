@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -28,19 +27,10 @@ import org.json.simple.JSONObject;
 
 public class ClientMain extends JFrame {
 	ClientThread ct;
-<<<<<<< HEAD
-	DefaultListModel userListModel = new DefaultListModel();	// JList에서 데이터가 저장되는 공간
-	
-//	Vector<String> users = new Vector<String>(); 
-//	을 없애고 DefaultListModel을 사용함 (접속한 유저가 바로바로 최신화가 안되는 오류 때문에..)  
-
-
-=======
 	DefaultListModel userListModel = new DefaultListModel();
 	// 기존에 사용하던 Vector<String> users를 없애고 DefaultListModel을 사용함(접속한 유저가 바로바로 최신화가 안되는 오류 때문에..)
 	// JList에 데이터가 저장되는 공간을 Vector에서 DefaultListModel로 바꾸었다.
 	
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
 	private JTextField tfIP;
@@ -88,7 +78,7 @@ public class ClientMain extends JFrame {
 			btnWhisper.setEnabled(true);
 			userListModel.clear();
 		}catch(Exception ex) {
-			System.out.println("clientMain connect()");
+//			System.out.println("clientMain connect()");
 			ex.printStackTrace();
 		}
 	}
@@ -100,20 +90,10 @@ public class ClientMain extends JFrame {
 		obj.put("command", ServerMain.LOGOUT);
 		obj.put("message", "난 이제 그만...");
 		
-		// 2) ct 종료
 		try {
 			ct.bw.write(obj.toJSONString());
 			ct.bw.write("\n");
 			ct.bw.flush();
-<<<<<<< HEAD
-			ct.flag = false;
-			ct.br.close();
-			ct.bw.close();
-			ct.socket.close();
-			
-		}catch(IOException e1) {
-			e1.printStackTrace();
-=======
 			ct.flag=false;
 			ct.br.close();
 			ct.bw.close();
@@ -122,25 +102,16 @@ public class ClientMain extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		}
 
 		ct=null;
-<<<<<<< HEAD
-		
-		// 3) 버튼 상태 변경
-=======
 		//3. 버튼 상태 변경
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		btnConnect.setEnabled(true);
 		btnDisconnect.setEnabled(false);
 		btnSend.setEnabled(false);
 		btnWhisper.setEnabled(false);
 		userListModel.clear();
-<<<<<<< HEAD
-=======
 		
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	}
 	
 	
@@ -240,15 +211,9 @@ public class ClientMain extends JFrame {
 		}
 		return scrollPane;
 	}
-<<<<<<< HEAD
-	public JList getList() {	// List의 UI만 다루는 메소드
-		if (list == null) {
-			list = new JList(userListModel);
-=======
 	public JList getList() {	//List의 UI만 다루는 메소드
 		if (list == null) {
 			list = new JList(userListModel);	
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		}
 		return list;
 	}
@@ -267,68 +232,6 @@ public class ClientMain extends JFrame {
 		}
 		return textArea;
 	}
-<<<<<<< HEAD
-	public JButton getBtnSend() {
-		if (btnSend == null) {
-			btnSend = new JButton("전 송");
-			btnSend.setEnabled(false);
-			btnSend.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					String msg = tfMessage.getText();
-					if(!msg.equals("")) {
-					ct.sendMsg(msg);
-//					textArea.append(msg+ "\n");
-//					textArea.setCaretPosition(textArea.getText().length());
-					}
-					tfMessage.setText("");
-					
-				}
-			});
-			btnSend.setBackground(SystemColor.textHighlight);
-			btnSend.setForeground(Color.WHITE);
-			btnSend.setBounds(777, 429, 91, 55);
-		}
-		return btnSend;
-	}
-	public JButton getBtnWhisper() {
-		if (btnWhisper == null) {
-			btnWhisper = new JButton("귓속말");
-			btnWhisper.setEnabled(false);
-			btnWhisper.setForeground(Color.WHITE);
-			btnWhisper.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {	
-				//JList에 있는 유저에게 메세지를 전달할건지 가져와야한다. (getList().selectedValuesList())
-					String msg = tfMessage.getText();
-					List<String> users = getList().getSelectedValuesList();
-					ct.sendWhisper(users, msg);
-					
-				}
-			});
-			btnWhisper.setBackground(SystemColor.textHighlight);
-			btnWhisper.setBounds(880, 429, 91, 55);
-		}
-		return btnWhisper;
-	}
-	public JLabel getLblNewLabel_3() {
-		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("접속자 ");
-			lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 20));
-			lblNewLabel_3.setForeground(Color.WHITE);
-			lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblNewLabel_3.setBounds(378, 25, 117, 28);
-		}
-		return lblNewLabel_3;
-	}
-	public JTextField getTfUser() {
-		if (tfUser == null) {
-			tfUser = new JTextField();
-			tfUser.setColumns(10);
-			tfUser.setBounds(494, 29, 130, 21);
-		}
-		return tfUser;
-	}
-=======
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	public JTextField getTfMessage() {
 		if (tfMessage == null) {
 			tfMessage = new JTextField();
@@ -336,21 +239,11 @@ public class ClientMain extends JFrame {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-<<<<<<< HEAD
-					String msg = tfMessage.getText();
-					if(!msg.equals("")) {
-					ct.sendMsg(msg);
-//					textArea.append(msg+ "\n");
-					textArea.setCaretPosition(textArea.getText().length());
-					}
-					tfMessage.setText("");
-=======
 						String msg = tfMessage.getText();
-						if(!tfMessage.getText().equals("")) {
+						if(!msg.equals("")) {
 						ct.sendMsg(msg);
 						tfMessage.setText("");
 						}
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 					}
 				}
 			});
@@ -362,6 +255,13 @@ public class ClientMain extends JFrame {
 	public JButton getBtnWhisper() {
 		if (btnWhisper == null) {
 			btnWhisper = new JButton("귓속말");
+			btnWhisper.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String msg = tfMessage.getText();
+					List<String> users = getList().getSelectedValuesList();
+					ct.sendWhisper(users, msg);
+				}
+			});
 			btnWhisper.setEnabled(false);
 			btnWhisper.setBounds(673, 409, 97, 23);
 		}

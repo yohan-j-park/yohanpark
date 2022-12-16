@@ -33,20 +33,6 @@ public class ServerMain extends JFrame {
 	Vector<ServerThread> clients = new Vector<ServerThread>();
 	boolean flagServer = true;
 	DefaultListModel userListModel = new DefaultListModel<String>();
-<<<<<<< HEAD
-
-	//	Vector<String> users = new Vector<String>();	// 동적 배열, 접속한 클라이언트의 정보를 실시간으로 저장하는 목적
-	
-	// JSON에서 정수는 모두 long타입이다.
-	final static int SERVER_START = 1;		//정석
-	final static int SERVER_STOP = 2;		// 상수는 카멜타입을 사용할 수 없고 _를 사용한다
-	final static int LOGIN = 3;
-	final static int LOGOUT = 4;
-	final static int MESSAGE = 5;
-	final static int USERS = 6;				// 유저들의 명단
-	final static int WHISPER = 7;			// 귓속말
-	
-=======
 	// JList와 Vector와의 시차떄문에 반영이 안되는 오류가 있어서 DefaltTableModel처럼 DefaultListModel을 사용함
 	// JList의 데이터를 컨트롤하기 위한 코드
 
@@ -57,7 +43,6 @@ public class ServerMain extends JFrame {
 	final static int MESSAGE = 5;
 	final static int USERS = 6; // 유저들의 명단
 	final static int WHISPER = 7; // 귓속말
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -69,15 +54,10 @@ public class ServerMain extends JFrame {
 	private JScrollPane scrollPane_1;
 	private JTextArea textArea;
 	private JTextField tfMessage;
-<<<<<<< HEAD
-	private JList list_1;
-	
-=======
 	private JButton btnWhisper;
 	private JButton btnSend;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 
 	/**
 	 * Launch the application.
@@ -95,13 +75,7 @@ public class ServerMain extends JFrame {
 		});
 	}
 
-<<<<<<< HEAD
-
-	public void start() {	//클라이언트 접속할 때 까지 아무런 동작도 할 수 없다. deadlock상태, 그래서 멀티스레드인 Thread클래스가 필요하다
-
-=======
 	public void start() {
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		try {
 			Thread t = new Thread(new Runnable() {
 				public void run() {
@@ -126,24 +100,16 @@ public class ServerMain extends JFrame {
 						}
 
 						for (ServerThread st : clients) {
+					
 							st.br.close();
 							st.bw.close();
 							st.socket.close();
 						}
-<<<<<<< HEAD
-						//clients.remove(st) : 강퇴시킬 client찾아서 remove하면 강퇴다
-						clients.clear();
-						server.close();
-						userListModel.clear();
-						
-						
-=======
 
 						clients.clear();
 						server.close();
 						userListModel.clear();
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -168,20 +134,12 @@ public class ServerMain extends JFrame {
 				st.bw.write("\n");
 				st.bw.flush();
 			}
+			
 
-<<<<<<< HEAD
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		// 2) 버튼들을 토클
-=======
 		} catch (Exception e) {
 		}
 
 		// 2) 버튼들을 토클.
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		btnStart.setEnabled(true);
 		btnStop.setEnabled(false);
 		btnSend.setEnabled(false);
@@ -219,68 +177,36 @@ public class ServerMain extends JFrame {
 			}
 		}
 	}
-<<<<<<< HEAD
-	
-	public void sendWhisper() {
-		String msg = tfMessage.getText();
-		
-=======
 
 	public void sendWhisper() {
 		String msg = tfMessage.getText();
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		JSONObject obj = new JSONObject();
 		obj.put("user", "server");
 		obj.put("command", ServerMain.WHISPER);
 		obj.put("message", msg);
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 		textArea.append(msg + "\n");
 		textArea.setCaretPosition(textArea.getText().length());
 		
 		// 데이터를 보내는 부분
 		
-<<<<<<< HEAD
-		List<String> receiveUsers = getList().getSelectedValuesList();
-		// JList에서 참여자 aa나 bb등 귓속말을 보낼 유저'들'을 선택 -> SelectedValue's'List라서.
-		
-		for(ServerThread st : clients){
-			if(!receiveUsers.contains(st.user)) continue;
-			// 선택한 유저가 st의 user('현재 접속중인' list에 포함되어 있지 않으면 다시 for문을 돌린다.
-			
-=======
 		List<String> receiveUsers = getList().getSelectedValuesList();  
 		// JList에서 참여자 aa나 bb등 귓속말을 보낼 유저'들'을 선택 SelectedValue's'
 		System.out.println(receiveUsers);
 		for (ServerThread st : clients) {
 			if( !receiveUsers.contains(st.user) ) continue;
 			// 선택한 유저가 st의 user('현재 접속중인' list에 있는 유저리스트)에 포함되어 있지 않으면 다시 for문을 돌린다(continue 때문)
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 			try {
 				st.bw.write(obj.toJSONString());
 				st.bw.write("\n");
 				st.bw.flush();
-<<<<<<< HEAD
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
-	
-=======
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	public ServerMain() {
 		setTitle("멀티 채팅 서버");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -361,46 +287,18 @@ public class ServerMain extends JFrame {
 			scrollPane.setBounds(12, 43, 124, 324);
 			scrollPane.setViewportView(getList());
 			scrollPane.setColumnHeaderView(getLblNewLabel_1());
-			scrollPane.setViewportView(getList());
 		}
 		return scrollPane;
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	public JList getList() {
 		if (list == null) {
 			list = new JList(userListModel);
 		}
-<<<<<<< HEAD
-		return list;
-	}
-//	public JList getList() {
-//		if (list == null) {
-//			list = new JList();
-//		}
-//		테스트용
-//		users.add("kim");
-//		users.add("hong");
-//		list.setListData(users);
-//		
-//		return list;
-//	}
-	public JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("대화 내용");
-			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		}
-		return lblNewLabel_2;
-	}
-=======
 
 		return list;
 	}
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	public JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
@@ -418,91 +316,27 @@ public class ServerMain extends JFrame {
 		}
 		return textArea;
 	}
-<<<<<<< HEAD
-	public JButton getBtnSend() {
-		if (btnSend == null) {
-			btnSend = new JButton("전 송");
-			btnSend.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-//						String msg = tfMessage.getText();
-//						st.sendMsgAll(msg);
-//						textArea.append(msg+"\n");
-					if(!tfMessage.getText().equals("")) {
-						send();
-						}
-						tfMessage.setText("");
-				}
-			});
-			btnSend.setEnabled(false);
-			btnSend.setForeground(Color.WHITE);
-			btnSend.setBackground(SystemColor.textHighlight);
-			btnSend.setBounds(777, 429, 91, 55);
-		}
-		return btnSend;
-	}
-	public JButton getBtnWhisper() {
-		if (btnWhisper == null) {
-			btnWhisper = new JButton("귓속말");
-			btnWhisper.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					sendWhisper();
-				}
-			});
-			btnWhisper.setEnabled(false);
-			btnWhisper.setForeground(Color.WHITE);
-			btnWhisper.setBackground(SystemColor.textHighlight);
-			btnWhisper.setBounds(880, 429, 91, 55);
-		}
-		return btnWhisper;
-	}
-	public JLabel getLblNewLabel_3() {
-		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("서버 IP");
-			lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblNewLabel_3.setForeground(Color.WHITE);
-			lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 20));
-			lblNewLabel_3.setBounds(226, 21, 117, 28);
-		}
-		return lblNewLabel_3;
-	}
-=======
 
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 	public JTextField getTfMessage() {
 		if (tfMessage == null) {
 			tfMessage = new JTextField();
 			tfMessage.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
-<<<<<<< HEAD
-					if(e.getKeyCode()==MenuKeyEvent.VK_ENTER) {
-						if(!tfMessage.getText().equals("")) {
-						send();
-						}
-						tfMessage.setText("");
-						
-=======
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						if(!tfMessage.getText().equals("")) {
 							send();
 							tfMessage.setText("");
 						}
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 					}
 				}
 			});
-<<<<<<< HEAD
-			tfMessage.setBounds(22, 423, 743, 68);
-=======
 			tfMessage.setBounds(12, 377, 410, 21);
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 			tfMessage.setColumns(10);
 		}
 		return tfMessage;
 	}
 
-<<<<<<< HEAD
-=======
 	public JButton getBtnWhisper() {
 		if (btnWhisper == null) {
 			btnWhisper = new JButton("귓속말");
@@ -555,5 +389,4 @@ public class ServerMain extends JFrame {
 		}
 		return lblNewLabel_2;
 	}
->>>>>>> 2844728828a9b07eb25cf7e35b6407c017d97107
 }
