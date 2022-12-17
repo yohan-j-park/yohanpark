@@ -16,7 +16,7 @@ public class BoardServlet extends HttpServlet{
 	HttpServletRequest req;
 	HttpServletResponse resp;
 	
-	String job="select";
+//	String job="select";
 	RequestDispatcher rd;
 	PageVo pVo;
 	BoardVo bVo;

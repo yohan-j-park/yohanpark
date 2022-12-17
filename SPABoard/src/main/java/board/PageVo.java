@@ -10,7 +10,7 @@ public class PageVo {
     int startNo;
     int endNo;
     
-    int    sno;
+    int sno;
     String findStr;
     
     public PageVo() {}

@@ -1,10 +1,5 @@
 package kr.jobtc.springboot;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +19,6 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
-	@Autowired
 	public BoardController(JdbcTemplate temp) {
 		this.jdbcTemp = temp;
 	}
@@ -34,7 +28,8 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		List<BoardVo>list = service.select("1");
 		
-		mv.addObject("list", list); 	//mvc 중 m(model)
+		mv.addObject("list", list); 	
+		//mvc 중 m(model)
 		mv.setViewName("board/board_select");	//WEB-INF/view/board/board_select.jsp
 		return mv;
 	}

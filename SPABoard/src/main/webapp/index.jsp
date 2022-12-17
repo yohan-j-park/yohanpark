@@ -17,7 +17,7 @@
 <div id='main'>
     <header>
 		<nav>
-			<button type="button" class="btn btn-outline-dark text-white index" style='background-color:rgb(139, 188, 204)'>Home</button>
+			<button type="button" class="btn bg-primary text-white index" style='background-color:rgb(139, 188, 204)'>Home</button>
 			<button type="button" class="btn bg-primary text-white board">게시판</button>
 		</nav>
     </header>
