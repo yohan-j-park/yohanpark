@@ -16,7 +16,6 @@ public class BoardVo {
     String subject = "";
     String doc = "";
     
-    public BoardVo() {}
     List<AttVo> attList = new ArrayList<AttVo>();
     
     public String getSubject() { return subject;     }

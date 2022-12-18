@@ -1,34 +1,21 @@
 /**
  * board.js
  */
-$('.lastboard').on('click',function(){
-	window.location.href='/';
-})
+
+(board = function(){
+    var frm = $('.frm')[0];
+    var param;
+    
+	$('.lastboard').on('click',function(){
+		window.location.href='/';
+	})
 
     $('.btnSearch').on('click', function(){
-        var frm = $('.frm_search')[0];
+        frm = $('.frm_search')[0];
         frm.nowPage.value = 1;
         param = $(frm).serialize();
         $('#content').load("/board/board_select", param);
     });
-    
-    board.move = function(nowPage){
-        frm = $('.frm_search')[0];
-        frm.nowPage.value = nowPage;
-        param = $(frm).serialize();
-        $.post("/board/board_select", param, function(data){
-            $('#content').html(data);
-        })
-    }
-    
-    board.view = function(sno){
-        frm = $('.frm_search')[0];
-        frm.sno.value = sno;
-        param = $(frm).serialize();
-        $.post("/board/board_view", param, function(data){
-            $('#content').html(data);
-        })
-    }    
     
     $('.btnDeleteR').on('click', function(){
         let yn = confirm('자료를 삭제하시겠습니까 ?');
@@ -47,9 +34,15 @@ $('.lastboard').on('click',function(){
     })
        
     $('.btnInsertR').on('click', function(){
-    	var frm = $('.frm')[0];
-    	var param = new FormData(frm);
-    	
+    	frm = $('.frm')[0];
+    	param = new FormData(frm);
+    	/*var param1 = $(frm).serialize();	 FormData를 사용하는 이유: serialize는 multipart를 지원하지 않는다.
+    	var keys = param.keys();			 Iterator(반복자)를 사용하여 FormData의 ket혹은 value값이 제대로 들어가 있는지 확인할 수 있다.
+    	var values = param.values();
+    	console.log(keys.next(),values.next());
+    	console.log(keys.next(),values.next());
+    	console.log(keys.next(),values.next());
+    	console.log(keys.next(),values.next());*/
     	$.ajax({
     		type : 'POST',
     		url : '/board/board_insertR',
@@ -68,16 +61,15 @@ $('.lastboard').on('click',function(){
     			$('#content').html(data);
     	})
     })
-    
-        $('.btnUpdate').on('click', function(){
-        param = $('.frm').serialize();
+    $('.btnUpdate').on('click', function(){
+        param = $(frm).serialize();
         $.post("/board/board_update", param, function(data){
             $('#content').html(data);
         })
     })
     $('.btnUpdateR').on('click', function(){
-        var frm = $('.frm')[0];
-        var param = new FormData(frm);
+        frm = $('.frm')[0];
+        param = new FormData(frm);
        
         $.ajax({
             type : 'POST',
@@ -91,32 +83,20 @@ $('.lastboard').on('click',function(){
             }
         })
     })
-
-/*
-(board = function(){
-    var frm = $('.frm')[0];
-    var param;
-    var url='board/board_main.jsp?';
-    
-    
-    
-    
-    
-
     
     $('.btnRepl').on('click', function(){
         param = $(frm).serialize();
-        $.post(url+ "job=repl", param, function(data){
+        $.post("/board/board_repl", param, function(data){
             $('#content').html(data);
         })
     })
     $('.btnReplR').on('click', function(){
-        var frm = $('.frm')[0];
-        var param = new FormData(frm);
+        frm = $('.frm')[0];
+        param = new FormData(frm);
        
         $.ajax({
             type : 'POST',
-            url : 'board/fileUpload.do?job=replR',
+            url : "/board/board_replR",
             contentType : false,
             processData : false,
             data : param,
@@ -126,8 +106,23 @@ $('.lastboard').on('click',function(){
             }
         })
     })
-
-
-   
-})() */
+    
+    board.move = function(nowPage){
+        frm = $('.frm_search')[0];
+        frm.nowPage.value = nowPage;
+        param = $(frm).serialize();
+        $.post("/board/board_select", param, function(data){
+            $('#content').html(data);
+        })
+    }
+    
+    board.view = function(sno){
+        frm = $('.frm_search')[0];
+        frm.sno.value = sno;
+        param = $(frm).serialize();
+        $.post("/board/board_view", param, function(data){
+            $('#content').html(data);
+        })
+    }    
+})()
 

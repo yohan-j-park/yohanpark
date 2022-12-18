@@ -26,6 +26,6 @@ public interface BoardMapper {
 	
 	public int update(BoardVo bVo);
 	public int attUpdate(BoardVo bVo);
-	public int attDelete(String[] delFiles);
+	public int attDelete(String[] delFile);
 	
 }

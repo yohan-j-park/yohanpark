@@ -10,8 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class BoardController {
 	
-	public BoardController() {}
-	
 	@Autowired
 	BoardService service;
 	@RequestMapping("/board/board_select")
@@ -55,7 +53,9 @@ public class BoardController {
 	public ModelAndView view(BoardVo bVo, PageVo pVo) {
 		ModelAndView mv = new ModelAndView();
 		// 조회수 증가
+		System.out.println("bVo.getSno() : " + bVo.getSno());
 		bVo = service.view(bVo.getSno(),"up");
+		System.out.println("bVo :" + bVo );
 
 		//doc 안에 있는 \n 기호를 <br/>로 변경
 		String temp = bVo.getDoc();
@@ -78,9 +78,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/board_update")
-	public ModelAndView update(PageVo pVo) {
+	public ModelAndView update(PageVo pVo, BoardVo bVo) {
 		ModelAndView mv = new ModelAndView();
-		BoardVo bVo = service.view(pVo.getSno(), "");
+		bVo = service.view(pVo.getSno(),"");
+		
 		mv.addObject("pVo",pVo);
 		mv.addObject("bVo",bVo);
 		mv.setViewName("board/board_update");
