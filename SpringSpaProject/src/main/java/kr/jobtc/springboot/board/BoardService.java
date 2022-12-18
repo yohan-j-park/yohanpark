@@ -14,7 +14,6 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 @Transactional
 public class BoardService {
 	PageVo pVo;
-	 
 
 	@Autowired
 	BoardMapper mapper;
@@ -24,7 +23,6 @@ public class BoardService {
 	PlatformTransactionManager manager;
 	TransactionStatus status;
 
-	public BoardService() {}
 	
 	
 	public boolean insertR(BoardVo bVo) {
@@ -48,40 +46,6 @@ public class BoardService {
 			status.rollbackToSavepoint(savePoint);
 		}
 	}
-	
-	 public boolean updateR(BoardVo bVo, String[] delFile) {
-	        System.out.println("service.update");
-	        System.out.println(bVo.getSno());
-	        System.out.println(bVo.getSubject());
-	       
-	        boolean b=true;
-	        
-	        status = manager.getTransaction(new DefaultTransactionDefinition());
-	        savePoint = status.createSavepoint();
-	        int cnt = mapper.update(bVo);		//내용 업데이트
-	        if(cnt<1) {
-	            b=false;
-	        }else if(bVo.getAttList().size()>0) {
-	            int attCnt = mapper.attUpdate(bVo);	//첨부파일 추가
-	            if(attCnt<1) b=false;
-	        }
-	       
-	        if(b) {
-	        	manager.commit(status);
-	            if(delFile != null && delFile.length>0) {
-	                // 첨부 파일 데이터 삭제
-	                cnt = mapper.attDelete(delFile);
-	                if(cnt>0) {
-	                    fileDelete(delFile); // 파일 삭제
-	                }else {
-	                    b=false;
-	                }
-	            }
-	        }
-	        else status.rollbackToSavepoint(savePoint);
- 
-	        return b;
-	    }
 	
 	
 	public List<BoardVo> select(PageVo pVo) {
@@ -149,7 +113,6 @@ public class BoardService {
 					b = false;
 				}
 			}
-
 		}
 		if (b)
 			manager.commit(status);
@@ -158,8 +121,54 @@ public class BoardService {
 
 		return b;
 	}
-	public void fileDelete(String[] delFile) {
-		for(String f : delFile) {
+	
+	public boolean updateR(BoardVo bVo, String[] delFile) {
+		boolean b = true;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		savePoint = status.createSavepoint();
+		int cnt = mapper.update(bVo);	//내용 업데이트
+		if(cnt < 1) {
+			b=false;
+		}else if(bVo.getAttList().size()>0) {
+			int attCnt = mapper.attUpdate(bVo);		//첨부파일 추가
+			if(attCnt<1) b=false;
+		}
+		
+		if(b) {
+			manager.commit(status);
+			if(delFile != null && delFile.length>0) {
+				//첨부 파일 데이터 삭제
+				cnt = mapper.attDelete(delFile);
+				if(cnt>0) {
+					fileDelete(delFile);	//파일 삭제
+				}else {
+					b=false;
+				}
+			}
+		}
+		else status.rollbackToSavepoint(savePoint);
+		
+		return b;
+	}
+	
+	public synchronized boolean replR(BoardVo bVo,List<AttVo> attList) {
+		boolean b = true;
+		status = manager.getTransaction(new DefaultTransactionDefinition());
+		savePoint = status.createSavepoint();
+		mapper.seqUp(bVo);
+		int cnt = mapper.repl(bVo);
+		if(cnt<1) b=false;
+		else if(bVo.getAttList().size()>0) {
+			int attCnt = mapper.insertAttList(attList);
+			if(attCnt<1) 
+				status.rollbackToSavepoint(savePoint);
+				b=false;
+		}
+		return b;
+	}
+	
+	public void fileDelete(String[] delFiles) {
+		for(String f : delFiles) {
 			File file = new File(FileUploadController.path + f);
 			if(file.exists()) file.delete();
 		}

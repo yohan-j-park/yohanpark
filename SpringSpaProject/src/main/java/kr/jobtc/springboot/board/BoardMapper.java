@@ -28,4 +28,7 @@ public interface BoardMapper {
 	public int attUpdate(BoardVo bVo);
 	public int attDelete(String[] delFile);
 	
+	public void seqUp(BoardVo bVo);
+	public int repl(BoardVo bVo);
+	
 }

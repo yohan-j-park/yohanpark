@@ -88,4 +88,13 @@ public class BoardController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/board/board_repl")
+	public ModelAndView repl(PageVo pVo, BoardVo bVo) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("pVo",pVo);
+		mv.addObject("bVo", bVo);
+		mv.setViewName("board/board_repl");
+		return mv;
+	}
 }

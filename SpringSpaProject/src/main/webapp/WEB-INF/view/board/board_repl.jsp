@@ -26,11 +26,11 @@
         <div class='btnZone'>
             <input type='button' value='취소' class='btnSelect'>
             <input type='button' value='댓글저장' class='btnReplR'>
-            <input type='text' name='nowPage' value='${pVo.nowPage }'>
-            <input type='text' name='findStr' value='${pVo.findStr }'>
-            <input type='text' name='grp' value='${bVo.grp }'/>
-            <input type='text' name='seq' value='${bVo.seq }'/>
-            <input type='text' name='deep' value='${bVo.deep }'/>
+            <input type='hidden' name='nowPage' value='${pVo.nowPage }'>
+            <input type='hidden' name='findStr' value='${pVo.findStr }'>
+            <input type='hidden' name='grp' value='${bVo.grp }'/>
+            <input type='hidden' name='seq' value='${bVo.seq }'/>
+            <input type='hidden' name='deep' value='${bVo.deep }'/>
            
         </div>
     </form>
