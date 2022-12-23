@@ -151,7 +151,7 @@ public class BoardService {
 		return b;
 	}
 	
-	public synchronized boolean replR(BoardVo bVo,List<AttVo> attList) {
+	public synchronized boolean replR(BoardVo bVo) {
 		boolean b = true;
 		status = manager.getTransaction(new DefaultTransactionDefinition());
 		savePoint = status.createSavepoint();
@@ -159,7 +159,7 @@ public class BoardService {
 		int cnt = mapper.repl(bVo);
 		if(cnt<1) b=false;
 		else if(bVo.getAttList().size()>0) {
-			int attCnt = mapper.insertAttList(attList);
+			int attCnt = mapper.insertAttList(bVo.getAttList());
 			if(attCnt<1) 
 				status.rollbackToSavepoint(savePoint);
 				b=false;

@@ -27,7 +27,8 @@
         <div class='attFileZone'>
             <c:forEach var="att" items='${bVo.attList }'>
                 <span class='attFile'>
-                    <a href='./upload/${att.sysFile }' download='${att.oriFile }'>
+                	<img src='/upload/${att.sysFile }'/><br/>
+                    <a href='/upload/${att.sysFile }' download='${att.oriFile }'>
                         ${att.oriFile }
                     </a>
                 </span>

@@ -76,3 +76,14 @@ input[type="checkbox"]:checked  ~ span{
     color:#f00;
     /*box-shadow: 0 0 0 10px orange;*/
 }
+#board .attFileZone span{
+	background-color:white;
+	display:inline-block;
+	width:150px;
+	height:100px;
+}
+
+#board .attFileZone span>img{
+	width:150px;
+	height:100px;
+}

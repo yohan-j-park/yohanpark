@@ -51,7 +51,10 @@
     		data : param,
     		dataType : 'html',
     		success : function(data){
-    			$('#content').html(data);
+				if(data != '') alert(data);
+				frm.enctype='';
+				param = $(frm).serialize();
+    			$('#content').load('/board/board_select',param);
     		}
     	})
     })
@@ -79,7 +82,10 @@
             data : param,
             dataType : 'html',
             success : function(data){
-                $('#content').html(data);
+                if(data != '') alert(data);
+				frm.enctype='';
+				param = $(frm).serialize();
+    			$('#content').load('/board/board_select',param);
             }
         })
     })
@@ -102,7 +108,10 @@
             data : param,
             dataType : 'html',
             success : function(data){
-                $('#content').html(data);
+            	if(data != '') alert(data);
+				frm.enctype='';
+				param = $(frm).serialize();
+    			$('#content').load('/board/board_select',param);
             }
         })
     })
@@ -125,4 +134,3 @@
         })
     }    
 })()
-
