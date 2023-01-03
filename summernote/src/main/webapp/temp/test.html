@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>hi..</h1>
+
+	<script>
+
+	var p = /(\<img src=\')(.*?)(\'\>)/gi;
+	var str = "asdfasdf<img src='a.png'>sadasdfasfd<img src='b.ing'>";
+	var r = str.split(p);
+	console.log(str);
+	for(i  in r){
+		console.log("> " + r[i])
+	}
+
+</script>
+
+</body>
+</html>

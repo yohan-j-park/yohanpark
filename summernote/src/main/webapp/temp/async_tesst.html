@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+	<h3>async test</h3>
+	<script>
+       
+        function a(){
+            var promise = new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    var v={
+                        name : 'hong',
+                        age : '19',
+                        phone : '010-111'
+                    }
+                    resolve(v)
+                }, 1000)
+            });
+
+            return promise
+        }
+
+        function b(){
+            console.log("2. b..............")
+        }
+
+        async function main(){
+            var r = await a();
+            console.log(r);
+            b();
+        }
+
+        main();
+    </script>
+</body>
+</html>
