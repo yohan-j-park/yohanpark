@@ -1,8 +1,8 @@
 # SET GLOBAL log_bin_trust_function_creators = 1;
 
 #DROP DATABASE kodup;
-#CREATE DATABASE kodup;
-#USE kodup;
+CREATE DATABASE kodup;
+USE kodup;
 
 CREATE TABLE member (
    id   varchar(255)   NOT NULL,
@@ -451,3 +451,4 @@ ALTER TABLE pixel_buy_list ADD CONSTRAINT FK_member_TO_pixel_buy_list_1 FOREIGN 
 REFERENCES member (
    id
 );
+commit;
