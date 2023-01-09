@@ -1,8 +1,8 @@
 # SET GLOBAL log_bin_trust_function_creators = 1;
 
 #DROP DATABASE kodup;
-CREATE DATABASE kodup;
-USE kodup;
+#CREATE DATABASE kodup;
+#USE kodup;
 
 CREATE TABLE member (
    id   varchar(255)   NOT NULL,
@@ -451,4 +451,9 @@ ALTER TABLE pixel_buy_list ADD CONSTRAINT FK_member_TO_pixel_buy_list_1 FOREIGN 
 REFERENCES member (
    id
 );
+ALTER TABLE member ADD corp_status INT NOT NULL;
+ALTER TABLE member MODIFY corp_status INT DEFAULT 0;
+ALTER TABLE mansearch_board ADD main_task VARCHAR(255);
+ALTER TABLE mansearch_board ADD sub_task VARCHAR(255);
+ALTER TABLE member MODIFY grade INT DEFAULT 0;
 commit;
