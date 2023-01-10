@@ -456,4 +456,12 @@ ALTER TABLE member MODIFY corp_status INT DEFAULT 0;
 ALTER TABLE mansearch_board ADD main_task VARCHAR(255);
 ALTER TABLE mansearch_board ADD sub_task VARCHAR(255);
 ALTER TABLE member MODIFY grade INT DEFAULT 0;
+
+insert into pixel_price values(1000,100,2700,300,4500,500,9000,1000,27000,3000,45000,5000);
+CREATE TABLE `chat` (
+   `chat_sno`   int   NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `id`   varchar(255)   NOT NULL,
+   `chat_status`   int   NOT NULL   DEFAULT 0
+);
 commit;
+select * from pixel_price;
