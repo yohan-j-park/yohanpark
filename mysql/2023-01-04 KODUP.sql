@@ -465,3 +465,21 @@ CREATE TABLE `chat` (
 );
 commit;
 select * from pixel_price;
+
+drop PROCEDURE memberlist;
+CREATE PROCEDURE memberlist()
+BEGIN
+   DECLARE cnt INT DEFAULT 301;
+   
+   here : LOOP
+      INSERT INTO member(id, pwd, email, nickname, gender, age, profile_img, account_type, ban_status, pixel, grade, join_date, email_status, mento_status, corp_status)
+      VALUES(CONCAT('m001',cnt), '1111', CONCAT('abc',cnt,'@naver.com'), CONCAT('Èúµû±â¿ä',cnt), 'm' , CONCAT((1960+FLOOR(RAND() * 32)),10+(FLOOR(RAND() * 3)),10+(FLOOR(RAND() * 18))), "default.png", 0, 0, 0, 1, "2023-01-09",0,0,0);
+      
+      IF cnt = 400 THEN
+         LEAVE here;
+      END IF;
+      
+      SET cnt = cnt + 1;
+   END LOOP;
+END;
+CALL memberlist();
