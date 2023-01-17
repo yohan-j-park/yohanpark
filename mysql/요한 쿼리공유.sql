@@ -1,39 +1,42 @@
-/* ´õ¹Ìµ¥ÀÌÅÍ boardtype mansearch »èÁ¦ */
+/* ë”ë¯¸ë°ì´í„° boardtype mansearch ì‚­ì œ */
+delete from mansearch_board;
 delete from board where boardtype='mansearch';
 
-/* ±¸ÀÎ°Ô½ÃÆÇ¿¡ ±Û ÀÛ¼º °¡´ÉÇÑ id¸ñ·Ï Ãß°¡ */
+/* êµ¬ì¸ê²Œì‹œíŒì— ê¸€ ì‘ì„± ê°€ëŠ¥í•œ idëª©ë¡ ì¶”ê°€ */
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00151','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_view_corp_logo.png','Ä³ºó½Ã½ºÅÛ','010-1111-1111','corp@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','manager@outlook.com');
+values ('m00151','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_view_corp_logo.png','ìºë¹ˆì‹œìŠ¤í…œ','010-1111-1111','corp@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','manager@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00152','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_bluecom.jpg','ºí·çÄÄ','010-1111-1111','bluecom@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','bluecom1@outlook.com');
+values ('m00152','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_bluecom.jpg','ë¸”ë£¨ì»´','010-1111-1111','bluecom@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','bluecom1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00153','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_dabinnetworks.png','´Ùºó³×Æ®¿÷½º','010-1111-1111','dabin@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','dabin1@outlook.com');
+values ('m00153','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_dabinnetworks.png','ë‹¤ë¹ˆë„¤íŠ¸ì›ìŠ¤','010-1111-1111','dabin@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','dabin1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00154','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_gspec.Jpg','Áö½ºÆå','010-1111-1111','gspec@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','gspec1@outlook.com');
+values ('m00154','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_gspec.Jpg','ì§€ìŠ¤í™','010-1111-1111','gspec@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','gspec1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00155','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_itist.jpg','¾ÆÀÌÆ¼ÀÌ½ºÆ®','010-1111-1111','itist@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','itist1@outlook.com');
+values ('m00155','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_itist.jpg','ì•„ì´í‹°ì´ìŠ¤íŠ¸','010-1111-1111','itist@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','itist1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00156','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_pilgrimsoft.png','ÇÊ±×¸²¼ÒÇÁÆ®','010-1111-1111','pilgrimsoft@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','pilgrimsoft1@outlook.com');
+values ('m00156','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_pilgrimsoft.png','í•„ê·¸ë¦¼ì†Œí”„íŠ¸','010-1111-1111','pilgrimsoft@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','pilgrimsoft1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00157','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_pni.png','ÇÇ¾Ø¾ÆÀÌ','010-1111-1111','pni@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','pni1@outlook.com');
+values ('m00157','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_pni.png','í”¼ì•¤ì•„ì´','010-1111-1111','pni@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','pni1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00158','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_pssoft.png','ÇÇ¿¡½º¼ÒÇÁÆ®','010-1111-1111','pssoft@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','pssoft1@outlook.com');
+values ('m00158','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_pssoft.png','í”¼ì—ìŠ¤ì†Œí”„íŠ¸','010-1111-1111','pssoft@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','pssoft1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00159','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_smartfive.png','½º¸¶Æ®ÆÄÀÌºê','010-1111-1111','smartfive@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','smartfive1@outlook.com');
+values ('m00159','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_smartfive.png','ìŠ¤ë§ˆíŠ¸íŒŒì´ë¸Œ','010-1111-1111','smartfive@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','smartfive1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00160','»ç¾÷ÀÚµî·ÏÁõ.png','mansearch_wizinc.png','À§Áî¾ÆÀÌ¾Ø¾¾','010-1111-1111','wizinc@outlook.com','´ã´çÀÚÀÌ¸§','010-2222-2222','wizinc1@outlook.com');
+values ('m00160','ì‚¬ì—…ìë“±ë¡ì¦.png','mansearch_wizinc.png','ìœ„ì¦ˆì•„ì´ì•¤ì”¨','010-1111-1111','wizinc@outlook.com','ë‹´ë‹¹ìì´ë¦„','010-2222-2222','wizinc1@outlook.com');
 
-/* °Ô½Ã±Û Ãß°¡*/
-/* mansearch_board table¿¡ Ãß°¡ */
+/* ê²Œì‹œê¸€ ì¶”ê°€*/
+/* mansearch_board tableì— ì¶”ê°€ */
 select * from board where boardtype='mansearch';
 select * from mansearch_board;
-
+select * from corperation;
 CREATE PROCEDURE board_mansearch_input1()
 BEGIN
 	DECLARE cnt INT DEFAULT 1;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00151','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00151','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-02-15',800,'ê²½ê¸° ìš©ì¸ì‹œ ê¸°í¥êµ¬ ë†ì„œë™','í”„ë¡ íŠ¸ì•¤ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','10ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ì‚¬ ì´ìƒ','í˜‘ì˜','ë§¤ì›” 12ì¼','javascript, vue.js','2023-02-05','SM','ê¸ˆìœµ');
 		IF cnt=20 THEN
 			LEAVE here;
 		END IF;
@@ -49,7 +52,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 21;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00152','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00152','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-02-15',800,'ê²½ê¸° ìš©ì¸ì‹œ ê¸°í¥êµ¬ ë†ì„œë™','í”„ë¡ íŠ¸ì•¤ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','10ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ì‚¬ ì´ìƒ','í˜‘ì˜','ë§¤ì›” 12ì¼','javascript, vue.js','2023-02-05','SM','ê¸ˆìœµ');
 		IF cnt=40 THEN
 			LEAVE here;
 		END IF;
@@ -65,7 +70,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 41;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00153','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00153','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-02-15',800,'ê²½ê¸° ìš©ì¸ì‹œ ê¸°í¥êµ¬ ë†ì„œë™','í”„ë¡ íŠ¸ì•¤ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','10ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ì‚¬ ì´ìƒ','í˜‘ì˜','ë§¤ì›” 12ì¼','javascript, vue.js','2023-02-05','SM','ê¸ˆìœµ');
 		IF cnt=60 THEN
 			LEAVE here;
 		END IF;
@@ -81,7 +88,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 61;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00154','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00154','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-02-15',800,'ê²½ê¸° ìš©ì¸ì‹œ ê¸°í¥êµ¬ ë†ì„œë™','í”„ë¡ íŠ¸ì•¤ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','10ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ì‚¬ ì´ìƒ','í˜‘ì˜','ë§¤ì›” 12ì¼','javascript, vue.js','2023-02-05','SM','ê¸ˆìœµ');
 		IF cnt=80 THEN
 			LEAVE here;
 		END IF;
@@ -97,7 +106,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 81;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00155','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00155','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-02-15',800,'ê²½ê¸° ìš©ì¸ì‹œ ê¸°í¥êµ¬ ë†ì„œë™','í”„ë¡ íŠ¸ì•¤ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','10ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ì‚¬ ì´ìƒ','í˜‘ì˜','ë§¤ì›” 12ì¼','javascript, vue.js','2023-02-05','SM','ê¸ˆìœµ');
 		IF cnt=100 THEN
 			LEAVE here;
 		END IF;
@@ -113,7 +124,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 101;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00156','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00156','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-03-24',600,'ì„œìš¸ ì„œì´ˆêµ¬ ì„œì´ˆë™','ë°±ì—”ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','3ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ë ¥ ë¬´ê´€','ìƒê·¼','ë§¤ì›” 25ì¼','java,spring,mysql','2023-03-10','SI','ì¸í„°ë„· / ì„œë¹„ìŠ¤');
 		IF cnt=120 THEN
 			LEAVE here;
 		END IF;
@@ -129,7 +142,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 121;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00157','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00157','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-03-24',600,'ì„œìš¸ ì„œì´ˆêµ¬ ì„œì´ˆë™','ë°±ì—”ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','3ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ë ¥ ë¬´ê´€','ìƒê·¼','ë§¤ì›” 25ì¼','java,spring,mysql','2023-03-10','SI','ì¸í„°ë„· / ì„œë¹„ìŠ¤');
 		IF cnt=140 THEN
 			LEAVE here;
 		END IF;
@@ -145,7 +160,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 141;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00158','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00158','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-03-24',600,'ì„œìš¸ ì„œì´ˆêµ¬ ì„œì´ˆë™','ë°±ì—”ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','3ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ë ¥ ë¬´ê´€','ìƒê·¼','ë§¤ì›” 25ì¼','java,spring,mysql','2023-03-10','SI','ì¸í„°ë„· / ì„œë¹„ìŠ¤');		
 		IF cnt=160 THEN
 			LEAVE here;
 		END IF;
@@ -161,7 +178,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 161;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00159','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00159','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-03-24',600,'ì„œìš¸ ì„œì´ˆêµ¬ ì„œì´ˆë™','ë°±ì—”ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','3ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ë ¥ ë¬´ê´€','ìƒê·¼','ë§¤ì›” 25ì¼','java,spring,mysql','2023-03-10','SI','ì¸í„°ë„· / ì„œë¹„ìŠ¤');		
 		IF cnt=180 THEN
 			LEAVE here;
 		END IF;
@@ -177,7 +196,9 @@ BEGIN
 	DECLARE cnt INT DEFAULT 181;
 	here:LOOP
 		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00160','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
+		VALUES ('m00160','mansearch',now(),CONCAT('ê°€ì¡±ê°™ì€ ë¶„ìœ„ê¸°ì—ì„œ ì¼í•˜ì‹¤ ë¶„ êµ¬í•©ë‹ˆë‹¤',cnt),'<p><span style="background-color: rgb(255, 255, 0);">êµ¬ì¸ê³µê³ ê¸€ ì‘ì„±!!</span></p>');
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES ((select sno from board order by sno desc limit 0,1),'2023-03-24',600,'ì„œìš¸ ì„œì´ˆêµ¬ ì„œì´ˆë™','ë°±ì—”ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','3ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ë ¥ ë¬´ê´€','ìƒê·¼','ë§¤ì›” 25ì¼','java,spring,mysql','2023-03-10','SI','ì¸í„°ë„· / ì„œë¹„ìŠ¤');		
 		IF cnt=200 THEN
 			LEAVE here;
 		END IF;
@@ -188,14 +209,15 @@ END;
 
 CALL board_mansearch_input10();
 
+
 /*
 CREATE PROCEDURE mansearch_board_input1()
 BEGIN
 	DECLARE cnt INT DEFAULT 1;
 	here:LOOP
-		INSERT INTO board(id, boardtype, nal, subject, doc)
-		VALUES ('m00151','mansearch',now(),CONCAT('°¡Á·°°Àº ºĞÀ§±â¿¡¼­ ÀÏÇÏ½Ç ºĞ ±¸ÇÕ´Ï´Ù',cnt),'<p><span style="background-color: rgb(255, 255, 0);">±¸ÀÎ°ø°í±Û ÀÛ¼º!!</span></p>');
-		IF cnt=20 THEN
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES (1822+cnt,'2023-03-24',600,'ì„œìš¸ ì„œì´ˆêµ¬ ì„œì´ˆë™','ë°±ì—”ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','3ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ë ¥ ë¬´ê´€','ìƒê·¼','ë§¤ì›” 25ì¼','java,spring,mysql','2023-03-10','SI','ì¸í„°ë„· / ì„œë¹„ìŠ¤');
+		IF cnt=100 THEN
 			LEAVE here;
 		END IF;
 		SET cnt=cnt+1;	
@@ -204,4 +226,20 @@ BEGIN
 END;
 
 CALL mansearch_board_input1();
+
+CREATE PROCEDURE mansearch_board_input2()
+BEGIN
+	DECLARE cnt INT DEFAULT 101;
+	here:LOOP
+		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
+		VALUES (1822+cnt,'2023-02-15',800,'ê²½ê¸° ìš©ì¸ì‹œ ê¸°í¥êµ¬ ë†ì„œë™','í”„ë¡ íŠ¸ì•¤ë“œê°œë°œ, íŒ€ì›','ê³„ì•½ì§','10ë…„ ì´ìƒ ~ ë¬´ê´€','í•™ì‚¬ ì´ìƒ','í˜‘ì˜','ë§¤ì›” 12ì¼','javascript, vue.js','2023-02-05','SM','ê¸ˆìœµ');
+		IF cnt=200 THEN
+			LEAVE here;
+		END IF;
+		SET cnt=cnt+1;	
+	END LOOP;
+	
+END;
+
+CALL mansearch_board_input2();
 */
