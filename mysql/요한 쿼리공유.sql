@@ -24,6 +24,18 @@ values ('m00159','사업자등록증.png','mansearch_smartfive.png','스마트�
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
 values ('m00160','사업자등록증.png','mansearch_wizinc.png','위즈아이앤씨','010-1111-1111','wizinc@outlook.com','담당자이름','010-2222-2222','wizinc1@outlook.com');
 
+/* 기업인증한 아이디 corp_status 2로 변경 */
+update member set corp_status=2 where id='m00151';
+update member set corp_status=2 where id='m00152';
+update member set corp_status=2 where id='m00153';
+update member set corp_status=2 where id='m00154';
+update member set corp_status=2 where id='m00155';
+update member set corp_status=2 where id='m00156';
+update member set corp_status=2 where id='m00157';
+update member set corp_status=2 where id='m00158';
+update member set corp_status=2 where id='m00159';
+update member set corp_status=2 where id='m00160';
+
 /* 게시글 추가*/
 /* mansearch_board table에 추가 */
 select * from board where boardtype='mansearch';
@@ -208,38 +220,3 @@ BEGIN
 END;
 
 CALL board_mansearch_input10();
-
-
-/*
-CREATE PROCEDURE mansearch_board_input1()
-BEGIN
-	DECLARE cnt INT DEFAULT 1;
-	here:LOOP
-		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
-		VALUES (1822+cnt,'2023-03-24',600,'서울 서초구 서초동','백엔드개발, 팀원','계약직','3년 이상 ~ 무관','학력 무관','상근','매월 25일','java,spring,mysql','2023-03-10','SI','인터넷 / 서비스');
-		IF cnt=100 THEN
-			LEAVE here;
-		END IF;
-		SET cnt=cnt+1;	
-	END LOOP;
-	
-END;
-
-CALL mansearch_board_input1();
-
-CREATE PROCEDURE mansearch_board_input2()
-BEGIN
-	DECLARE cnt INT DEFAULT 101;
-	here:LOOP
-		INSERT INTO mansearch_board(sno, work_start, pay, corp_location, position, job_type, required_career, education_level, work_type, pay_date, required_skill, deadline, main_task, sub_task)
-		VALUES (1822+cnt,'2023-02-15',800,'경기 용인시 기흥구 농서동','프론트앤드개발, 팀원','계약직','10년 이상 ~ 무관','학사 이상','협의','매월 12일','javascript, vue.js','2023-02-05','SM','금융');
-		IF cnt=200 THEN
-			LEAVE here;
-		END IF;
-		SET cnt=cnt+1;	
-	END LOOP;
-	
-END;
-
-CALL mansearch_board_input2();
-*/
