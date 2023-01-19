@@ -220,3 +220,29 @@ BEGIN
 END;
 
 CALL board_mansearch_input10();
+
+
+ALTER TABLE premium_review ADD id varchar(255) AFTER mansearch_sno;
+alter table premium_review add foreign key(id) references member(id);
+ALTER TABLE premium_review_buylist CHANGE review_sno premium_review_sno int;
+insert into premium_review(mansearch_sno,id,review) values(671,'m0011','프리미엄리뷰 테스트');
+insert into premium_review(mansearch_sno,id,review) values(670,'m0013','프리미엄리뷰 테스트');
+insert into premium_review_buylist(id,premium_review_sno) values('m0015',5);
+commit;
+select * from premium_review;
+select * from mansearch_board order by mansearch_sno desc;
+select * from premium_review;
+select * from premium_review_buylist;
+
+select * from information_schema.table_constraints where table_name = 'premium_review_buylist';
+alter table premium_review_buylist drop foreign key FK_premium_review_TO_premium_review_buylist_1;
+
+select pr.premium_review_sno,pr.mansearch_sno,pr.id as writer_id, pr.review,prb.id as buyer_id from premium_review pr 
+				  left join premium_review_buylist prb on pr.premium_review_sno = prb.premium_review_sno;
+
+select pr.id writer, prb.id buyer from premium_review pr JOIN premium_review_buylist prb on pr.premium_review_sno = prb.premium_review_sno
+where pr.mansearch_sno=671;
+
+ALTER TABLE `kodup`.`premium_review_buylist` DROP PRIMARY KEY;
+commit;
+ 
