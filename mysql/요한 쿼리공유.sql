@@ -2,6 +2,9 @@
 delete from mansearch_board;
 delete from board where boardtype='mansearch';
 
+insert into pixel_price values(1000,100,2700,300,4500,500,9000,1000,27000,3000,45000,5000);
+commit;
+
 /* 구인게시판에 글 작성 가능한 id목록 추가 */
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
 values ('m00151','사업자등록증.png','mansearch_view_corp_logo.png','캐빈시스템','010-1111-1111','corp@outlook.com','담당자이름','010-2222-2222','manager@outlook.com');
@@ -240,9 +243,30 @@ alter table premium_review_buylist drop foreign key FK_premium_review_TO_premium
 select pr.premium_review_sno,pr.mansearch_sno,pr.id as writer_id, pr.review,prb.id as buyer_id from premium_review pr 
 				  left join premium_review_buylist prb on pr.premium_review_sno = prb.premium_review_sno;
 
-select pr.id writer, prb.id buyer from premium_review pr JOIN premium_review_buylist prb on pr.premium_review_sno = prb.premium_review_sno
+select pr.id writer_id, prb.id buyer_id from premium_review pr JOIN premium_review_buylist prb on pr.premium_review_sno = prb.premium_review_sno
 where pr.mansearch_sno=671;
 
 ALTER TABLE `kodup`.`premium_review_buylist` DROP PRIMARY KEY;
 commit;
- 
+
+
+		select mb.mansearch_sno,pr.premium_review_sno,pr.mansearch_sno as pr_mansearch_sno,pr.id as writer_id, pr.review,prb.id as buyer_id 
+		from premium_review pr left join premium_review_buylist prb on pr.premium_review_sno = prb.premium_review_sno
+							   left join mansearch_board mb on pr.mansearch_sno = mb.mansearch_sno
+		where mb.mansearch_sno = 671; 
+
+		
+select * from member;
+select * from mansearch_board;
+select * from corperation;
+select * from premium_review;
+select * from premium_review_buylist;
+select id as buyer_id from premium_review_buylist where premium_review_sno=1;
+
+insert into premium_review(mansearch_sno,id,review) values(1,'kodup100','프리미엄리뷰 doc입니다');
+commit;
+insert into premium_review(mansearch_sno,id,review) values(2,'kodup101','프리미엄리뷰 doc입니다');
+insert into premium_review_buylist(id,premium_review_sno) values('kodup200',1);
+insert into premium_review_buylist(id,premium_review_sno) values('kodup201',1);
+insert into premium_review_buylist(id,premium_review_sno) values('kodup201',2);
+		
