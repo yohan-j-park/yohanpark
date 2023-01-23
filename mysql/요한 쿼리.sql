@@ -60,13 +60,6 @@ select * from board where id='m0011' order by sno desc;
  insert into board_att(sno, sysFile, oriFile)
  values((select sno from board order by sno desc limit 0,1),'default.png', 'default.png');
  select * from board_att order by sno desc;
- 
- /* insert all test > 안됨... */
-													/* insert ALL
-														into board(id,boardtype,nal,subject,doc)
-														values('m0011','mansearchboard',now(),'insertAllTest','제발됐으면좋겠다')
-														into board_att(sno, sysFile, oriFile)
-														values((select sno from board order by sno desc limit 0,1),'default.png', 'default.png'); */
 
 /* delete시 mansearch_board -> board -> corperation 순으로 지우기 */
 DELETE FROM mb, b
