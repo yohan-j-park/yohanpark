@@ -7,7 +7,7 @@ commit;
 
 /* 구인게시판에 글 작성 가능한 id목록 추가 */
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
-values ('m00151','사업자등록증.png','mansearch_view_corp_logo.png','캐빈시스템','010-1111-1111','corp@outlook.com','담당자이름','010-2222-2222','manager@outlook.com');
+values ('kodup104','사업자등록증.png','mansearch_view_corp_logo.png','캐빈시스템','010-1111-1111','corp@outlook.com','담당자이름','010-2222-2222','manager@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
 values ('m00152','사업자등록증.png','mansearch_bluecom.jpg','블루컴','010-1111-1111','bluecom@outlook.com','담당자이름','010-2222-2222','bluecom1@outlook.com');
 insert into corperation(id,corp_license,corp_logo,corp_name,corp_phone,corp_email,manager_name,manager_phone,manager_email)
@@ -255,18 +255,43 @@ commit;
 							   left join mansearch_board mb on pr.mansearch_sno = mb.mansearch_sno
 		where mb.mansearch_sno = 671; 
 
+				SELECT pr.premium_review_sno,pr.id AS writer_id FROM premium_review pr;
 		
-select * from member;
+select * from member WHERE id="kodup104" OR id="kodup101" OR id="kodup100" OR id="kodup201" OR id="kodup200" OR id="kodup105" OR id="kodup107";
 select * from mansearch_board;
+SELECT * FROM board;
 select * from corperation;
 select * from premium_review;
 select * from premium_review_buylist;
-select id as buyer_id from premium_review_buylist where premium_review_sno=1;
-
-insert into premium_review(mansearch_sno,id,review) values(1,'kodup100','프리미엄리뷰 doc입니다');
+SELECT * FROM pixel_history;
+DELETE FROM pixel_history;
 commit;
-insert into premium_review(mansearch_sno,id,review) values(2,'kodup101','프리미엄리뷰 doc입니다');
-insert into premium_review_buylist(id,premium_review_sno) values('kodup200',1);
-insert into premium_review_buylist(id,premium_review_sno) values('kodup201',1);
+
+select id as buyer_id from premium_review_buylist where premium_review_sno=1;
+insert into premium_review(mansearch_sno,id,review) values(4,'kodup101','프리미엄리뷰 doc입니다');
+commit;
+insert into premium_review_buylist(id,premium_review_sno) values('kodup200',3);
+insert into premium_review_buylist(id,premium_review_sno) values('kodup201',3);
 insert into premium_review_buylist(id,premium_review_sno) values('kodup201',2);
-		
+
+SELECT pr.premium_review_sno,pr.review,pr.id AS writer_id, prb.id AS buyer_id FROM premium_review pr 
+		JOIN premium_review_buylist prb ON pr.premium_review_sno = prb.premium_review_sno;
+/* 구매 버튼 눌렀을 시 필요한 데이터:
+	premium_review_sno, writer_id, buyer_id
+	
+	데이터를 가져오기 위해 필요한 쿼리문
+	SELECT pr.premium_review_sno,pr.id AS writer_id, prb.id AS buyer_id FROM premium_review pr 
+	JOIN premium_review_buylist prb ON pr.premium_review_sno = prb.premium_review_sno
+ */
+		SELECT pr.premium_review_sno,pr.id AS writer_id FROM premium_review pr WHERE pr.mansearch_sno=4;
+
+/* 세션아이디를 구매리스트에 추가 */
+INSERT INTO premium_review_buylist(id,prmium_review_sno) VALUES(#{buyer_id},${premium_review_sno} )
+/* 세션아이디의 픽셀 수량 -200 업데이트 */
+UPDATE member SET pixel = pixel -200 WHERE id = #{buyer_id}
+/* 세션아이디의 픽셀히스토리에 프리미엄리뷰 열람 추가 */
+INSERT INTO pixel_history(id,pixel_log,history_detail) VALUES(#{buyer_id},-200,'프리미엄리뷰 열람')
+/* 프리미엄리뷰 작성자의 픽셀 수량 +200 업데이트 */
+UPDATE member SET pixel = pixel +200 WHERE id = #{writer_id}
+/* 프리미엄리뷰 작성자의 픽셀히스토리에 프리미엄리뷰 작성 추가 */
+INSERT INTO pixel_history(id,pixel_log,history_detail) VALUES(#{writer_id},-200,'프리미엄리뷰 작성')
